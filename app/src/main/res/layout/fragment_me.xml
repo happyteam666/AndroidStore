@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".fragment.MeFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/partial_mine_top" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/horizontal_bar_bg">
+
+            <TextView
+                android:id="@+id/text_order_unconfirmed"
+                style="@style/HorizontalItemTextView"
+                android:drawableLeft="@drawable/ic_order_unconfirmed"
+                android:gravity="center_vertical"
+                android:text="@string/mine_order_unconfirmed"
+                android:textSize="18sp" />
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/white">
+
+                <TextView
+                    android:id="@+id/text_wait_pay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableTop="@drawable/ic_order_wait_pay"
+                    android:gravity="center"
+                    android:padding="1dp"
+                    android:text="@string/mine_order_wait_pay"
+                    android:textColor="@color/cardview_dark_background" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:layout_weight="1"
+                android:background="@android:color/white">
+
+                <TextView
+                    android:id="@+id/text_wait_ship"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableTop="@drawable/ic_order_wait_ship"
+                    android:gravity="center"
+                    android:padding="1dp"
+                    android:text="@string/mine_order_wait_ship"
+                    android:textColor="@color/cardview_dark_background" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:layout_weight="1"
+                android:background="@android:color/white">
+
+                <TextView
+                    android:id="@+id/text_shipped"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableTop="@drawable/ic_order_shipped"
+                    android:gravity="center"
+                    android:padding="1dp"
+                    android:text="@string/mine_order_shipped"
+                    android:textColor="@color/cardview_dark_background" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:layout_weight="1"
+                android:background="@android:color/white">
+
+                <TextView
+                    android:id="@+id/text_history"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableTop="@drawable/ic_order_history"
+                    android:gravity="center"
+                    android:padding="1dp"
+                    android:text="@string/mine_order_history"
+                    android:textColor="@color/cardview_dark_background" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</ScrollView>

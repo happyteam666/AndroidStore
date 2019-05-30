@@ -31,6 +31,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
+        app:passwordToggleEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_phone">
@@ -66,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="42dp"
         android:layout_marginEnd="32dp"
-        android:text="发送验证码"
+        android:text="@string/send_identify"
         android:textColor="#FFC107"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_password" />
@@ -79,7 +80,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
         android:background="#FF9800"
-        android:text="同意协议并注册"
+        android:text="@string/accept_register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_identify" />
