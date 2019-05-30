@@ -112,6 +112,36 @@
 
         </LinearLayout>
 
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/horizontal_bar_bg">
+
+            <TextView
+                android:id="@+id/text_manage_address"
+                style="@style/HorizontalItemTextView"
+                android:drawableLeft="@drawable/ic_address"
+                android:gravity="center_vertical"
+                android:text="@string/address_title_manage"
+                android:textSize="18sp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/horizontal_bar_bg">
+
+            <TextView
+                android:id="@+id/text_help"
+                style="@style/HorizontalItemTextView"
+                android:drawableLeft="@drawable/ic_help"
+                android:gravity="center_vertical"
+                android:text="@string/mine_help"
+                android:textSize="18sp" />
+        </FrameLayout>
     </LinearLayout>
 
 
