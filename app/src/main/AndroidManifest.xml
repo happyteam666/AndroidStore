@@ -23,7 +23,9 @@
             android:name=".activity.LoginActivity"
             android:label="登录"
             android:parentActivityName=".activity.MainActivity"/>
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.noActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

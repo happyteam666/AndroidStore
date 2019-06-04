@@ -7,6 +7,10 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="AppTheme.noActionBar">
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">true</item>
+    </style>
     <style name="ContentText" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/cardview_dark_background</item>
     </style>
