@@ -28,19 +28,19 @@ public class RegisterActivity extends AppCompatActivity {
     @BindView(R.id.input_identify)
     TextInputLayout inputIdentify;
 
-    private RegisterTask registerTask;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
+
     }
 
     @OnClick({R.id.send_identify, R.id.register})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.send_identify:
+                attemptSendIdentify();
                 break;
             case R.id.register:
                 break;
@@ -48,30 +48,8 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    private void attemptSendIdentify() {
 
-    private class RegisterTask extends AsyncTask<Void, Void, Boolean> {
-        public RegisterTask() {
-            super();
-        }
-
-        @Override
-        protected void onPostExecute(Boolean success) {
-            registerTask = null;
-            if (success) {
-                finish();
-            } else {
-                inputPassword.setError(getString(R.string.error_incorrect_password));
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            registerTask = null;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... voids) {
-            return true;
-        }
     }
+
 }
