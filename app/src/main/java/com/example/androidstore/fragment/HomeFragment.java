@@ -1,9 +1,11 @@
 package com.example.androidstore.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -15,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.androidstore.R;
+import com.example.androidstore.activity.RegisterActivity;
 import com.example.androidstore.bean.BannerBean;
 import com.example.androidstore.contants.HttpContants;
 import com.google.gson.Gson;
@@ -38,6 +41,7 @@ import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 
@@ -231,6 +235,7 @@ public class HomeFragment extends Fragment{
             scheduledExecutorService = null;
         }
     }
+
 
 
 }
