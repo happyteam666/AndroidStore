@@ -20,7 +20,7 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_centerVertical="true"
-        android:layout_marginStart="64dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="64dp"
         app:srcCompat="@drawable/default_profile"
         android:contentDescription="@string/todo" />
@@ -30,9 +30,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginStart="128dp"
+        android:layout_marginStart="108dp"
         android:text="@string/login_and_register"
-        android:textColor="#FF9800"
+        android:textColor="#f2f2f2"
         android:textSize="18sp" />
 
 

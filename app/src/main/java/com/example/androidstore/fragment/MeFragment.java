@@ -36,8 +36,34 @@ public class MeFragment extends Fragment {
         bind.unbind();
     }
 
-    @OnClick(R.id.login_and_register)
-    public void onViewClicked() {
-        startActivity(new Intent(getActivity(), LoginActivity.class));
+    @OnClick({R.id.button_setting, R.id.image_profile, R.id.login_and_register,
+            R.id.text_order_unconfirmed, R.id.text_wait_pay, R.id.text_wait_ship,
+            R.id.text_shipped, R.id.text_history, R.id.text_manage_address, R.id.text_help})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.button_setting:
+                break;
+            case R.id.image_profile:
+                break;
+            case R.id.login_and_register:
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+                break;
+            case R.id.text_order_unconfirmed:
+                break;
+            case R.id.text_wait_pay:
+                break;
+            case R.id.text_wait_ship:
+                break;
+            case R.id.text_shipped:
+                break;
+            case R.id.text_history:
+                break;
+            case R.id.text_manage_address:
+                break;
+            case R.id.text_help:
+                break;
+            default:
+
+        }
     }
 }

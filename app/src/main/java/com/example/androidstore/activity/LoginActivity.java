@@ -1,8 +1,6 @@
 package com.example.androidstore.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
@@ -15,6 +13,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+
 public class LoginActivity extends AppCompatActivity {
 
     @BindView(R.id.phone)
@@ -26,7 +25,6 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.input_password)
     TextInputLayout inputPassword;
 
-    private LoginTask loginTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +33,13 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.login, R.id.textView})
+    @OnClick({R.id.login, R.id.register_now})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.login:
                 attemptLogin();
                 break;
-            case R.id.textView:
+            case R.id.register_now:
                 startActivity(new Intent(this, RegisterActivity.class));
                 break;
             default:
@@ -52,32 +50,4 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-
-    @SuppressLint("StaticFieldLeak")
-    private class LoginTask extends AsyncTask<Void, Void, Boolean> {
-        public LoginTask() {
-            super();
-        }
-
-        @Override
-        protected void onPostExecute(Boolean success) {
-            loginTask = null;
-            if (success) {
-                finish();
-            } else {
-                inputPassword.setError(getString(R.string.error_incorrect_password));
-            }
-        }
-
-
-        @Override
-        protected void onCancelled() {
-            loginTask = null;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... voids) {
-            return true;
-        }
-    }
 }
