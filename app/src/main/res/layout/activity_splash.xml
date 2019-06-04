@@ -6,12 +6,12 @@
 
     <ImageView
         android:id="@+id/logo_iv"
-        android:layout_width="377dp"
-        android:layout_height="709dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="14dp"
-        android:layout_marginBottom="-1dp"
-        android:src="@drawable/pre" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:src="@drawable/th"
+        android:contentDescription="@string/todo" />
 
 </RelativeLayout>
