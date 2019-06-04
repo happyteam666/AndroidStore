@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.androidstore">
+    package="com.example.androidstore"
+
+    >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -18,14 +20,16 @@
         <activity
             android:name=".activity.RegisterActivity"
             android:label="注册"
-            android:parentActivityName=".activity.LoginActivity"/>
+            android:parentActivityName=".activity.LoginActivity" />
         <activity
             android:name=".activity.LoginActivity"
             android:label="登录"
             android:parentActivityName=".activity.MainActivity"/>
         <activity android:name=".activity.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.noActionBar">
+            android:theme="@style/AppTheme.noActionBar"
+            android:parentActivityName=".activity.MainActivity" />
+        <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
     @Override
     public void onPageSelected(int i) {
-        bottomNavigation.getMenu().getItem(i).setChecked(true);
+//        bottomNavigation.getMenu().getItem(i).setChecked(true);
     }
 
     @Override

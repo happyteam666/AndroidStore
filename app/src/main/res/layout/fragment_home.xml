@@ -1,10 +1,271 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.HomeFragment">
+    tools:ignore="ExtraText">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:actionViewClass="android.support.v7.widget.SearchView"
+            app:title="搜索">
+
+        </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vp"
+                android:layout_width="match_parent"
+                android:layout_height="170dp" />  
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="35dip"-->
+            <!--android:layout_gravity="bottom"-->
+            <!--android:background="#33000000"-->
+            <!--android:gravity="center"-->
+            <!--android:orientation="vertical" >-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/title"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="图片标题"-->
+            <!--android:textColor="@android:color/white" />-->
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:orientation="horizontal">
+
+                <View
+                    android:id="@+id/dot_1"
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp" />
+
+                <View
+                    android:id="@+id/dot_2"
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp" />
+
+                <View
+                    android:id="@+id/dot_3"
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp" />
+
+                <View
+                    android:id="@+id/dot_4"
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp" />
+
+                <View
+                    android:id="@+id/dot_5"
+                    android:layout_width="5dip"
+                    android:layout_height="5dip"
+                    android:layout_marginLeft="2dip"
+                    android:layout_marginRight="2dip" />
+
+                <View
+                    android:id="@+id/dot_6"
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp" />
+            </LinearLayout>
+        </LinearLayout>
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
 
-</FrameLayout>
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/white">
+
+                <TextView
+                    android:id="@+id/text_MK"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableTop="@drawable/market"
+                    android:gravity="center"
+                    android:padding="1dp"
+                    android:text="夕夕超市"
+                    android:textColor="@color/cardview_dark_background" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:layout_weight="1"
+                android:background="@android:color/white">
+
+                <TextView
+                    android:id="@+id/text_digital"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableTop="@drawable/digital"
+                    android:gravity="center"
+                    android:padding="1dp"
+                    android:text="数码电器"
+                    android:textColor="@color/cardview_dark_background" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:layout_weight="1"
+                android:background="@android:color/white">
+
+                <TextView
+                    android:id="@+id/text_YF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableTop="@drawable/tshit"
+                    android:gravity="center"
+                    android:padding="1dp"
+                    android:text="夕夕服饰"
+                    android:textColor="@color/cardview_dark_background" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:layout_weight="1"
+                android:background="@android:color/white">
+
+                <TextView
+                    android:id="@+id/text_fresh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableTop="@drawable/fresh"
+                    android:gravity="center"
+                    android:padding="1dp"
+                    android:text="夕夕生鲜"
+                    android:textColor="@color/cardview_dark_background" />
+
+            </FrameLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/white">
+
+                <TextView
+                    android:id="@+id/text_CZ"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableTop="@drawable/chongzhi"
+                    android:gravity="center"
+                    android:padding="1dp"
+                    android:text="充值缴费"
+                    android:textColor="@color/cardview_dark_background" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:layout_weight="1"
+                android:background="@android:color/white">
+
+                <TextView
+                    android:id="@+id/text_ticket"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableTop="@drawable/ticket"
+                    android:gravity="center"
+                    android:padding="1dp"
+                    android:text="领券"
+                    android:textColor="@color/cardview_dark_background" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:layout_weight="1"
+                android:background="@android:color/white">
+
+                <TextView
+                    android:id="@+id/text_MD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableTop="@drawable/minadan"
+                    android:gravity="center"
+                    android:padding="1dp"
+                    android:text="兑换免单"
+                    android:textColor="@color/cardview_dark_background" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:layout_weight="1"
+                android:background="@android:color/white">
+
+                <TextView
+                    android:id="@+id/text_VIP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableTop="@drawable/vip"
+                    android:gravity="center"
+                    android:padding="1dp"
+                    android:text="会员"
+                    android:textColor="@color/cardview_dark_background" />
+
+            </FrameLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
