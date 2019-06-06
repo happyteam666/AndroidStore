@@ -21,9 +21,10 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         android:networkSecurityConfig="@xml/network_security_config">
-        <activity android:name=".activity.AddressManage">
+        <activity android:name=".activity.AddressManage"
+            android:label="添加地址"
+            android:parentActivityName=".activity.MainActivity"/>
 
-        </activity>
 
         <activity
             android:name=".activity.RegisterActivity"
