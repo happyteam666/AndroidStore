@@ -3,6 +3,13 @@
     <color name="colorPrimary">#ff3311</color>
     <color name="colorPrimaryDark">#ff3311</color>
     <color name="colorAccent">#ff3311</color>
+
+    <color name="base_text_color_gray">#666666</color>
+    <color name="white_color_disable">#7fffffff</color>
+    <color name="white">#ffffff</color>
+    <color name="red_btn_color_disable">#7fff5454</color>
+    <color name="red_btn_color_pressed">#ffd24242</color>
+    <color name="red_btn_color_normal">#ffff5454</color>
     <color name="jd_welcome_bg">#9D000B</color>
     <color name="main_bottom_bg">#363636</color>
     <color name="bot_text_color_normal">#BB1F35</color>
@@ -16,6 +23,5 @@
     <color name="transparent">#00000000</color>
     <color name="bg_color">#f1f1f1</color>
     <color name="black">#000</color>
-    <color name="white">#ffffff</color>
     <color name="grey_btn_color_normal">#fff1f1f1</color>
 </resources>

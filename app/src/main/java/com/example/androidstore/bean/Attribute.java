@@ -2,13 +2,13 @@ package com.example.androidstore.bean;
 
 import java.io.Serializable;
 
-
 /**
  * @author mascot
- * @date 2019/6/1 15:57
+ * @date 2019/6/1 16:53
  */
 
-public class Category implements Serializable {
+public class Attribute implements Serializable {
+
 
     private long id;
 
@@ -16,7 +16,7 @@ public class Category implements Serializable {
     private String name;
 
 
-    private long pid;
+    private long categoryId;
 
     public long getId() {
         return id;
@@ -34,11 +34,11 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public long getPid() {
-        return pid;
+    public long getCategoryId() {
+        return categoryId;
     }
 
-    public void setPid(long pid) {
-        this.pid = pid;
+    public void setCategoryId(long categoryId) {
+        this.categoryId = categoryId;
     }
 }

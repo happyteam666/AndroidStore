@@ -1,22 +1,19 @@
 package com.example.androidstore.bean;
 
 import java.io.Serializable;
-
+import java.util.Date;
 
 /**
  * @author mascot
- * @date 2019/6/1 15:57
+ * @date 2019/6/1 15:42
  */
 
-public class Category implements Serializable {
+public class Brand implements Serializable {
 
     private long id;
 
 
     private String name;
-
-
-    private long pid;
 
     public long getId() {
         return id;
@@ -34,11 +31,14 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public long getPid() {
-        return pid;
+    public String getImage() {
+        return image;
     }
 
-    public void setPid(long pid) {
-        this.pid = pid;
+    public void setImage(String image) {
+        this.image = image;
     }
+
+    private String image;
+
 }
