@@ -1,29 +1,18 @@
 package com.example.androidstore.View;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
-
 import com.example.androidstore.Listener.IViewContainer;
 import com.example.androidstore.R;
 import com.example.androidstore.UI.FlexiScrollView;
 import com.example.androidstore.bean.Category;
-
-
 import java.util.ArrayList;
-
-import static android.content.ContentValues.TAG;
-
 
 public class SubCategoryView extends FlexiScrollView
 							implements IViewContainer {

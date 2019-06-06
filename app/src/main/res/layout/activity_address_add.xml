@@ -10,17 +10,6 @@
               android:clipToPadding="true"
     >
 
-    <!--<com.enjoyshop.widget.EnjoyshopToolBar-->
-        <!--android:id="@id/toolbar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="?attr/colorPrimary"-->
-        <!--android:minHeight="?attr/actionBarSize"-->
-        <!--app:contentInsetEnd="56dp"-->
-        <!--app:rightButtonText="保存"-->
-        <!--app:title="@string/add_addresses"-->
-        <!--/>-->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,30 +23,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingBottom="@dimen/largePadding"
             android:paddingTop="@dimen/largePadding"
-            >
+            android:paddingBottom="@dimen/largePadding">
+
+            <View style="@style/line_horizontal" />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="33dp"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:text="收件人"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
-            <View
-                style="@style/line_horizontal"/>
+            <EditText
+                android:id="@+id/address_person_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-            <!--<com.enjoyshop.widget.ClearEditText-->
-                <!--android:id="@+id/edittxt_consignee"-->
-                <!--style="@style/editText_base"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="10dp"-->
-                <!--android:layout_weight="1"-->
-                <!--android:hint="请输入收件人姓名"-->
-                <!--/>-->
         </LinearLayout>
 
         <View
@@ -68,31 +51,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingBottom="@dimen/largePadding"
             android:paddingTop="@dimen/largePadding"
-            >
+            android:paddingBottom="@dimen/largePadding">
+
+            <View style="@style/line_horizontal" />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
                 android:text="联系电话"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                />
+                android:textSize="16sp" />
 
-            <View
-                style="@style/line_horizontal"/>
+            <EditText
+                android:id="@+id/address_person_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-            <!--<com.enjoyshop.widget.ClearEditText-->
-                <!--android:id="@+id/edittxt_phone"-->
-                <!--style="@style/editText_base"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_marginLeft="10dp"-->
-                <!--android:layout_weight="1"-->
-                <!--android:hint="请输入收件人电话"-->
-                <!--android:inputType="phone" />-->
 
 
         </LinearLayout>
@@ -112,12 +88,11 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
                 android:text="联系地址"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                />
+                android:textSize="16sp" />
 
             <View
                 style="@style/line_horizontal"/>
@@ -142,31 +117,43 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingBottom="@dimen/largePadding"
             android:paddingTop="@dimen/largePadding"
-            >
+            android:paddingBottom="@dimen/largePadding">
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
+                android:hint="什么街多少号"
                 android:text="详细地址"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                />
+                android:textSize="16sp" />
 
-            <View
-                style="@style/line_horizontal"/>
+            <View style="@style/line_horizontal" />
 
-            <!--<com.enjoyshop.widget.ClearEditText-->
-                <!--android:id="@+id/edittxt_add"-->
-                <!--style="@style/editText_base"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="10dp"-->
-                <!--android:layout_weight="1"-->
-                <!--android:hint="什么街多少号"-->
-                <!--/>-->
+            <EditText
+                android:id="@+id/address_person_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/save_address"
+            android:layout_width="272dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/button_circle_shape"
+            android:text="@string/save_address"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_password" />
     </LinearLayout>
 </LinearLayout>

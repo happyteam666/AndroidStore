@@ -51,6 +51,7 @@
     <dimen name="basePadding">12dp</dimen>
     <dimen name="footerPadding">11dp</dimen>
     <dimen name="noPadding">0dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 
 </resources>

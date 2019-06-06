@@ -1,10 +1,5 @@
 package com.example.androidstore.contants;
 
-/**
- * Created by 高磊华
- * Time  2017/8/11
- * Describe:一般的常量
- */
 
 public class Contants {
 

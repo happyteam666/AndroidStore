@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 
@@ -24,7 +26,11 @@ import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 
-public class AddressManage extends AppCompatActivity {
+public class AddAddressActivity extends AppCompatActivity {
+    private EditText address_person_name;
+    private EditText address_person_phone;
+    private EditText address_person_detail;
+    private Button save_address;
     private TextView addressTv;
     private ArrayList<JsonBean> options1Items = new ArrayList<>(); //省
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();//市
@@ -45,6 +51,9 @@ public class AddressManage extends AppCompatActivity {
                 showPickerView();
             }
         });
+
+    }
+    private void initView(){
 
     }
     private void showPickerView() {// 弹出选择器（省市区三级联动）
@@ -77,13 +86,6 @@ public class AddressManage extends AppCompatActivity {
         String JsonData = new GetJsonDataUtil().getJson(this, "province.json");//获取assets目录下的json文件数据
 
         ArrayList<JsonBean> jsonBean = parseData(JsonData);//用Gson 转成实体
-
-        /**
-         * 添加省份数据
-         *
-         * 注意：如果是添加的JavaBean实体，则实体类需要实现 IPickerViewData 接口，
-         * PickerView会通过getPickerViewText方法获取字符串显示出来。
-         */
         options1Items = jsonBean;
 
         for (int i = 0; i < jsonBean.size(); i++) {//遍历省份
