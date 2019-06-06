@@ -5,13 +5,21 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.example.androidstore.R;
+import com.example.androidstore.contants.HttpContants;
+import com.example.androidstore.utils.ToastUtils;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -47,7 +55,27 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void attemptLogin() {
+        if(phone.getText().toString() != null && password.getText().toString() != null) {
+            OkHttpUtils.post().
+                    url(HttpContants.REGISTER_URL)
+                    .addParams("phone", Objects.requireNonNull(phone.getText()).toString())
+                    .addParams("password", Objects.requireNonNull(password.getText()).toString())
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            Log.e("TAG", "首页请求失败==" + e.getMessage());
+                        }
 
+                        @Override
+                        public void onResponse(String response, int id) {
+                            Log.d("TAG", "首页请求成功==" + response);
+                            finish();
+                        }
+                    });
+        }else{
+            ToastUtils.showSafeToast(this,"请输入用户名与密码");
+        }
     }
 
 }
