@@ -1,0 +1,9 @@
+package com.example.androidstore.Util;
+
+public class Data {
+    private static String categorystr ="[{'cid' : 1,'cname' : '手机','pid' : null,'cimage' : null},{'cid' : 2,'cname' : '男装','pid' : null,'cimage' : null},{'cid' : 3,'cname' : '女装','pid' : null,'cimage' : null},{'cid' : 4,'cname' : '食品','pid' : null,'cimage' : null},{'cid' : 5,'cname' : '手机','pid' : 1,'cimage' : null},{'cid' : 6,'cname' : '手机配件','pid' : 1,'cimage' : null},{'cid' : 7,'cname' : '上装','pid' : 2,'cimage' : null},{'cid' : 8,'cname' : '裤子','pid' : 2,'cimage' : null},{'cid' : 9,'cname' : '裙装裤装','pid' : 3,'cimage' : null},{'cid' : 10,'cname' : '上装','pid' : 3,'cimage' : null},{'cid' : 11,'cname' : '零食','pid' : 4,'cimage' : null},{'cid' : 12,'cname' : '茶酒冲饮','pid' : 4,'cimage' : null},{'cid' : 13,'cname' : '手机','pid' : 5,'cimage' : null},{'cid' : 14,'cname' : '手机壳','pid' : 6,'cimage' : null},{'cid' : 15,'cname' : '充电宝','pid' : 6,'cimage' : null},{'cid' : 16,'cname' : '手机耳机','pid' : 6,'cimage' : null},{'cid' : 17,'cname' : 'T恤','pid' : 7,'cimage' : null},{'cid' : 18,'cname' : '衬衫','pid' : 7,'cimage' : null},{'cid' : 19,'cname' : '卫衣','pid' : 7,'cimage' : null},{'cid' : 20,'cname' : '休闲裤','pid' : 8,'cimage' : null},{'cid' : 21,'cname' : '牛仔裤','pid' : 8,'cimage' : null},{'cid' : 22,'cname' : '裙子','pid' : 9,'cimage' : null},{'cid' : 23,'cname' : '休闲裤','pid' : 9,'cimage' : null},{'cid' : 24,'cname' : '牛仔裤','pid' : 9,'cimage' : null},{'cid' : 25,'cname' : 'T恤','pid' : 10,'cimage' : null},{'cid' : 26,'cname' : '衬衫','pid' : 10,'cimage' : null},{'cid' : 27,'cname' : '糕点','pid' : 11,'cimage' : null},{'cid' : 28,'cname' : '糖果布丁','pid' : 11,'cimage' : null},{'cid' : 29,'cname' : '酒','pid' : 12,'cimage' : null},{'cid' : 30,'cname' : '乳制品','pid' : 12,'cimage' : null}]";
+
+    public static String getCategorystr() {
+        return categorystr;
+    }
+}

@@ -3,4 +3,19 @@
     <color name="colorPrimary">#ff3311</color>
     <color name="colorPrimaryDark">#ff3311</color>
     <color name="colorAccent">#ff3311</color>
+    <color name="jd_welcome_bg">#9D000B</color>
+    <color name="main_bottom_bg">#363636</color>
+    <color name="bot_text_color_normal">#BB1F35</color>
+    <color name="bot_text_color_selected">#414141</color>
+    <color name="choose_indicator_nor">#323335</color>
+    <color name="choose_indicator_nor_selected">#F33F3F</color>
+    <color name="choose_jd_service_nor">#232326</color>
+    <color name="choose_jd_service_selected">#F33F3F</color>
+    <color name="comment_titile_txt_normal">#161616</color>
+    <color name="comment_titile_txt_selected">#F47A7A</color>
+    <color name="transparent">#00000000</color>
+    <color name="bg_color">#f1f1f1</color>
+    <color name="black">#000</color>
+    <color name="white">#ffffff</color>
+    <color name="grey_btn_color_normal">#fff1f1f1</color>
 </resources>

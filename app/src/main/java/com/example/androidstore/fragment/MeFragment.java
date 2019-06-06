@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.androidstore.R;
+import com.example.androidstore.activity.AddressManage;
 import com.example.androidstore.activity.LoginActivity;
 
 import butterknife.ButterKnife;
@@ -59,6 +60,7 @@ public class MeFragment extends Fragment {
             case R.id.text_history:
                 break;
             case R.id.text_manage_address:
+                startActivity(new Intent(getActivity(), AddressManage.class));
                 break;
             case R.id.text_help:
                 break;

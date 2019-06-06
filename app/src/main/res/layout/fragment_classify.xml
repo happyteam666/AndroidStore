@@ -1,14 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.ClassifyFragment">
+    android:orientation="vertical" >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- 头部 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#FAFAFA"
+        android:orientation="horizontal" >
+
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="7dp"></ImageView>
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="#FAFAFA"
+        android:orientation="horizontal" >
 
-</FrameLayout>
+        <ListView
+            android:id="@+id/top_lv"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:cacheColorHint="#0000"
+            android:listSelector="#0000"
+            android:scrollbars="none" />
+
+        <include layout="@layout/sub_category_view" />
+    </LinearLayout>
+
+</LinearLayout>
