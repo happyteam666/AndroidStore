@@ -5,9 +5,9 @@ public abstract class HttpContants {
 
     public static final String BASE_URL = "http://47.101.176.1:8088/";       //url的基类
 
-    public static final String LOGIN_URL=BASE_URL+"/login";
+    public static final String LOGIN_URL=BASE_URL+"customer/login";
 
-    public static final String REGISTER_URL =BASE_URL+"/register";
+    public static final String REGISTER_URL =BASE_URL+"customer/register";
 
     public static final String BANNER_URL=BASE_URL+"/banner";
 

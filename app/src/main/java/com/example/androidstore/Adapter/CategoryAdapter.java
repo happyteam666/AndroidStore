@@ -66,7 +66,7 @@ public class CategoryAdapter extends BaseAdapter {
             holder.titleTv.setBackgroundColor(0xf4f4f4);
             holder.dividerTv.setVisibility(View.VISIBLE);
         }
-        holder.titleTv.setText(mDatas.get(position).getCname());
+        holder.titleTv.setText(mDatas.get(position).getName());
 
         holder.titleTv.setSelected(mPosition==position);
         return convertView;

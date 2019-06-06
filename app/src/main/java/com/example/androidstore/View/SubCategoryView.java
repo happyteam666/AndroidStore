@@ -8,10 +8,12 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.example.androidstore.Listener.IViewContainer;
 import com.example.androidstore.R;
 import com.example.androidstore.UI.FlexiScrollView;
 import com.example.androidstore.bean.Category;
+
 import java.util.ArrayList;
 
 public class SubCategoryView extends FlexiScrollView
@@ -78,7 +80,7 @@ public class SubCategoryView extends FlexiScrollView
 		
 		TextView nameTv=new TextView(getContext());
 		nameTv.setLayoutParams(new LinearLayout.LayoutParams(-1, -2));
-		nameTv.setText(thirdCategory.get(columnIndex).getCname());
+		nameTv.setText(thirdCategory.get(columnIndex).getName());
 		nameTv.setGravity(Gravity.CENTER_HORIZONTAL);
 		column.addView(nameTv);
 		
@@ -108,7 +110,7 @@ public class SubCategoryView extends FlexiScrollView
 		mChildContainerLl.removeAllViews();
 		mTopCategory=(Category) values[0];
 		TextView textView=new TextView(getContext());
-		textView.setText(mTopCategory.getCname());
+		textView.setText(mTopCategory.getName());
 		mChildContainerLl.addView(textView);
 
 	}
