@@ -13,12 +13,15 @@ import com.example.androidstore.fragment.CartFragment;
 import com.example.androidstore.fragment.ClassifyFragment;
 import com.example.androidstore.fragment.HomeFragment;
 import com.example.androidstore.fragment.MeFragment;
+import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.OkHttpClient;
 
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
@@ -36,6 +39,17 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         initView();
+
+        initOkHttpClient();
+    }
+
+    private void initOkHttpClient() {
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(10000L, TimeUnit.MILLISECONDS) //链接超时
+                .readTimeout(10000L, TimeUnit.MILLISECONDS) //读取超时
+                .build(); //其他配置
+
+        OkHttpUtils.initClient(okHttpClient);
     }
 
     private void initView() {
