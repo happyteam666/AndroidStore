@@ -73,7 +73,8 @@ public class ClassifyFragment extends Fragment implements View.OnClickListener {
     }
 
     private void loadCategory() {
-        OkHttpUtils.get().url(HttpContants.CATEGORY_URL + "/0")
+        OkHttpUtils.get().url(HttpContants.CATEGORY_URL)
+                .addParams("pid","0")
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -83,9 +84,9 @@ public class ClassifyFragment extends Fragment implements View.OnClickListener {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.d(TAG, "onResponse: " + response);
                         adapter.setBeans( GsonUtils.GsonToList(response,Category[].class));
                         topCategoryLv.setAdapter(adapter);
+                        topCategoryLv.performItemClick(null,0,0);
                     }
                 });
     }

@@ -15,26 +15,26 @@ import java.util.List;
 
 
 public class CategoryAdapter extends BaseAdapter {
-    private Context mContext;
+    private Context context;
     public int mPosition;
-    private List<Category> mDatas=new ArrayList<>();
+    private List<Category> datas=new ArrayList<>();
 
     public CategoryAdapter(Context c) {
-        mContext=c;
+        context=c;
     }
 
     public void setBeans(List<Category> rBaseCategorys) {
-        mDatas=rBaseCategorys;
+        datas=rBaseCategorys;
     }
 
     @Override
     public int getCount() {
-        return mDatas.size();
+        return datas.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mDatas.get(position);
+        return datas.get(position);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class CategoryAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder=null;
         if (convertView==null) {
-            convertView= LayoutInflater.from(mContext).inflate(R.layout.top_category_item, null);
+            convertView= LayoutInflater.from(context).inflate(R.layout.top_category_item, null);
             holder=new ViewHolder();
             holder.titleTv= convertView.findViewById(R.id.tv);
             holder.dividerTv= convertView.findViewById(R.id.divider);
@@ -66,7 +66,7 @@ public class CategoryAdapter extends BaseAdapter {
             holder.titleTv.setBackgroundColor(0xf4f4f4);
             holder.dividerTv.setVisibility(View.VISIBLE);
         }
-        holder.titleTv.setText(mDatas.get(position).getName());
+        holder.titleTv.setText(datas.get(position).getName());
 
         holder.titleTv.setSelected(mPosition==position);
         return convertView;

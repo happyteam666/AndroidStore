@@ -5,11 +5,13 @@ import android.os.Bundle;
 
 
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
+import static com.zhy.http.okhttp.log.LoggerInterceptor.TAG;
 
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
@@ -17,14 +19,25 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.example.androidstore.R;
 import com.example.androidstore.Util.GetJsonDataUtil;
+import com.example.androidstore.Util.GsonUtils;
+import com.example.androidstore.bean.Address;
+import com.example.androidstore.bean.Customer;
 import com.example.androidstore.bean.JsonBean;
+import com.example.androidstore.contants.HttpContants;
+import com.example.androidstore.utils.ToastUtils;
 import com.google.gson.Gson;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.ButterKnife;
+import okhttp3.Call;
 
 public class AddAddressActivity extends AppCompatActivity {
     private EditText address_person_name;
@@ -43,24 +56,83 @@ public class AddAddressActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address_add);
         initJsonData();
+        initView();
         ButterKnife.bind(this);
-        addressTv=findViewById(R.id.txt_address);
         addressTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showPickerView();
             }
         });
+        save_address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name=address_person_name.getText().toString();
+                String phone=address_person_phone.getText().toString();
+                String address=addressTv.getText().toString();
+                String address_detail=address_person_detail.getText().toString();
+                if(isEmpty(name,phone,address,address_detail)){
+                    if (verificationPhone(phone)){
+                        String address1=address+address_detail;
+                        Log.d(TAG, "onClick: "+address1+phone+name);
+                        saveAddress(name,address1,phone);
+                    }
+                }
+            }
+        });
+    }
+    private boolean verificationPhone(String p){
+        String regExp = "13\\d{9}|14[579]\\d{8}|15[0123456789]\\d{8}|17[01235678]\\d{8" +
+                "}|18\\d{9}";
+        Pattern pattern=Pattern.compile(regExp);
+        Matcher matcher=pattern.matcher(p);
+        if (matcher.find()){
+            return true;
+        }else
+            ToastUtils.showToast(this,"请输入有效的号码");
+            return false;
+    }
+
+    private Boolean isEmpty(String name,String phone,String address,String address_detail ){
+        if(TextUtils.isEmpty(name)||TextUtils.isEmpty(phone)||TextUtils.isEmpty(address)||TextUtils.isEmpty(address_detail)){
+            ToastUtils.showToast(this,"请完整信息");
+            return false;
+        }else
+            return true;
+    }
+    private void saveAddress(String name,String address,String phone){
+        OkHttpUtils.post().
+                url(HttpContants.ADDADDRESS_URL)
+                .addParams("customerId","1")
+                .addParams("receivingAddress",address)
+                .addParams("addressee",name)
+                .addParams("phone",phone)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Log.e("TAG",  e.getMessage());
+                    }
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.d("TAG",response);
+                        Log.d("TAG", "onResponse: "+ GsonUtils.GsonToBean(response, Address.class));
+                        finish();
+                    }
+                });
 
     }
     private void initView(){
-
+        addressTv=findViewById(R.id.txt_address);
+        address_person_detail=findViewById(R.id.address_person_detail);
+        address_person_name=findViewById(R.id.address_person_name);
+        address_person_phone=findViewById(R.id.address_person_phone);
+        save_address=findViewById(R.id.save_address);
     }
-    private void showPickerView() {// 弹出选择器（省市区三级联动）
+    private void showPickerView() {
         OptionsPickerView pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
-                //返回的分别是三个级别的选中位置
                 addressTv.setText(options1Items.get(options1).getPickerViewText() + "  "
                         + options2Items.get(options1).get(options2) + "  "
                         + options3Items.get(options1).get(options2).get(options3));
@@ -69,57 +141,45 @@ public class AddAddressActivity extends AppCompatActivity {
         })
                 .setTitleText("城市选择")
                 .setDividerColor(Color.BLACK)
-                .setTextColorCenter(Color.BLACK) //设置选中项文字颜色
+                .setTextColorCenter(Color.BLACK)
                 .setContentTextSize(20)
                 .build();
-        pvOptions.setPicker(options1Items, options2Items, options3Items);//三级选择器
+        pvOptions.setPicker(options1Items, options2Items, options3Items);
         pvOptions.show();
     }
 
 
-    private void initJsonData() {//解析数据 （省市区三级联动）
-        /**
-         * 注意：assets 目录下的Json文件仅供参考，实际使用可自行替换文件
-         * 关键逻辑在于循环体
-         *
-         * */
+    private void initJsonData() {
         String JsonData = new GetJsonDataUtil().getJson(this, "province.json");//获取assets目录下的json文件数据
 
-        ArrayList<JsonBean> jsonBean = parseData(JsonData);//用Gson 转成实体
+        ArrayList<JsonBean> jsonBean = parseData(JsonData);
         options1Items = jsonBean;
 
-        for (int i = 0; i < jsonBean.size(); i++) {//遍历省份
-            ArrayList<String> CityList = new ArrayList<>();//该省的城市列表（第二级）
-            ArrayList<ArrayList<String>> Province_AreaList = new ArrayList<>();//该省的所有地区列表（第三级）
+        for (int i = 0; i < jsonBean.size(); i++) {
+            ArrayList<String> CityList = new ArrayList<>();
+            ArrayList<ArrayList<String>> Province_AreaList = new ArrayList<>();
 
-            for (int c = 0; c < jsonBean.get(i).getCityList().size(); c++) {//遍历该省份的所有城市
+            for (int c = 0; c < jsonBean.get(i).getCityList().size(); c++) {
                 String CityName = jsonBean.get(i).getCityList().get(c).getName();
-                CityList.add(CityName);//添加城市
-                ArrayList<String> City_AreaList = new ArrayList<>();//该城市的所有地区列表
+                CityList.add(CityName);
+                ArrayList<String> City_AreaList = new ArrayList<>();
 
-                //如果无地区数据，建议添加空字符串，防止数据为null 导致三个选项长度不匹配造成崩溃
                 if (jsonBean.get(i).getCityList().get(c).getArea() == null
                         || jsonBean.get(i).getCityList().get(c).getArea().size() == 0) {
                     City_AreaList.add("");
                 } else {
                     City_AreaList.addAll(jsonBean.get(i).getCityList().get(c).getArea());
                 }
-                Province_AreaList.add(City_AreaList);//添加该省所有地区数据
+                Province_AreaList.add(City_AreaList);
             }
 
-            /**
-             * 添加城市数据
-             */
             options2Items.add(CityList);
 
-            /**
-             * 添加地区数据
-             */
             options3Items.add(Province_AreaList);
         }
     }
 
-    public ArrayList<JsonBean> parseData(String result) {//Gson 解析
+    public ArrayList<JsonBean> parseData(String result) {
         ArrayList<JsonBean> detail = new ArrayList<>();
         try {
             JSONArray data = new JSONArray(result);

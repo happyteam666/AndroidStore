@@ -1,7 +1,9 @@
 package com.example.androidstore.View;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -9,13 +11,17 @@ import android.widget.TextView;
 import com.example.androidstore.Listener.IViewContainer;
 import com.example.androidstore.R;
 import com.example.androidstore.UI.FlexiScrollView;
+import com.example.androidstore.activity.GoodsListActivity;
 import com.example.androidstore.bean.Category;
 import java.util.ArrayList;
+
+
 
 public class SubCategoryView extends FlexiScrollView
 							implements IViewContainer {
 	private Category mTopCategory;
 	private LinearLayout mChildContainerLl;
+	public static String CATEGORY_ID="CATEGORY_ID";
 	public SubCategoryView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
@@ -44,20 +50,24 @@ public class SubCategoryView extends FlexiScrollView
 
 
 
-	private void addColumn(final ArrayList<Category> thirdCategory, final int columnIndex,LinearLayout lineLl) {
+	private void addColumn(final ArrayList<Category> Categorys, final int columnIndex,LinearLayout lineLl) {
 		LinearLayout column=new LinearLayout(getContext());
 		column.setOrientation(LinearLayout.VERTICAL);
 		column.setLayoutParams(new LinearLayout.LayoutParams(getWidth()/2,-2));
 		lineLl.addView(column);
 
 		SmartImageView bannerIv=new SmartImageView(getContext());
-		bannerIv.setImageUrl(thirdCategory.get(columnIndex).getImage());
-		bannerIv.setLayoutParams(new LinearLayout.LayoutParams(-1, getWidth()/2));
+		LinearLayout.LayoutParams bannerIvParams = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.MATCH_PARENT,
+				400);
+
+		bannerIv.setImageUrl(Categorys.get(columnIndex).getImage());
+		bannerIv.setLayoutParams(bannerIvParams);
 		column.addView(bannerIv);
 		
 		TextView nameTv=new TextView(getContext());
 		nameTv.setLayoutParams(new LinearLayout.LayoutParams(-1, -2));
-		nameTv.setText(thirdCategory.get(columnIndex).getName());
+		nameTv.setText(Categorys.get(columnIndex).getName());
 		nameTv.setGravity(Gravity.CENTER_HORIZONTAL);
 		column.addView(nameTv);
 		
@@ -66,11 +76,9 @@ public class SubCategoryView extends FlexiScrollView
 
 			@Override
 			public void onClick(View v) {
-//				String categoryId = thirdCategory.get(columnIndex).getId();
-//				Intent intent=new Intent(getContext(),ProductListActivity.class);
-//				intent.putExtra(IntentValues.TO_PRODUCT_LIST_KEY, categoryId);
-//				intent.putExtra(IntentValues.TOP_CATEGORY, mTopCategory.getId());
-//				getContext().startActivity(intent);
+				Intent intent=new Intent(getContext(), GoodsListActivity.class);
+				intent.putExtra(CATEGORY_ID,Categorys.get(columnIndex).getId());
+				getContext().startActivity(intent);
 			}
 		});
 	}
