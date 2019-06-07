@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.androidstore.R;
+import com.example.androidstore.Util.GsonUtils;
+import com.example.androidstore.bean.Customer;
 import com.example.androidstore.contants.HttpContants;
 import com.example.androidstore.utils.ToastUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -68,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(String response, int id) {
                             Log.d("TAG", "首页请求成功==" + response);
+                            Log.d("TAG", "onResponse: "+ GsonUtils.GsonToBean(response,Customer.class));
                             finish();
                         }
                     });

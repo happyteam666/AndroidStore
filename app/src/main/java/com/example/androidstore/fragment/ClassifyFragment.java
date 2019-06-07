@@ -9,20 +9,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.androidstore.Adapter.CategoryAdapter;
 import com.example.androidstore.R;
-import com.example.androidstore.Util.GSonUtil;
+import com.example.androidstore.Util.GsonUtils;
 import com.example.androidstore.View.SubCategoryView;
 import com.example.androidstore.bean.Category;
 import com.example.androidstore.contants.HttpContants;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-
-import java.util.ArrayList;
 
 import okhttp3.Call;
 
@@ -60,12 +57,7 @@ public class ClassifyFragment extends Fragment implements View.OnClickListener {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        topCategoryLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                touchTopCategory(i);
-            }
-        });
+        topCategoryLv.setOnItemClickListener((adapterView, view, i, l) -> touchTopCategory(i));
     }
 
     private void touchTopCategory(int position) {
@@ -92,7 +84,7 @@ public class ClassifyFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onResponse(String response, int id) {
                         Log.d(TAG, "onResponse: " + response);
-                        adapter.setBeans((ArrayList<Category>) GSonUtil.getCategoryList(response));
+                        adapter.setBeans( GsonUtils.GsonToList(response,Category[].class));
                         topCategoryLv.setAdapter(adapter);
                     }
                 });

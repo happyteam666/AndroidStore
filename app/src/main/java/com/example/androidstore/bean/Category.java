@@ -59,4 +59,15 @@ public class Category implements Serializable {
     public void setPid(long pid) {
         this.pid = pid;
     }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", categories=" + categories +
+                ", image='" + image + '\'' +
+                ", pid=" + pid +
+                '}';
+    }
 }

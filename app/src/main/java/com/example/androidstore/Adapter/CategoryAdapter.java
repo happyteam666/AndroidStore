@@ -11,19 +11,19 @@ import com.example.androidstore.R;
 import com.example.androidstore.bean.Category;
 
 import java.util.ArrayList;
-
+import java.util.List;
 
 
 public class CategoryAdapter extends BaseAdapter {
     private Context mContext;
     public int mPosition;
-    private ArrayList<Category> mDatas=new ArrayList<Category>();
+    private List<Category> mDatas=new ArrayList<>();
 
     public CategoryAdapter(Context c) {
         mContext=c;
     }
 
-    public void setBeans(ArrayList<Category> rBaseCategorys) {
+    public void setBeans(List<Category> rBaseCategorys) {
         mDatas=rBaseCategorys;
     }
 
