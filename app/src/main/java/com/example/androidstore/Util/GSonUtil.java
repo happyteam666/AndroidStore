@@ -7,8 +7,8 @@ import com.google.gson.reflect.TypeToken;
 import java.util.List;
 
 public class GSonUtil {
-    public static List<Category> getData(String jsonStr){
-        Gson gson = new Gson();
+    static Gson gson = new Gson();
+    public static List<Category> getCategoryList(String jsonStr){
         List<Category>list = gson.fromJson(jsonStr,new TypeToken<List<Category>>() {}.getType());
         return list;
 

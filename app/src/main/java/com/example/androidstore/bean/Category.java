@@ -1,6 +1,7 @@
 package com.example.androidstore.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 
 /**
@@ -14,7 +15,24 @@ public class Category implements Serializable {
 
 
     private String name;
+    private List<Category> categories;
+    private String image;
 
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     private long pid;
 
