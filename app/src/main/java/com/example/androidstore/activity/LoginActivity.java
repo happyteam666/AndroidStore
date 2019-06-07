@@ -1,6 +1,8 @@
 package com.example.androidstore.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.design.widget.TextInputEditText;
@@ -35,6 +37,8 @@ public class LoginActivity extends AppCompatActivity {
     TextInputLayout inputPhone;
     @BindView(R.id.input_password)
     TextInputLayout inputPassword;
+    //id
+    long id1;
     //手机号
     String phoneuser;
     //密码
@@ -77,19 +81,26 @@ public class LoginActivity extends AppCompatActivity {
                         public void onResponse(String response, int id) {
                             Log.d("TAG", "首页请求成功==" + response);
                             if(!response.equals("")) {
+                                id1 = GsonUtils.GsonToBean(response,Customer.class).getId();
                                 phoneuser = GsonUtils.GsonToBean(response, Customer.class).getPhone();
                                 pwd = GsonUtils.GsonToBean(response, Customer.class).getPassword();
                                 if (!isvalid(phoneuser, pwd, phone.getText().toString(), password.getText().toString())) {
                                     if (Looper.myLooper() == null) {
                                         Looper.prepare();
                                     }
-                                    ToastUtils.showToast(LoginActivity.this, "密码或者帐号错误");
+                                    ToastUtils.showToast(LoginActivity.this, "帐号或密码错误");
                                     Looper.loop();
                                 } else {
                                     if (Looper.myLooper() == null) {
                                         Looper.prepare();
                                     }
                                     ToastUtils.showToast(LoginActivity.this, "登录成功");
+                                    SharedPreferences sharedPreferences = getSharedPreferences("Id", Context.MODE_PRIVATE); //私有数据
+
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();//获取编辑器
+
+                                    editor.putInt("_Id",(int)id1);
+                                    editor.commit();//提交修改
                                     finish();
                                     Looper.loop();
                                 }
@@ -107,10 +118,10 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public static boolean isvalid(String phonevalid,String pwdvalid,String i,String j){
-        if(i.equals(phonevalid) && j.equals(pwdvalid)){
+    public static boolean isvalid(String phonevalid,String pwdvalid,String i,String j) {
+        if (i.equals(phonevalid) && j.equals(pwdvalid)) {
             return true;
-        }else
+        } else
             return false;
     }
 
