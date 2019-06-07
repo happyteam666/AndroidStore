@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.example.androidstore.R;
 import com.example.androidstore.activity.AddressManageActivity;
 import com.example.androidstore.activity.LoginActivity;
+import com.example.androidstore.activity.SettingActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -43,6 +44,7 @@ public class MeFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.button_setting:
+                startActivity(new Intent(getActivity(), SettingActivity.class));
                 break;
             case R.id.image_profile:
                 break;
