@@ -1,7 +1,6 @@
 package com.example.androidstore.fragment;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,58 +14,87 @@ import android.widget.ListView;
 
 import com.example.androidstore.Adapter.CategoryAdapter;
 import com.example.androidstore.R;
-import com.example.androidstore.Util.Data;
 import com.example.androidstore.Util.GSonUtil;
 import com.example.androidstore.View.SubCategoryView;
 import com.example.androidstore.bean.Category;
+import com.example.androidstore.contants.HttpContants;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 
 import java.util.ArrayList;
-import java.util.List;
 
-import static android.content.ContentValues.TAG;
+import okhttp3.Call;
+
+import static com.zhy.http.okhttp.log.LoggerInterceptor.TAG;
 
 
 public class ClassifyFragment extends Fragment implements View.OnClickListener {
     private SubCategoryView subCategoryView;
-    private ListView mTopCategoryLv;
-    private CategoryAdapter mAdapter;
+    private ListView topCategoryLv;
+    private CategoryAdapter adapter;
+
+
 
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_classify, container, false);
+        View view = inflater.inflate(R.layout.fragment_classify, container, false);
+        initView(view);
+        loadCategory();
+        return view;
+
+    }
+
+    private void initView(View view) {
+        topCategoryLv = view.findViewById(R.id.top_lv);
+        subCategoryView = view.findViewById(R.id.subcategory);
+        adapter = new CategoryAdapter(getActivity());
+
+
     }
 
     @SuppressLint("WrongViewCast")
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mTopCategoryLv=getActivity().findViewById(R.id.top_lv);
-        subCategoryView=getActivity().findViewById(R.id.subcategory);
-        mAdapter=new CategoryAdapter(getActivity());
-        mAdapter.setBeans((ArrayList<Category>) GSonUtil.getData(Data.getCategorystr()));
-        mTopCategoryLv.setAdapter(mAdapter);
-        mTopCategoryLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        topCategoryLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                touchTopCategory(position);
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                touchTopCategory(i);
             }
         });
-
     }
+
     private void touchTopCategory(int position) {
-        mAdapter.mPosition=position;
-        mAdapter.notifyDataSetChanged();
-        Category topCategory = (Category) mAdapter.getItem(position);
+        adapter.mPosition = position;
+        adapter.notifyDataSetChanged();
+        Category topCategory = (Category) adapter.getItem(position);
         subCategoryView.show(topCategory);
     }
 
     @Override
     public void onClick(View view) {
 
+    }
+
+    private void loadCategory() {
+        OkHttpUtils.get().url(HttpContants.CATEGORY_URL + "/0")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Log.d(TAG, "onResponse: " + e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.d(TAG, "onResponse: " + response);
+                        adapter.setBeans((ArrayList<Category>) GSonUtil.getCategoryList(response));
+                        topCategoryLv.setAdapter(adapter);
+                    }
+                });
     }
 }

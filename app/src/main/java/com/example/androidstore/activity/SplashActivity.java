@@ -11,6 +11,11 @@ import android.widget.ImageView;
 
 import com.example.androidstore.R;
 import com.example.androidstore.fragment.HomeFragment;
+import com.zhy.http.okhttp.OkHttpUtils;
+
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 
 public class SplashActivity extends Activity {
 
@@ -21,14 +26,23 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_splash);
-        mIv =  findViewById(R.id.logo_iv);
+        mIv = findViewById(R.id.logo_iv);
         alphaAnim();
 
-
+        initOkHttpClient();
     }
 
-    private void alphaAnim(){
-        Animation anim = new AlphaAnimation(0.2f,1.0f);
+    private void initOkHttpClient() {
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(10000L, TimeUnit.MILLISECONDS) //链接超时
+                .readTimeout(10000L, TimeUnit.MILLISECONDS) //读取超时
+                .build(); //其他配置
+
+        OkHttpUtils.initClient(okHttpClient);
+    }
+
+    private void alphaAnim() {
+        Animation anim = new AlphaAnimation(0.2f, 1.0f);
         anim.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {

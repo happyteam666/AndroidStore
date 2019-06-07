@@ -4,78 +4,55 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.example.androidstore.Listener.IViewContainer;
 import com.example.androidstore.R;
 import com.example.androidstore.UI.FlexiScrollView;
 import com.example.androidstore.bean.Category;
-
 import java.util.ArrayList;
 
 public class SubCategoryView extends FlexiScrollView
 							implements IViewContainer {
-	private Category mTopCategory;//该对象是左边列表传递过来的，主要是获取分类id 和右边头部的图片
-	private LinearLayout mChildContainerLl;//布局里的容器id
+	private Category mTopCategory;
+	private LinearLayout mChildContainerLl;
 	public SubCategoryView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
-	
+
 	private void handleLoadSubCategory(ArrayList<Category> subCategorys) {
-		//1.删除原来内部的所有子控件
 		mChildContainerLl.removeAllViews();
 		if (subCategorys.size()!=0) {
-			//2.添加头部图片
-			ImageView iv=new ImageView(getContext());
-			iv.setLayoutParams(new LinearLayout.LayoutParams(-1,110));
-			iv.setScaleType(ScaleType.FIT_XY);
-			mChildContainerLl.addView(iv);
-//			for (int i = 0; i < subCategorys.size(); i++) {
-//				//添加2级分类文本  如裙装 上装 下装等
-//				Category subCategory = subCategorys.get(i);
-//				TextView titleTv=new TextView(getContext());
-//				LinearLayout.LayoutParams titleTvParams = new LinearLayout.LayoutParams(-2, -2);
-//				titleTvParams.setMargins(0, 30, 0, 0);
-//				titleTv.setLayoutParams(titleTvParams);
-//				titleTv.setText(subCategory.getCname()+"");
-//				mChildContainerLl.addView(titleTv);
-				//添加9宫格
-//				ArrayList<Category> thirdCategory = subCategory.getThirdCategory();
-//					int lineNum = thirdCategory.size()/3;
-//					lineNum=thirdCategory.size()%3!=0?lineNum+1:lineNum;
-//					for (int j = 0; j < lineNum; j++) {
-//						//根据行号为2级分类创建行
-//						LinearLayout lineLl=new LinearLayout(getContext());
-//						lineLl.setOrientation(LinearLayout.HORIZONTAL);
-//						LinearLayout.LayoutParams lineParams=new LinearLayout.LayoutParams(-1, -2);
-//						lineLl.setLayoutParams(lineParams);
-//						//添加第 1 列
-//						addColumn(thirdCategory, 3*j, lineLl);
-//						//添加第2列
-//						if (3*j+1<thirdCategory.size()-1) {
-//							addColumn(thirdCategory, 3*j+1, lineLl);
-//						}
-//						//添加第3列
-//						if (3*j+2<thirdCategory.size()-1) {
-//							addColumn(thirdCategory, 3*j+2, lineLl);
-//						}
-//						mChildContainerLl.addView(lineLl);
-//				}
+				int lineNum = subCategorys.size()/3;
+				lineNum=subCategorys.size()%3!=0?lineNum+1:lineNum;
+				for (int j = 0; j < lineNum; j++) {
+					LinearLayout lineLl=new LinearLayout(getContext());
+					lineLl.setOrientation(LinearLayout.HORIZONTAL);
+					LinearLayout.LayoutParams lineParams=new LinearLayout.LayoutParams(-1, -2);
+					lineLl.setLayoutParams(lineParams);
+					addColumn(subCategorys, 3*j, lineLl);
+					if (3*j+1<subCategorys.size()-1) {
+						addColumn(subCategorys, 3*j+1, lineLl);
+					}
+					if (3*j+2<subCategorys.size()-1) {
+						addColumn(subCategorys, 3*j+2, lineLl);
+					}
+					mChildContainerLl.addView(lineLl);
+				}
 			}
 		}
+
 
 
 	private void addColumn(final ArrayList<Category> thirdCategory, final int columnIndex,LinearLayout lineLl) {
 		LinearLayout column=new LinearLayout(getContext());
 		column.setOrientation(LinearLayout.VERTICAL);
-		column.setLayoutParams(new LinearLayout.LayoutParams(getWidth()/3,-2));
+		column.setLayoutParams(new LinearLayout.LayoutParams(getWidth()/2,-2));
 		lineLl.addView(column);
-		
-		ImageView bannerIv=new ImageView(getContext());
-		bannerIv.setLayoutParams(new LinearLayout.LayoutParams(-1, getWidth()/3));
+
+		SmartImageView bannerIv=new SmartImageView(getContext());
+		bannerIv.setImageUrl(thirdCategory.get(columnIndex).getImage());
+		bannerIv.setLayoutParams(new LinearLayout.LayoutParams(-1, getWidth()/2));
 		column.addView(bannerIv);
 		
 		TextView nameTv=new TextView(getContext());
@@ -109,9 +86,8 @@ public class SubCategoryView extends FlexiScrollView
 	public void show(Object... values) {
 		mChildContainerLl.removeAllViews();
 		mTopCategory=(Category) values[0];
-		TextView textView=new TextView(getContext());
-		textView.setText(mTopCategory.getName());
-		mChildContainerLl.addView(textView);
+		handleLoadSubCategory((ArrayList<Category>) mTopCategory.getCategories());
+		}
 
 	}
-}
+
