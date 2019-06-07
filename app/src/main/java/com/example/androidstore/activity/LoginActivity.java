@@ -55,18 +55,16 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void attemptLogin() {
-        if(phone.getText().toString() != null && password.getText().toString() != null) {
+        if(!phone.getText().toString().equals("") ) {
             OkHttpUtils.post().
-                    url(HttpContants.REGISTER_URL)
+                    url(HttpContants.LOGIN_URL)
                     .addParams("phone", Objects.requireNonNull(phone.getText()).toString())
-                    .addParams("password", Objects.requireNonNull(password.getText()).toString())
                     .build()
                     .execute(new StringCallback() {
                         @Override
                         public void onError(Call call, Exception e, int id) {
                             Log.e("TAG", "首页请求失败==" + e.getMessage());
                         }
-
                         @Override
                         public void onResponse(String response, int id) {
                             Log.d("TAG", "首页请求成功==" + response);
@@ -74,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     });
         }else{
-            ToastUtils.showSafeToast(this,"请输入用户名与密码");
+            ToastUtils.showToast(this,"请输入用户名与密码");
         }
     }
 
