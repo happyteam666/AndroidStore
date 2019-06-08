@@ -1,6 +1,7 @@
 package com.example.androidstore.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author mascot

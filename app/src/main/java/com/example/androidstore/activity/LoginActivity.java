@@ -95,13 +95,16 @@ public class LoginActivity extends AppCompatActivity {
                                         Looper.prepare();
                                     }
                                     ToastUtils.showToast(LoginActivity.this, "登录成功");
-                                    SharedPreferences sharedPreferences = getSharedPreferences("Id", Context.MODE_PRIVATE); //私有数据
+                                    SharedPreferences sharedPreferences = getSharedPreferences("Id",0); //私有数据
 
                                     SharedPreferences.Editor editor = sharedPreferences.edit();//获取编辑器
-
-                                    editor.putInt("_Id",(int)id1);
+                                    String name =String.valueOf((int)((Math.random()*9+1)*1000));
+                                    editor.putString("_Id",String.valueOf(id1));
+                                    editor.putString("_Name","@"+name);
                                     editor.commit();//提交修改
-                                    finish();
+//                                    finish();
+                                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
                                     Looper.loop();
                                 }
                             }else{
