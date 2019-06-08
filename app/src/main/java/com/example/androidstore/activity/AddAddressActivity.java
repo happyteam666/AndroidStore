@@ -1,5 +1,7 @@
 package com.example.androidstore.activity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -11,7 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import static com.zhy.http.okhttp.log.LoggerInterceptor.TAG;
+
 
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
@@ -19,9 +21,7 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.example.androidstore.R;
 import com.example.androidstore.Util.GetJsonDataUtil;
-import com.example.androidstore.Util.GsonUtils;
-import com.example.androidstore.bean.Address;
-import com.example.androidstore.bean.Customer;
+
 import com.example.androidstore.bean.JsonBean;
 import com.example.androidstore.contants.HttpContants;
 import com.example.androidstore.utils.ToastUtils;
@@ -32,31 +32,35 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+import static android.support.constraint.Constraints.TAG;
 import butterknife.ButterKnife;
 import okhttp3.Call;
 
 public class AddAddressActivity extends AppCompatActivity {
+    private String id=null;
+    private String customerId;
+    private SharedPreferences preferences;
     private EditText address_person_name;
     private EditText address_person_phone;
     private EditText address_person_detail;
     private Button save_address;
     private TextView addressTv;
-    private ArrayList<JsonBean> options1Items = new ArrayList<>(); //省
-    private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();//市
-    private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();//区
-
+    private ArrayList<JsonBean> options1Items = new ArrayList<>();
+    private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
+    private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address_add);
+        preferences=getSharedPreferences("Id",MODE_PRIVATE);
+        customerId=preferences.getString("_Id","");
         initJsonData();
         initView();
+        editAddress();
         ButterKnife.bind(this);
         addressTv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,19 +71,41 @@ public class AddAddressActivity extends AppCompatActivity {
         save_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name=address_person_name.getText().toString();
-                String phone=address_person_phone.getText().toString();
-                String address=addressTv.getText().toString();
-                String address_detail=address_person_detail.getText().toString();
-                if(isEmpty(name,phone,address,address_detail)){
-                    if (verificationPhone(phone)){
-                        String address1=address+address_detail;
-                        Log.d(TAG, "onClick: "+address1+phone+name);
-                        saveAddress(name,address1,phone);
+                    String name = address_person_name.getText().toString();
+                    String phone = address_person_phone.getText().toString();
+                    String address = addressTv.getText().toString();
+                    String address_detail = address_person_detail.getText().toString();
+                    if (isEmpty(name, phone, address, address_detail)) {
+                        if (verificationPhone(phone)) {
+                            String address1 = address + address_detail;
+                            if (id!=null){
+                                Log.d(TAG, "onClick: "+"88888888888888888888");
+                                saveAddress(name, address1, phone);
+                                startActivity(new Intent(AddAddressActivity.this, AddressManageActivity.class));
+
+                            }else {
+//                                updateAddress();
+                                startActivity(new Intent(AddAddressActivity.this, AddressManageActivity.class));
+                                Log.d(TAG, "onClick: "+"111111111111111111111111");
+                            }
+
+                        }
                     }
-                }
             }
         });
+    }
+    private void editAddress(){
+        Intent intent=getIntent();
+        String name=intent.getStringExtra("addressee");
+        String phone=intent.getStringExtra("phone");
+        String bigAddress=intent.getStringExtra("bigAddress");
+        String smallAddress=intent.getStringExtra("smallAddress");
+        id=intent.getStringExtra("id");
+        address_person_phone.setText(phone);
+        address_person_name.setText(name);
+        addressTv.setText(bigAddress);
+        address_person_detail.setText(smallAddress);
+        Log.d(TAG, "updateAddress: ");
     }
     private boolean verificationPhone(String p){
         String regExp = "13\\d{9}|14[579]\\d{8}|15[0123456789]\\d{8}|17[01235678]\\d{8" +
@@ -92,7 +118,6 @@ public class AddAddressActivity extends AppCompatActivity {
             ToastUtils.showToast(this,"请输入有效的号码");
             return false;
     }
-
     private Boolean isEmpty(String name,String phone,String address,String address_detail ){
         if(TextUtils.isEmpty(name)||TextUtils.isEmpty(phone)||TextUtils.isEmpty(address)||TextUtils.isEmpty(address_detail)){
             ToastUtils.showToast(this,"请完整信息");
@@ -100,10 +125,26 @@ public class AddAddressActivity extends AppCompatActivity {
         }else
             return true;
     }
+    private void updateAddress(){
+        OkHttpUtils.put().
+                url(HttpContants.ADDRESS_UPDATE)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Log.e("TAG",  e.getMessage());
+                    }
+                    @Override
+                    public void onResponse(String response, int id) {
+                        finish();
+                    }
+                });
+
+    }
     private void saveAddress(String name,String address,String phone){
         OkHttpUtils.post().
                 url(HttpContants.ADDADDRESS_URL)
-                .addParams("customerId","1")
+                .addParams("customerId",customerId)
                 .addParams("receivingAddress",address)
                 .addParams("addressee",name)
                 .addParams("phone",phone)
@@ -115,8 +156,6 @@ public class AddAddressActivity extends AppCompatActivity {
                     }
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.d("TAG",response);
-                        Log.d("TAG", "onResponse: "+ GsonUtils.GsonToBean(response, Address.class));
                         finish();
                     }
                 });
@@ -150,7 +189,7 @@ public class AddAddressActivity extends AppCompatActivity {
 
 
     private void initJsonData() {
-        String JsonData = new GetJsonDataUtil().getJson(this, "province.json");//获取assets目录下的json文件数据
+        String JsonData = new GetJsonDataUtil().getJson(this, "province.json");
 
         ArrayList<JsonBean> jsonBean = parseData(JsonData);
         options1Items = jsonBean;

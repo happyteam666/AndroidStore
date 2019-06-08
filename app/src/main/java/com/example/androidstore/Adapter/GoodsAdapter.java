@@ -66,7 +66,7 @@ public class GoodsAdapter extends BaseAdapter {
 
         holer.smIv.setImageUrl(bean.getImage());
         holer.nameTv.setText(bean.getName());
-//        holer.priceTv.setText("¥ "+bean.getPrice());
+        holer.priceTv.setText("¥ "+bean.getSpecificationsList().get(0).getPrice()/100);
         return convertView;
     }
     }

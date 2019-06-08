@@ -79,5 +79,14 @@ public class Goods implements Serializable {
     private long parameterId;
 
     private String image;
+    private List<Specifications> specificationsList;
+
+    public List<Specifications> getSpecificationsList() {
+        return specificationsList;
+    }
+
+    public void setSpecificationsList(List<Specifications> specificationsList) {
+        this.specificationsList = specificationsList;
+    }
 }
 
