@@ -23,6 +23,8 @@ public abstract class HttpContants {
 
     public static final String ADDADDRESS_URL=BASE_URL+"address/add";
     public static final String ADDRESS_BY_CUSTOMER_URL=BASE_URL+"address/customer";
+    public static final String ADDRESS_UPDATE=BASE_URL+"address/update";
+    public static final String ADDRESS_DELETE=BASE_URL+"address/delete";
 
     public static final String ADDORDER_URL=BASE_URL+"order/add";
 

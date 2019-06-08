@@ -98,8 +98,9 @@ public class LoginActivity extends AppCompatActivity {
                                     SharedPreferences sharedPreferences = getSharedPreferences("Id", Context.MODE_PRIVATE); //私有数据
 
                                     SharedPreferences.Editor editor = sharedPreferences.edit();//获取编辑器
+                                   String ID=""+id1;
 
-                                    editor.putInt("_Id",(int)id1);
+                                    editor.putString("_Id",ID);
                                     editor.commit();//提交修改
                                     finish();
                                     Looper.loop();

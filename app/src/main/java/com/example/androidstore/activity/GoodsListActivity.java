@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
-import static android.support.constraint.Constraints.TAG;
+
 
 import com.example.androidstore.Adapter.GoodsAdapter;
 import com.example.androidstore.R;
@@ -33,11 +35,16 @@ public class GoodsListActivity extends AppCompatActivity {
         adapter=new GoodsAdapter(this);
         initData();
         loadGoodsList(categoryId.toString());
+        goodsList_Lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                startActivity(new Intent(GoodsListActivity.this,GoodsDetailsActivity.class));
+            }
+        });
     }
     private void initData(){
         Intent intent = getIntent();
         categoryId = intent.getLongExtra(SubCategoryView.CATEGORY_ID,0);
-        Log.d(TAG, "initData: "+categoryId.toString());
     }
     private void loadGoodsList(String categoryId){
         if (categoryId!=null)
@@ -52,7 +59,6 @@ public class GoodsListActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.d(LoggerInterceptor.TAG, "onResponse: " + response);
                         adapter.setBeans(GsonUtils.GsonToList(response, Goods[].class));
                         goodsList_Lv.setAdapter(adapter);
                     }
