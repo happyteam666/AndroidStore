@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -15,11 +16,12 @@ import com.example.androidstore.Adapter.CartAdapter;
 import com.example.androidstore.R;
 import com.example.androidstore.Util.GsonUtils;
 import com.example.androidstore.bean.CartItem;
-import com.example.androidstore.bean.Goods;
 import com.example.androidstore.contants.HttpContants;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zhy.http.okhttp.log.LoggerInterceptor;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,12 +29,13 @@ import butterknife.Unbinder;
 import okhttp3.Call;
 
 
-public class CartFragment extends Fragment {
+public class CartFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     private Unbinder bind;
 
     private ListView goodsList_Lv;
     private CartAdapter adapter;
+    private static ArrayList<Boolean> sItemChecked=new ArrayList<Boolean>();
 
     String message;
     @BindView(R.id.rv_bottom)
@@ -53,6 +56,22 @@ public class CartFragment extends Fragment {
         return view;
     }
 
+    //设置item是否选中
+    public void setCheck(int position) {
+//		1.判断item是否选中 如果选中则取消  如未选中 则选中
+        sItemChecked.set(position, !sItemChecked.get(position));
+//		2.刷新界面
+//        notifyDataSetChanged();
+//		3.刷新外部的Fragment
+//        refreshOuterFragmentTip();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position,
+                            long id) {
+        setCheck(position);
+    }
+
     private void initView(View view) {
         goodsList_Lv = view.findViewById(R.id.goods_lv);
         adapter = new CartAdapter(getActivity());
@@ -66,7 +85,7 @@ public class CartFragment extends Fragment {
     private void attemptListCart() {
             OkHttpUtils.get().
                     url(HttpContants.CARTITEM_URL)
-                    .addParams("id", message)
+                    .addParams("id", "1")
                     .build()
                     .execute(new StringCallback() {
                         @Override

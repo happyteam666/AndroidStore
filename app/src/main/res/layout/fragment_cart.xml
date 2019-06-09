@@ -34,25 +34,13 @@
         android:paddingTop="5dp"
         >
 
-        <CheckBox
-            android:id="@+id/checkbox_all"
-            style="@style/customCheckbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:checked="true"
-            android:text="全选"
-            />
-
         <TextView
             android:id="@+id/txt_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="25dp"
-            android:layout_toRightOf="@+id/checkbox_all"
-            android:text="合计"
+            android:text="合计:0.0"
             android:textSize="20sp"
             />
 

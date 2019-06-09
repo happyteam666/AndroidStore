@@ -12,11 +12,14 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.androidstore.Adapter.CartAdapter;
 import com.example.androidstore.R;
 import com.example.androidstore.activity.AddressManageActivity;
 import com.example.androidstore.activity.LoginActivity;
 import com.example.androidstore.activity.MainActivity;
 import com.example.androidstore.activity.SettingActivity;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -82,7 +85,7 @@ public class MeFragment extends Fragment {
                 SharedPreferences sp = getActivity().getSharedPreferences("Id", 0);
                 if(!sp.getString("_Id","").equals("")) {
                     Exit();
-                    startActivity(new Intent(getActivity(), MainActivity.class));
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
 
                 }else{}
                 break;
