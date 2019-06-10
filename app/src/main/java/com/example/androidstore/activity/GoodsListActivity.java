@@ -20,13 +20,14 @@ import com.example.androidstore.contants.HttpContants;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zhy.http.okhttp.log.LoggerInterceptor;
-
+import static com.zhy.http.okhttp.log.LoggerInterceptor.TAG;
 import okhttp3.Call;
 
 public class GoodsListActivity extends AppCompatActivity {
     private Long categoryId;
     private ListView goodsList_Lv;
     private GoodsAdapter adapter;
+    private Goods goods;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +39,10 @@ public class GoodsListActivity extends AppCompatActivity {
         goodsList_Lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                startActivity(new Intent(GoodsListActivity.this,GoodsDetailsActivity.class));
+                goods=(Goods)adapter.getItem(i);
+                Intent intent=new Intent(GoodsListActivity.this,GoodsDetailsActivity.class);
+                intent.putExtra("goodsId",goods.getId()+"");
+                startActivity(intent);
             }
         });
     }
