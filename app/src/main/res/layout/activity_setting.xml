@@ -6,4 +6,128 @@
     android:layout_height="match_parent"
     tools:context=".activity.SettingActivity">
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/horizontal_bar_bg">
+
+            <TextView
+                android:id="@+id/text_usersafe"
+                style="@style/HorizontalItemTextView"
+                android:gravity="center_vertical"
+                android:text="账号与安全"
+                android:textSize="18sp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/horizontal_bar_bg">
+
+            <TextView
+                android:id="@+id/text_paysetting"
+                style="@style/HorizontalItemTextView"
+                android:gravity="center_vertical"
+                android:text="支付设置"
+                android:textSize="18sp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/horizontal_bar_bg">
+
+            <TextView
+                android:id="@+id/text_myfiles"
+                style="@style/HorizontalItemTextView"
+                android:gravity="center_vertical"
+                android:text="我的档案"
+                android:textSize="18sp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/horizontal_bar_bg">
+
+            <TextView
+                android:id="@+id/text_design"
+                style="@style/HorizontalItemTextView"
+                android:gravity="center_vertical"
+                android:text="我的订制"
+                android:textSize="18sp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/horizontal_bar_bg">
+
+            <TextView
+                android:id="@+id/text_general"
+                style="@style/HorizontalItemTextView"
+                android:gravity="center_vertical"
+                android:text="通用"
+                android:textSize="18sp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/horizontal_bar_bg">
+
+            <TextView
+                android:id="@+id/text_vipp"
+                style="@style/HorizontalItemTextView"
+                android:gravity="center_vertical"
+                android:text="PLUS会员"
+                android:textSize="18sp" />
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/horizontal_bar_bg">
+
+            <TextView
+                android:id="@+id/text_feedback"
+                style="@style/HorizontalItemTextView"
+                android:gravity="center_vertical"
+                android:text="功能反馈"
+                android:textSize="18sp" />
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/horizontal_bar_bg">
+
+            <TextView
+                android:id="@+id/text_about"
+                style="@style/HorizontalItemTextView"
+                android:gravity="center_vertical"
+                android:text="关于拼夕夕APP"
+                android:textSize="18sp" />
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/exit"
+            android:layout_width="322dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/button_circle_shape"
+            android:text="@string/exit"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </LinearLayout>
+
+
 </android.support.constraint.ConstraintLayout>

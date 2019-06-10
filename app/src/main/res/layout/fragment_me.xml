@@ -145,21 +145,6 @@
         </FrameLayout>
 
 
-        <Button
-            android:id="@+id/exit"
-            android:layout_width="322dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="22dp"
-            android:layout_marginTop="120dp"
-            android:layout_marginEnd="32dp"
-            android:background="@drawable/button_circle_shape"
-            android:text="@string/exit"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-
-
     </LinearLayout>
 
 
