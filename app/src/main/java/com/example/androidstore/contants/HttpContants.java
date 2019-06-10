@@ -12,6 +12,7 @@ public abstract class HttpContants {
     public static final String GOODS_URL=BASE_URL+"goods";
     public static final String GOODS_BY_CATEGORY_URL=BASE_URL+"goods/category";
     public static final String GOODS_BY_BRAND_URL=BASE_URL+"goods/brand";
+    public static final String GOODS_BY_ID=BASE_URL+"goods";
 
 
     public static final String CATEGORY_URL=BASE_URL+"category/pid";

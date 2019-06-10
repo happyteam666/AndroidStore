@@ -1,65 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/scan_iv"
+        android:layout_width="match_parent"
+        android:layout_height="664dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="67dp">
+
+        <LinearLayout
+            android:id="@+id/vp"
+            android:layout_width="match_parent"
+            android:layout_height="650dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <com.example.androidstore.View.SmartImageView
+                android:id="@+id/goods_image"
+                android:layout_width="match_parent"
+                android:layout_height="332dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="61dp">
+
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="45dp" />
+
+                <TextView
+                    android:id="@+id/goods_price"
+                    android:layout_width="266dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="4dp"
+                    android:textColor="#F23030"
+                    android:textSize="28sp" />
+
+                <TextView
+                    android:layout_width="82dp"
+                    android:layout_height="285dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="领券"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
 
-    <View 
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#E8E8E8" />
+            <TextView
+                android:id="@+id/goods_name"
+                android:layout_width="match_parent"
+                android:layout_height="106dp" />
+            <GridView
+                android:id="@+id/specification_gv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFF"
+                android:listSelector="@android:color/transparent"
+                android:horizontalSpacing="5dp"
+                android:verticalSpacing  ="5dp"
+                android:numColumns="3"
+                android:scrollbars="none" />
+        </LinearLayout>
+    </ScrollView>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vp"
-        android:layout_width="match_parent"
-        android:layout_height="677dp"
-        android:layout_weight="1" />
-    <View 
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#C71523" />
-	<LinearLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@android:color/white" >
-        
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="0dp"
+            android:layout_height="50dp"
             android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:paddingTop="5dp"
+            android:drawableTop="@drawable/service"
+            android:gravity="center"
+            android:paddingTop="0dp"
             android:text="客服"
-            android:drawableTop="@drawable/cussvc_icon"
-            android:gravity="center"
             android:textSize="14sp" />
-        
+
         <TextView
             android:layout_width="0dp"
+            android:layout_height="50dp"
             android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:paddingTop="5dp"
-            android:text="关注"
-            android:drawableTop="@drawable/fav_icon"
+            android:drawableTop="@drawable/collection"
             android:gravity="center"
+            android:paddingTop="0dp"
+            android:text="关注"
             android:textSize="14sp" />
-        
-        <TextView 
+
+        <TextView
             android:id="@+id/add2shopcar"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-			android:layout_alignParentRight="true"
-			android:paddingLeft="8dp"
-			android:paddingRight="8dp"
-            android:text="加入购物车"
-            android:gravity="center"
-            android:textSize="16sp"
+            android:layout_alignParentRight="true"
             android:background="#CC0000"
-            android:onClick="add2ShopCar"
             android:clickable="true"
-            android:textColor="@android:color/white" />
-        
+            android:gravity="center"
+            android:onClick="add2ShopCar"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="加入购物车"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>
