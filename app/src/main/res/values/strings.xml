@@ -26,4 +26,5 @@
     <string name="address_title_manage">管理收货地址</string>
     <string name="forget_password">忘记密码</string>
     <string name="save_address">保存</string>
+    <string name="exit">退出登录</string>
 </resources>

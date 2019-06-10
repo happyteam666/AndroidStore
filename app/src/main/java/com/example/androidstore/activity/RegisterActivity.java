@@ -81,6 +81,11 @@ public class RegisterActivity extends AppCompatActivity {
                                      @Override
                                      public void onError(Call call, Exception e, int id) {
                                          Log.e("TAG", "首页请求失败==" + e.getMessage());
+                                         if (Looper.myLooper() == null) {
+                                             Looper.prepare();
+                                         }
+                                         ToastUtils.showToast(RegisterActivity.this, "用户已存在");
+                                         Looper.loop();
                                      }
 
                                      @Override

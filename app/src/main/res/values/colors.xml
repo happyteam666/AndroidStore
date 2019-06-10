@@ -26,4 +26,5 @@
     <color name="grey_btn_color_normal">#fff1f1f1</color>
     <color name="gainsboro">#dcdcdc</color>
     <color name="gray">#808080</color>
+    <color name="crimson">#dc143c</color>
 </resources>
