@@ -145,7 +145,7 @@ public class CartFragment extends Fragment {
         cartExpandAdapter.setOnClickDeleteListenter((view, onePosition, position) -> {
             CartItem cartItem = cartInfo.getData().get(onePosition).getItems().get(position);
 
-            OkHttpUtils.get().url(HttpContants.CARTITEM_DELETE_URL)
+            OkHttpUtils.post().url(HttpContants.CARTITEM_DELETE_URL)
                     .addParams("id",cartItem.getId()  + "")
                     .build()
                     .execute(new StringCallback() {
