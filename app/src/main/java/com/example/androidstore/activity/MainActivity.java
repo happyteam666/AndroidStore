@@ -1,6 +1,5 @@
 package com.example.androidstore.activity;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -8,13 +7,13 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
-import android.widget.TextView;
 
 import com.example.androidstore.R;
 import com.example.androidstore.fragment.CartFragment;
 import com.example.androidstore.fragment.ClassifyFragment;
 import com.example.androidstore.fragment.HomeFragment;
 import com.example.androidstore.fragment.MeFragment;
+import com.example.androidstore.wight.PxxViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +24,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
     @BindView(R.id.view_pager_bottom_navigation)
-    ViewPager viewPager;
+    PxxViewPager viewPager;
     @BindView(R.id.bottom_navigation)
     BottomNavigationView bottomNavigation;
 
@@ -39,8 +38,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         ButterKnife.bind(this);
         initView();
 
-
-
     }
 
     private void initView() {
@@ -51,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         fragments.add(new MeFragment());
 
         viewPager.addOnPageChangeListener(this);
+        viewPager.setNoScroll(true);
 
         bottomNavigation.setOnNavigationItemSelectedListener(item -> {
             viewPager.setCurrentItem(item.getOrder());

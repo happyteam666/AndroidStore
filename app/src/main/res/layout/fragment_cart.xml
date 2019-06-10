@@ -1,113 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.CartFragment">
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
-
-
-        <ListView
-            android:id="@+id/goods_lv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:overScrollMode="never"
-            android:scrollbars="none" />
-
-
-    <RelativeLayout
-        android:id="@+id/rv_bottom"
+        android:layout_height="40dp"
+        android:background="@color/colorPrimary"
+        android:text="购物车"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        />
+    <ExpandableListView
+        android:id="@+id/cart_expandablelistview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#802f4f4f"
-        android:paddingBottom="5dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingTop="5dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingBottom="15dp"
+        android:scrollbars="none"
         >
+    </ExpandableListView>
 
-        <TextView
-            android:id="@+id/txt_total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="25dp"
-            android:text="合计:0.0"
-            android:textSize="20sp"
-            />
-
-        <Button
-            android:id="@+id/btn_order"
-            style="@style/bigRedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:minHeight="40dp"
-            android:minWidth="80dp"
-            android:text="去结算"
-            />
-
-        <Button
-            android:id="@+id/btn_del"
-            style="@style/bigRedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:minHeight="60dp"
-            android:minWidth="120dp"
-            android:text="删除"
-            android:visibility="gone"
-            />
-    </RelativeLayout>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#e8e8e8" />
     <LinearLayout
-        android:id="@+id/ll_empty"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="gone"
+        android:layout_height="45dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:gravity="center"
         >
-
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/cart_num"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:gravity="center"
-            android:text="购物车空空如也\n赶紧去逛逛吧"
-            android:textColor="@color/base_text_color_gray"
-            android:textSize="20sp"
+            android:text="共0件商品"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:gravity="right"
             />
-
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/shop_emptycart"
-            />
-
         <TextView
-            android:id="@+id/tv_goshop"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="40dp"
-            android:background="@drawable/bt_empty_gotoshop"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="去逛逛"
-            android:textSize="20sp"
+            android:text="合计："
+            android:textColor="#000000"
+            android:textSize="14dp"
+            android:layout_marginLeft="9dp"
             />
+        <TextView
+            android:id="@+id/cart_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¥ 0.0"
+            android:textColor="@color/colorOrder"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            />
+
+        <Button
+            android:id="@+id/cart_shopp_moular"
+            android:layout_width="119dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorOrder"
+            android:layout_marginLeft="5dp"
+            android:text="提交订单"
+            android:textColor="@android:color/white" />
     </LinearLayout>
-    </LinearLayout>
-</FrameLayout>
+
+</LinearLayout>

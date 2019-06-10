@@ -7,118 +7,226 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
+import android.widget.Button;
+import android.widget.ExpandableListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.androidstore.Adapter.CartAdapter;
+import com.example.androidstore.Adapter.CartExpandAdapter;
 import com.example.androidstore.R;
 import com.example.androidstore.Util.GsonUtils;
+import com.example.androidstore.bean.CartInfo;
 import com.example.androidstore.bean.CartItem;
+import com.example.androidstore.callback.OnClickAddCloseListenter;
 import com.example.androidstore.contants.HttpContants;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
-import com.zhy.http.okhttp.log.LoggerInterceptor;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import okhttp3.Call;
 
+import static org.greenrobot.eventbus.EventBus.TAG;
 
-public class CartFragment extends Fragment implements AdapterView.OnItemClickListener {
+
+public class CartFragment extends Fragment {
 
     private Unbinder bind;
 
-    private ListView goodsList_Lv;
-    private CartAdapter adapter;
-    private static ArrayList<Boolean> sItemChecked=new ArrayList<Boolean>();
+    @BindView(R.id.cart_expandablelistview)
+    ExpandableListView cartExpandablelistview;
+    @BindView(R.id.cart_num)
+    TextView cartNum;
+    @BindView(R.id.cart_money)
+    TextView cartMoney;
+    @BindView(R.id.cart_shopp_moular)
+    Button cartShoppMoular;
 
+    volatile CartInfo cartInfo;
+    CartExpandAdapter cartExpandAdapter;
+    double price;
+    int num;
     String message;
-    @BindView(R.id.rv_bottom)
-    RelativeLayout mRvBottom;
-    @BindView(R.id.ll_empty)
-    LinearLayout mLlEmpty;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_cart,container, false);
-        initView(view);
+        View view = inflater.inflate(R.layout.fragment_cart, container, false);
         bind = ButterKnife.bind(this, view);
-        if(getid1())
-            attemptListCart();
-        else
-            initEmptyView();
+
+        initView();
+
         return view;
     }
 
-    //设置item是否选中
-    public void setCheck(int position) {
-//		1.判断item是否选中 如果选中则取消  如未选中 则选中
-        sItemChecked.set(position, !sItemChecked.get(position));
-//		2.刷新界面
-//        notifyDataSetChanged();
-//		3.刷新外部的Fragment
-//        refreshOuterFragmentTip();
+    private void initView() {
+        cartExpandablelistview.setGroupIndicator(null);
+        showData();
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position,
-                            long id) {
-        setCheck(position);
+    private void showData() {
+        SharedPreferences sp = getActivity().getSharedPreferences("Id", 0);
+        message = sp.getString("_Id","");
+        OkHttpUtils.get().url(HttpContants.CARTITEM_URL)
+                .addParams("id", message)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        cartInfo = GsonUtils.GsonToBean(response, CartInfo.class);
+                        if (cartInfo != null && cartInfo.getData().size() > 0) {
+                            cartExpandAdapter = null;
+                            showExpandData();
+                        } else {
+                            try {
+                                cartExpandAdapter.notifyDataSetChanged();
+                            } catch (Exception e) {
+                                return;
+                            }
+                        }
+
+                    }
+                });
+
+
     }
 
-    private void initView(View view) {
-        goodsList_Lv = view.findViewById(R.id.goods_lv);
-        adapter = new CartAdapter(getActivity());
-    }
+    private void showExpandData() {
+        cartExpandAdapter = new CartExpandAdapter(getActivity(), cartExpandablelistview, cartInfo.getData());
+        cartExpandablelistview.setAdapter(cartExpandAdapter);
+        int intgroupCount = cartExpandablelistview.getCount();
+        for (int i = 0; i < intgroupCount; i++) {
+            cartExpandablelistview.expandGroup(i);
+        }
+        /**
+         * 全选
+         */
+        cartExpandAdapter.setOnItemClickListener((isFlang, view, position) -> {
+            cartInfo.getData().get(position).setIscheck(isFlang);
+            int length = cartInfo.getData().get(position).getItems().size();
+            for (int i = 0; i < length; i++) {
+                cartInfo.getData().get(position).getItems().get(i).setIscheck(isFlang);
+            }
+            cartExpandAdapter.notifyDataSetChanged();
+            showCommodityCalculation();
+        });
 
-    private void initEmptyView() {
-        mRvBottom.setVisibility(View.GONE);
-        mLlEmpty.setVisibility(View.VISIBLE);
-    }
+        /**
+         * 单选
+         */
+        cartExpandAdapter.setOnClickListenterModel((isFlang, view, onePosition, position) -> {
+            cartInfo.getData().get(onePosition).getItems().get(position).setIscheck(isFlang);
+            int length = cartInfo.getData().get(onePosition).getItems().size();
+            for (int i = 0; i < length; i++) {
+                if (!cartInfo.getData().get(onePosition).getItems().get(i).ischeck()) {
+                    if (!isFlang) {
+                        cartInfo.getData().get(onePosition).setIscheck(isFlang);
+                    }
+                    cartExpandAdapter.notifyDataSetChanged();
+                    showCommodityCalculation();
+                    return;
+                } else {
+                    if (i == (length - 1)) {
+                        cartInfo.getData().get(onePosition).setIscheck(isFlang);
+                        cartExpandAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+            showCommodityCalculation();
+        });
+        cartExpandAdapter.setOnClickDeleteListenter((view, onePosition, position) -> {
+            CartItem cartItem = cartInfo.getData().get(onePosition).getItems().get(position);
 
-    private void attemptListCart() {
-            OkHttpUtils.get().
-                    url(HttpContants.CARTITEM_URL)
-                    .addParams("id", "1")
+            OkHttpUtils.get().url(HttpContants.CARTITEM_DELETE_URL)
+                    .addParams("id",cartItem.getId()  + "")
                     .build()
                     .execute(new StringCallback() {
                         @Override
                         public void onError(Call call, Exception e, int id) {
-                            Log.e("TAG", "首页请求失败==" + e.getMessage());
+                            Toast.makeText(getActivity(), "删除失败", Toast.LENGTH_LONG).show();
+
                         }
 
                         @Override
                         public void onResponse(String response, int id) {
-                            Log.d("TAG", "首页请求成功==" + response);
-                            if(response.equals("")){
-                                initEmptyView();
-                            }
-                            else{
-                                Log.d(LoggerInterceptor.TAG, "onResponse: " + response);
-                                if(response.equals("[]")) {
-                                    initEmptyView();
-                                }else {
-                                    adapter.setBeans(GsonUtils.GsonToList(response, CartItem[].class));
-                                    goodsList_Lv.setAdapter(adapter);
-                                }
-                            }
-
+                            cartInfo.getData().get(onePosition).getItems().remove(position);
+                            Log.d(TAG, "showExpandData: "+view+"  "+onePosition+"  "+position);
+                            cartExpandAdapter.notifyDataSetChanged();
+                            // TODO 具体代码没写， 只要删除商品，刷新数据即可
+                            Toast.makeText(getActivity(), "删除操作", Toast.LENGTH_LONG).show();
                         }
-        });
-  }
+                    });
 
-  public boolean getid1() {
-      SharedPreferences sp = getActivity().getSharedPreferences("Id", 0);
-      message = sp.getString("_Id", "");
-      if (!message.equals(""))
-          return true;
-       else
-          return false;
-  }
+
+
+        });
+
+        /***
+         * 数量增加和减少
+         */
+        cartExpandAdapter.setOnClickAddCloseListenter(new OnClickAddCloseListenter() {
+            @Override
+            public void onItemClick(View view, int index, int onePosition, int position, int num) {
+                if (index == 1) {
+                    if (num > 1) {
+                        cartInfo.getData().get(onePosition).getItems().get(position).setNum((num - 1));
+                        cartExpandAdapter.notifyDataSetChanged();
+                    }
+                } else {
+                    cartInfo.getData().get(onePosition).getItems().get(position).setNum((num + 1));
+                    cartExpandAdapter.notifyDataSetChanged();
+                }
+                showCommodityCalculation();
+            }
+        });
+        showCommodityCalculation();
+    }
+
+    private void showCommodityCalculation() {
+        price = 0;
+        num = 0;
+        for (int i = 0; i < cartInfo.getData().size(); i++) {
+            for (int j = 0; j < cartInfo.getData().get(i).getItems().size(); j++) {
+                if (cartInfo.getData().get(i).getItems().get(j).ischeck()) {
+                    price += Double.valueOf((cartInfo.getData().get(i).getItems().get(j).getNum() * Double.valueOf(cartInfo.getData().get(i).getItems().get(j).getPrice())));
+                    num++;
+                }
+            }
+        }
+        if (price == 0.0) {
+            cartNum.setText("共0件商品");
+            cartMoney.setText("¥ 0.0");
+            return;
+        }
+        try {
+            String money = String.valueOf(price);
+            cartNum.setText("共" + num + "件商品");
+            if (money.substring(money.indexOf("."), money.length()).length() > 2) {
+                cartMoney.setText("¥ " + money.substring(0, (money.indexOf(".") + 3)));
+                return;
+            }
+            cartMoney.setText("¥ " + money.substring(0, (money.indexOf(".") + 2)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @OnClick(R.id.cart_shopp_moular)
+    public void onClick() {
+        Toast.makeText(getActivity(), "提交订单:  " + cartMoney.getText().toString() + "元", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        bind.unbind();
+    }
 }
