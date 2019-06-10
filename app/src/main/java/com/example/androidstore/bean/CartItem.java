@@ -9,13 +9,31 @@ import java.io.Serializable;
 public class CartItem implements Serializable {
 
     private long id;
-
-
     private int quantity;
-
     private long goodsId;
-
     private String name;
+    private double price;
+    private String image;
+    private long customerId;
+
+    private boolean ischeck = false;
+    private int num = 1;
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    public boolean ischeck() {
+        return ischeck;
+    }
+
+    public void setIscheck(boolean ischeck) {
+        this.ischeck = ischeck;
+    }
 
     public String getName() {
         return name;
@@ -25,8 +43,6 @@ public class CartItem implements Serializable {
         this.name = name;
     }
 
-    private String image;
-
     public String getImage() {
         return image;
     }
@@ -35,15 +51,14 @@ public class CartItem implements Serializable {
         this.image = image;
     }
 
-    public long getPrice() {
-        return price;
+    public double getPrice() {
+        return price / 100.00;
     }
 
-    public void setPrice(long price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    private long price;
 
     public long getId() {
         return id;
@@ -77,8 +92,6 @@ public class CartItem implements Serializable {
     public void setCustomerId(long customerId) {
         this.customerId = customerId;
     }
-
-    private long customerId;
 
 
 }
