@@ -16,7 +16,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 
 
-public class ZQRoundOvalImageView extends android.support.v7.widget.AppCompatImageView {
+public class PxxRoundOvalImageView extends android.support.v7.widget.AppCompatImageView {
 
 
     private Paint mPaint;
@@ -43,17 +43,17 @@ public class ZQRoundOvalImageView extends android.support.v7.widget.AppCompatIma
     public static final int TYPE_OVAL = 2;//椭圆形
     public static final int DEFAUT_ROUND_RADIUS = 10;//默认圆角大小
 
-    public ZQRoundOvalImageView(Context context) {
+    public PxxRoundOvalImageView(Context context) {
         this(context, null);
         // TODO Auto-generated constructor stub
     }
 
-    public ZQRoundOvalImageView(Context context, AttributeSet attrs) {
+    public PxxRoundOvalImageView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
         // TODO Auto-generated constructor stub
     }
 
-    public ZQRoundOvalImageView(Context context, AttributeSet attrs, int defStyle) {
+    public PxxRoundOvalImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initView();
     }

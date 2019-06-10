@@ -19,7 +19,7 @@ import com.example.androidstore.callback.OnClickDeleteListenter;
 import com.example.androidstore.callback.OnClickListenterModel;
 import com.example.androidstore.callback.OnViewItemClickListener;
 import com.example.androidstore.wight.FrontViewToMove;
-import com.example.androidstore.wight.ZQRoundOvalImageView;
+import com.example.androidstore.wight.PxxRoundOvalImageView;
 
 import java.util.List;
 
@@ -62,12 +62,12 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
         viewHolder1.checkBox.setChecked(list.get(groupPosition).getItems().get(position).ischeck());
         viewHolder1.tvMoney.setText("¥ " + list.get(groupPosition).getItems().get(position).getPrice());
         viewHolder1.btnNum.setText(list.get(groupPosition).getItems().get(position).getNum() + "");
-        viewHolder1.zqRoundOvalImageView.setType(ZQRoundOvalImageView.TYPE_ROUND);
-        viewHolder1.zqRoundOvalImageView.setRoundRadius(8);
+        viewHolder1.pxxRoundOvalImageView.setType(PxxRoundOvalImageView.TYPE_ROUND);
+        viewHolder1.pxxRoundOvalImageView.setRoundRadius(8);
 
         Glide.with(context).load(list.get(groupPosition)
                 .getItems().get(position).getImage())
-                .into(viewHolder1.zqRoundOvalImageView);
+                .into(viewHolder1.pxxRoundOvalImageView);
 //                .placeholder(R.mipmap.image_error)
 //                .error(R.mipmap.image_error).into(viewHolder1.zqRoundOvalImageView);
 
@@ -87,7 +87,7 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
         private View frontView;
         private Button button;
         private CheckBox checkBox;
-        private ZQRoundOvalImageView zqRoundOvalImageView;
+        private PxxRoundOvalImageView pxxRoundOvalImageView;
         private TextView tvMoney;
         private Button btnAdd;
         private Button btnNum;
@@ -96,7 +96,7 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
         public ViewHolder1(View view, int groupPosition, int position) {
             this.groupPosition = groupPosition;
             this.position = position;
-            zqRoundOvalImageView = view.findViewById(R.id.item_chlid_image);
+            pxxRoundOvalImageView = view.findViewById(R.id.item_chlid_image);
             textView = view.findViewById(R.id.item_chlid_name);
             checkBox = view.findViewById(R.id.item_chlid_check);
             button = view.findViewById(R.id.btn_delete);

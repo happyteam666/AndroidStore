@@ -43,7 +43,7 @@
                 android:background="@drawable/checkbox_payment"
                 android:button="@android:color/transparent" />
 
-            <com.example.androidstore.wight.ZQRoundOvalImageView
+            <com.example.androidstore.wight.PxxRoundOvalImageView
                 android:id="@+id/item_chlid_image"
                 android:layout_width="85dp"
                 android:layout_height="80dp"

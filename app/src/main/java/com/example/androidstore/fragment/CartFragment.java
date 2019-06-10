@@ -1,7 +1,9 @@
 package com.example.androidstore.fragment;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import com.example.androidstore.Adapter.CartExpandAdapter;
 import com.example.androidstore.R;
 import com.example.androidstore.Util.GsonUtils;
 import com.example.androidstore.bean.CartInfo;
+import com.example.androidstore.bean.CartItem;
 import com.example.androidstore.callback.OnClickAddCloseListenter;
 import com.example.androidstore.contants.HttpContants;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -24,6 +27,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import okhttp3.Call;
+
+import static org.greenrobot.eventbus.EventBus.TAG;
 
 
 public class CartFragment extends Fragment {
@@ -43,6 +48,7 @@ public class CartFragment extends Fragment {
     CartExpandAdapter cartExpandAdapter;
     double price;
     int num;
+    String message;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,8 +68,10 @@ public class CartFragment extends Fragment {
     }
 
     private void showData() {
+        SharedPreferences sp = getActivity().getSharedPreferences("Id", 0);
+        message = sp.getString("_Id","");
         OkHttpUtils.get().url(HttpContants.CARTITEM_URL)
-                .addParams("id", "1")
+                .addParams("id", message)
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -135,9 +143,30 @@ public class CartFragment extends Fragment {
             showCommodityCalculation();
         });
         cartExpandAdapter.setOnClickDeleteListenter((view, onePosition, position) -> {
+            CartItem cartItem = cartInfo.getData().get(onePosition).getItems().get(position);
 
-            //具体代码没写， 只要删除商品，刷新数据即可
-            Toast.makeText(getActivity(), "删除操作", Toast.LENGTH_LONG).show();
+            OkHttpUtils.get().url(HttpContants.CARTITEM_DELETE_URL)
+                    .addParams("id",cartItem.getId()  + "")
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            Toast.makeText(getActivity(), "删除失败", Toast.LENGTH_LONG).show();
+
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            cartInfo.getData().get(onePosition).getItems().remove(position);
+                            Log.d(TAG, "showExpandData: "+view+"  "+onePosition+"  "+position);
+                            cartExpandAdapter.notifyDataSetChanged();
+                            // TODO 具体代码没写， 只要删除商品，刷新数据即可
+                            Toast.makeText(getActivity(), "删除操作", Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+
+
         });
 
         /***
