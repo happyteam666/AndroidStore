@@ -17,7 +17,7 @@ public class Specifications implements Serializable {
 
     private long goodsId;
 
-    private Long price;
+    private double price;
 
     public long getId() {
         return id;
@@ -51,11 +51,11 @@ public class Specifications implements Serializable {
         this.goodsId = goodsId;
     }
 
-    public Long getPrice() {
-        return price;
+    public double getPrice() {
+        return price/100.0;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 }

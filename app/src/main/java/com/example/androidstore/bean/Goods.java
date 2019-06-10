@@ -88,5 +88,19 @@ public class Goods implements Serializable {
     public void setSpecificationsList(List<Specifications> specificationsList) {
         this.specificationsList = specificationsList;
     }
+
+    @Override
+    public String toString() {
+        return "Goods{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", brandId=" + brandId +
+                ", categoryId=" + categoryId +
+                ", attributeId=" + attributeId +
+                ", parameterId=" + parameterId +
+                ", image='" + image + '\'' +
+                ", specificationsList=" + specificationsList +
+                '}';
+    }
 }
 
