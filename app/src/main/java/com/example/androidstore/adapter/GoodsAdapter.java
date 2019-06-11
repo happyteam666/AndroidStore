@@ -1,4 +1,4 @@
-package com.example.androidstore.Adapter;
+package com.example.androidstore.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.androidstore.R;
-import com.example.androidstore.View.SmartImageView;
+import com.example.androidstore.view.SmartImageView;
 import com.example.androidstore.bean.Goods;
 
 import java.util.ArrayList;

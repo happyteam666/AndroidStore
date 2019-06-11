@@ -11,20 +11,20 @@ public class CartItem implements Serializable {
     private long id;
     private int quantity;
     private long goodsId;
+    private Specifications specifications;
     private String name;
-    private double price;
     private String image;
     private long customerId;
 
     private boolean ischeck = false;
-    private int num = 1;
 
-    public int getNum() {
-        return num;
+
+    public Specifications getSpecifications() {
+        return specifications;
     }
 
-    public void setNum(int num) {
-        this.num = num;
+    public void setSpecifications(Specifications specifications) {
+        this.specifications = specifications;
     }
 
     public boolean ischeck() {
@@ -50,15 +50,6 @@ public class CartItem implements Serializable {
     public void setImage(String image) {
         this.image = image;
     }
-
-    public double getPrice() {
-        return price / 100.00;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
 
     public long getId() {
         return id;

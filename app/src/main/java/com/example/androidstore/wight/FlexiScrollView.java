@@ -1,4 +1,4 @@
-package com.example.androidstore.UI;
+package com.example.androidstore.wight;
 
 import android.content.Context;
 import android.util.AttributeSet;

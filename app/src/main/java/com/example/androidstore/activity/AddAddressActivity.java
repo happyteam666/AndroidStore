@@ -20,7 +20,7 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.example.androidstore.R;
-import com.example.androidstore.Util.GetJsonDataUtil;
+import com.example.androidstore.utils.GetJsonDataUtil;
 
 import com.example.androidstore.bean.JsonBean;
 import com.example.androidstore.contants.HttpContants;

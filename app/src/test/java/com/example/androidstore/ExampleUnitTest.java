@@ -1,6 +1,6 @@
 package com.example.androidstore;
 
-import com.example.androidstore.Util.GsonUtils;
+import com.example.androidstore.utils.GsonUtils;
 import com.example.androidstore.bean.Category;
 
 import org.junit.Test;

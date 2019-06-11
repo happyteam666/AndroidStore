@@ -12,9 +12,9 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.androidstore.Adapter.CartExpandAdapter;
+import com.example.androidstore.adapter.CartExpandAdapter;
 import com.example.androidstore.R;
-import com.example.androidstore.Util.GsonUtils;
+import com.example.androidstore.utils.GsonUtils;
 import com.example.androidstore.bean.CartInfo;
 import com.example.androidstore.bean.CartItem;
 import com.example.androidstore.callback.OnClickAddCloseListenter;
@@ -153,7 +153,6 @@ public class CartFragment extends Fragment {
                         @Override
                         public void onError(Call call, Exception e, int id) {
                             Toast.makeText(getActivity(), "删除失败", Toast.LENGTH_LONG).show();
-
                         }
 
                         @Override
@@ -178,11 +177,11 @@ public class CartFragment extends Fragment {
             public void onItemClick(View view, int index, int onePosition, int position, int num) {
                 if (index == 1) {
                     if (num > 1) {
-                        cartInfo.getData().get(onePosition).getItems().get(position).setNum((num - 1));
+                        cartInfo.getData().get(onePosition).getItems().get(position).setQuantity((num - 1));
                         cartExpandAdapter.notifyDataSetChanged();
                     }
                 } else {
-                    cartInfo.getData().get(onePosition).getItems().get(position).setNum((num + 1));
+                    cartInfo.getData().get(onePosition).getItems().get(position).setQuantity((num + 1));
                     cartExpandAdapter.notifyDataSetChanged();
                 }
                 showCommodityCalculation();
@@ -197,7 +196,8 @@ public class CartFragment extends Fragment {
         for (int i = 0; i < cartInfo.getData().size(); i++) {
             for (int j = 0; j < cartInfo.getData().get(i).getItems().size(); j++) {
                 if (cartInfo.getData().get(i).getItems().get(j).ischeck()) {
-                    price += Double.valueOf((cartInfo.getData().get(i).getItems().get(j).getNum() * Double.valueOf(cartInfo.getData().get(i).getItems().get(j).getPrice())));
+                    price += Double.valueOf((cartInfo.getData().get(i).getItems().get(j).getQuantity()
+                            * Double.valueOf(cartInfo.getData().get(i).getItems().get(j).getSpecifications().getPrice())));
                     num++;
                 }
             }

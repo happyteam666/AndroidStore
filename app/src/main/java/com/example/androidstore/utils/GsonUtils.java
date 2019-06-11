@@ -1,4 +1,4 @@
-package com.example.androidstore.Util;
+package com.example.androidstore.utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

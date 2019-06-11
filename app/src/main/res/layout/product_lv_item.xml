@@ -9,7 +9,7 @@
         android:layout_height="130dp"
         android:orientation="horizontal" >
 
-        <com.example.androidstore.View.SmartImageView
+        <com.example.androidstore.view.SmartImageView
             android:id="@+id/product_iv"
             android:layout_width="120dp"
             android:layout_height="120dp"

@@ -1,4 +1,4 @@
-package com.example.androidstore.Util;
+package com.example.androidstore.utils;
 
 import android.content.Context;
 import android.content.res.AssetManager;

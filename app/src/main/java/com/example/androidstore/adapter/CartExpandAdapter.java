@@ -1,4 +1,4 @@
-package com.example.androidstore.Adapter;
+package com.example.androidstore.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.androidstore.R;
 import com.example.androidstore.bean.CartInfo;
+import com.example.androidstore.bean.CartItem;
 import com.example.androidstore.callback.OnClickAddCloseListenter;
 import com.example.androidstore.callback.OnClickDeleteListenter;
 import com.example.androidstore.callback.OnClickListenterModel;
@@ -58,10 +59,12 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
 
         //关键语句，使用自己写的类来对frontView的ontouch事件复写，实现视图滑动效果
         new FrontViewToMove(viewHolder1.frontView, listView, 200);
-        viewHolder1.textView.setText(list.get(groupPosition).getItems().get(position).getName());
-        viewHolder1.checkBox.setChecked(list.get(groupPosition).getItems().get(position).ischeck());
-        viewHolder1.tvMoney.setText("¥ " + list.get(groupPosition).getItems().get(position).getPrice());
-        viewHolder1.btnNum.setText(list.get(groupPosition).getItems().get(position).getNum() + "");
+        CartItem cartItem = list.get(groupPosition).getItems().get(position);
+        viewHolder1.textView.setText(cartItem.getName());
+        viewHolder1.checkBox.setChecked(cartItem.ischeck());
+        viewHolder1.tvMoney.setText("¥ " + cartItem.getSpecifications().getPrice() * cartItem.getQuantity());
+        viewHolder1.btnNum.setText(cartItem.getQuantity() + "");
+        viewHolder1.chlidContent.setText(cartItem.getSpecifications().getName());
         viewHolder1.pxxRoundOvalImageView.setType(PxxRoundOvalImageView.TYPE_ROUND);
         viewHolder1.pxxRoundOvalImageView.setRoundRadius(8);
 
@@ -92,6 +95,7 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
         private Button btnAdd;
         private Button btnNum;
         private Button btnClose;
+        private TextView chlidContent;
 
         public ViewHolder1(View view, int groupPosition, int position) {
             this.groupPosition = groupPosition;
@@ -107,6 +111,7 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
             btnNum = view.findViewById(R.id.item_chlid_num);
             btnClose = view.findViewById(R.id.item_chlid_close);
             btnClose.setOnClickListener(this);
+            chlidContent = view.findViewById(R.id.item_chlid_content);
         }
 
         @Override

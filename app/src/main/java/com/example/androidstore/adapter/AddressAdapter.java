@@ -1,4 +1,4 @@
-package com.example.androidstore.Adapter;
+package com.example.androidstore.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,8 +15,6 @@ import com.example.androidstore.bean.Address;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.support.constraint.Constraints.TAG;
 
 public class AddressAdapter extends BaseAdapter {
     private Context context;

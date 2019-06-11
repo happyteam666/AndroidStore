@@ -1,6 +1,5 @@
 package com.example.androidstore.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,7 +11,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.androidstore.R;
-import com.example.androidstore.Util.GsonUtils;
+import com.example.androidstore.utils.GsonUtils;
 import com.example.androidstore.bean.Customer;
 import com.example.androidstore.contants.HttpContants;
 import com.example.androidstore.utils.ToastUtils;
