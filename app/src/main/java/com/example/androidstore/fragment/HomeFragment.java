@@ -1,6 +1,7 @@
 package com.example.androidstore.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -14,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.androidstore.R;
+import com.example.androidstore.activity.GoodsListActivity;
+import com.example.androidstore.activity.SettingActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +26,7 @@ import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 
@@ -114,14 +118,11 @@ public class HomeFragment extends Fragment{
         mViewPaper.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
 
+
+
             @Override
             public void onPageSelected(int position) {
-//                title.setText(titles[position]);
-//                dots.get(position).setBackgroundResource(R.drawable.dot_yes);
-//                dots.get(oldPosition).setBackgroundResource(R.drawable.dot_no);
 //
-//                oldPosition = position;
-//                currentItem = position;
             }
 
             @Override
@@ -218,5 +219,24 @@ public class HomeFragment extends Fragment{
     }
 
 
-}
 
+    @OnClick({R.id.Tshit,R.id.sjkh,R.id.ssfs,R.id.mzhf})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.Tshit:
+                Intent intent=new Intent(getContext(), GoodsListActivity.class);
+                intent.putExtra("CATEGORY_ID",125);
+                getContext().startActivity(intent);
+                break;
+            case R.id.sjkh:
+                break;
+            case R.id.ssfs:
+                break;
+            case R.id.mzhf:
+                break;
+            default:
+
+        }
+    }
+
+}

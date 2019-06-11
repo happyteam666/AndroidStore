@@ -288,12 +288,12 @@
             android:orientation="horizontal">
             //手机配件
             <ImageView
-                android:id="@+id/sjpj"
+                android:id="@+id/Tshit"
                 android:layout_width="165dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="15dp"
-                android:src="@drawable/sjpj" />
+                android:src="@drawable/tshit1" />
 
             //手机狂欢
             <ImageView

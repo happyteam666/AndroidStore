@@ -63,6 +63,9 @@ public class GoodsListActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
+
+
+                        Log.d(TAG, "陆成钢测试: "+response);
                         adapter.setBeans(GsonUtils.GsonToList(response, Goods[].class));
                         goodsList_Lv.setAdapter(adapter);
                     }

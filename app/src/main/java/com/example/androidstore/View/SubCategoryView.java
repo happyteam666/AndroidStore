@@ -15,6 +15,7 @@ import com.example.androidstore.activity.GoodsListActivity;
 import com.example.androidstore.bean.Category;
 import java.util.ArrayList;
 
+import static org.greenrobot.eventbus.EventBus.TAG;
 
 
 public class SubCategoryView extends FlexiScrollView
@@ -78,6 +79,7 @@ public class SubCategoryView extends FlexiScrollView
 			public void onClick(View v) {
 				Intent intent=new Intent(getContext(), GoodsListActivity.class);
 				intent.putExtra(CATEGORY_ID,Categorys.get(columnIndex).getId());
+				Log.d(TAG, "详情页内容ID："+CATEGORY_ID+"  "+Categorys.get(columnIndex).getId());
 				getContext().startActivity(intent);
 			}
 		});
