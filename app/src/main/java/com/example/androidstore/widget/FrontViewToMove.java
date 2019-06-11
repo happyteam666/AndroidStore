@@ -1,4 +1,4 @@
-package com.example.androidstore.wight;
+package com.example.androidstore.widget;
 
 import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;

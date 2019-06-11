@@ -19,8 +19,8 @@ import com.example.androidstore.callback.OnClickAddCloseListenter;
 import com.example.androidstore.callback.OnClickDeleteListenter;
 import com.example.androidstore.callback.OnClickListenterModel;
 import com.example.androidstore.callback.OnViewItemClickListener;
-import com.example.androidstore.wight.FrontViewToMove;
-import com.example.androidstore.wight.PxxRoundOvalImageView;
+import com.example.androidstore.widget.FrontViewToMove;
+import com.example.androidstore.widget.PxxRoundOvalImageView;
 
 import java.util.List;
 

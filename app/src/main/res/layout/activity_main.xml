@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".activity.MainActivity">
 
-    <com.example.androidstore.wight.PxxViewPager
+    <com.example.androidstore.widget.PxxViewPager
         android:id="@+id/view_pager_bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="0dp"

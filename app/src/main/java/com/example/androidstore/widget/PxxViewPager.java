@@ -1,4 +1,4 @@
-package com.example.androidstore.wight;
+package com.example.androidstore.widget;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;

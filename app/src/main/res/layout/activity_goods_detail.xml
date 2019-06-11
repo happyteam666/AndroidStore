@@ -8,9 +8,9 @@
     <ScrollView
         android:id="@+id/scan_iv"
         android:layout_width="match_parent"
-        android:layout_height="664dp"
+        android:layout_height="679dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="67dp">
+        android:layout_marginBottom="52dp">
 
         <LinearLayout
             android:id="@+id/vp"
@@ -53,16 +53,16 @@
                 android:id="@+id/goods_name"
                 android:layout_width="match_parent"
                 android:layout_height="106dp" />
+
             <GridView
                 android:id="@+id/specification_gv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#FFF"
-                android:listSelector="@android:color/transparent"
+                android:layout_height="234dp"
                 android:horizontalSpacing="5dp"
-                android:verticalSpacing  ="5dp"
+                android:listSelector="@android:color/transparent"
                 android:numColumns="3"
-                android:scrollbars="none" />
+                android:scrollbars="none"
+                android:verticalSpacing="5dp" />
         </LinearLayout>
     </ScrollView>
 
@@ -96,7 +96,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/add2shopcar"
+            android:id="@+id/addshopcar"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"

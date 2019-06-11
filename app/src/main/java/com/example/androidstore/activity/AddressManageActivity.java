@@ -63,7 +63,6 @@ public class AddressManageActivity extends AppCompatActivity {
 
                         @Override
                         public void onResponse(String response, int id) {
-                            Log.d(LoggerInterceptor.TAG, "onResponse: " + response);
                             adapter.setBeans(GsonUtils.GsonToList(response, Address[].class));
                             addressList.setAdapter(adapter);
                         }

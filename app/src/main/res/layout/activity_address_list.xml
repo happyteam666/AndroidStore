@@ -12,7 +12,7 @@
     <ListView
         android:id="@+id/address_list_view"
         android:layout_width="match_parent"
-        android:layout_height="651dp"
+        android:layout_height="778dp"
         android:overScrollMode="never"
         android:scrollbars="none">
 
