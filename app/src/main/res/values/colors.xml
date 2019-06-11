@@ -29,4 +29,5 @@
     <color name="crimson">#dc143c</color>
     <color name="colorOrder">#E8321D</color>
     <color name="colorGrayan">#E4E4E4</color>
+    <color name="activity_background">#EEEEEE</color>
 </resources>

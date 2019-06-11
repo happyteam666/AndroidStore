@@ -22,6 +22,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".activity.RecordingActivity"
+            android:theme="@style/AppTheme.noActionBar" />
+        <activity
             android:name=".activity.OrderActicity"
             android:label="我的订单"
             android:parentActivityName=".activity.MainActivity" />

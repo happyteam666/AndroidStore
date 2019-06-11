@@ -1,14 +1,14 @@
 package com.example.androidstore.bean;
 
-import java.util.Date;
+import java.io.Serializable;
 
-public class Recording {
+public class Recording implements Serializable {
     private long id;
     private long customerId;
     private long goodsId;
     private String goodsImage;
     private String goodsName;
-    private Date createTime;
+    private String createTime;
 
     public long getId() {
         return id;
@@ -50,11 +50,11 @@ public class Recording {
         this.goodsName = goodsName;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 }

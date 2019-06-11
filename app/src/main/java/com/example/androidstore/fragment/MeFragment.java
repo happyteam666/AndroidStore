@@ -14,6 +14,7 @@ import com.example.androidstore.R;
 import com.example.androidstore.activity.AddressManageActivity;
 import com.example.androidstore.activity.LoginActivity;
 import com.example.androidstore.activity.MainActivity;
+import com.example.androidstore.activity.RecordingActivity;
 import com.example.androidstore.activity.SettingActivity;
 
 import butterknife.BindView;
@@ -71,6 +72,7 @@ public class MeFragment extends Fragment {
             case R.id.text_shipped:
                 break;
             case R.id.text_history:
+                startActivity(new Intent(getActivity(), RecordingActivity.class));
                 break;
             case R.id.text_manage_address:
                 startActivity(new Intent(getActivity(), AddressManageActivity.class));
