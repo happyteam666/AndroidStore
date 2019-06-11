@@ -286,14 +286,16 @@
             android:layout_height="134dp"
             android:layout_marginTop="12dp"
             android:orientation="horizontal">
-            //手机配件
+
+            //时尚服饰
             <ImageView
-                android:id="@+id/Tshit"
+                android:id="@+id/ssfs"
                 android:layout_width="165dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="15dp"
-                android:src="@drawable/tshit1" />
+                android:src="@drawable/ssfs" />
+
 
             //手机狂欢
             <ImageView
@@ -311,15 +313,14 @@
             android:layout_marginTop="12dp"
             android:orientation="horizontal">
 
-
-            //时尚服饰
+            //手机配件
             <ImageView
-                android:id="@+id/ssfs"
+                android:id="@+id/Tshit"
                 android:layout_width="165dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="15dp"
-                android:src="@drawable/ssfs" />
+                android:src="@drawable/tshit1" />
 
             //美妆护肤
             <ImageView
@@ -336,17 +337,19 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            //first-recycleview
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="183dp"
+                android:layout_height="wrap_content"
+                android:text="Tshit"
+                android:textAlignment="center" />
 
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="196dp"
-                android:layout_height="match_parent">
-
-
-            </android.support.v7.widget.RecyclerView>
-
-
-
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="零食"
+                android:textAlignment="center" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
