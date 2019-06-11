@@ -72,13 +72,14 @@ public class CartFragment extends Fragment {
 
         SharedPreferences sp = getActivity().getSharedPreferences("Id", 0);
         message = sp.getString("_Id", "");
+        Log.d(TAG, "showData: ===================================================" + message);
         OkHttpUtils.get().url(HttpContants.CARTITEM_URL)
                 .addParams("id", message)
                 .build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        if (message != null) {
+                        if (message != null && ! "".equals(message)) {
                             Toast.makeText(getActivity(), "似乎没有连网，加载失败", Toast.LENGTH_LONG).show();
                         }
                     }

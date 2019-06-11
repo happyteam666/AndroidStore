@@ -3,7 +3,6 @@ package com.example.androidstore.view;
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -11,14 +10,11 @@ import android.widget.TextView;
 
 import com.example.androidstore.Listener.IViewContainer;
 import com.example.androidstore.R;
-import com.example.androidstore.widget.FlexiScrollView;
 import com.example.androidstore.activity.GoodsListActivity;
 import com.example.androidstore.bean.Category;
-import com.example.androidstore.wight.FlexiScrollView;
+import com.example.androidstore.widget.FlexiScrollView;
 
 import java.util.ArrayList;
-
-import static org.greenrobot.eventbus.EventBus.TAG;
 
 
 public class SubCategoryView extends FlexiScrollView
