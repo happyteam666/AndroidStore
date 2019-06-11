@@ -7,15 +7,13 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import static com.zhy.http.okhttp.log.LoggerInterceptor.TAG;
-import com.example.androidstore.Adapter.AddressAdapter;
+
+import com.example.androidstore.adapter.AddressAdapter;
 import com.example.androidstore.R;
-import com.example.androidstore.Util.GsonUtils;
+import com.example.androidstore.utils.GsonUtils;
 import com.example.androidstore.bean.Address;
 import com.example.androidstore.contants.HttpContants;
 import com.zhy.http.okhttp.OkHttpUtils;

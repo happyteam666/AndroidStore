@@ -11,16 +11,16 @@ import android.widget.ListView;
 
 
 
-import com.example.androidstore.Adapter.GoodsAdapter;
+import com.example.androidstore.adapter.GoodsAdapter;
 import com.example.androidstore.R;
-import com.example.androidstore.Util.GsonUtils;
-import com.example.androidstore.View.SubCategoryView;
+import com.example.androidstore.utils.GsonUtils;
+import com.example.androidstore.view.SubCategoryView;
 import com.example.androidstore.bean.Goods;
 import com.example.androidstore.contants.HttpContants;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zhy.http.okhttp.log.LoggerInterceptor;
-import static com.zhy.http.okhttp.log.LoggerInterceptor.TAG;
+
 import okhttp3.Call;
 
 public class GoodsListActivity extends AppCompatActivity {

@@ -25,7 +25,7 @@
         android:layout_marginLeft="10dp"
         android:orientation="horizontal">
 
-        <com.example.androidstore.View.SmartImageView
+        <com.example.androidstore.view.SmartImageView
             android:id="@+id/iv_view"
             android:layout_width="100dp"
             android:layout_height="100dp"

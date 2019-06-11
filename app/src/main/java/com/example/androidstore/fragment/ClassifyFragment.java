@@ -11,10 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.example.androidstore.Adapter.CategoryAdapter;
+import com.example.androidstore.adapter.CategoryAdapter;
 import com.example.androidstore.R;
-import com.example.androidstore.Util.GsonUtils;
-import com.example.androidstore.View.SubCategoryView;
+import com.example.androidstore.utils.GsonUtils;
+import com.example.androidstore.view.SubCategoryView;
 import com.example.androidstore.bean.Category;
 import com.example.androidstore.contants.HttpContants;
 import com.zhy.http.okhttp.OkHttpUtils;

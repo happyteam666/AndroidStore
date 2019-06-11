@@ -19,7 +19,7 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <com.example.androidstore.View.SmartImageView
+            <com.example.androidstore.view.SmartImageView
                 android:id="@+id/goods_image"
                 android:layout_width="match_parent"
                 android:layout_height="332dp" />

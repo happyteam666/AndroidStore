@@ -12,9 +12,9 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.androidstore.Adapter.CartExpandAdapter;
+import com.example.androidstore.adapter.CartExpandAdapter;
 import com.example.androidstore.R;
-import com.example.androidstore.Util.GsonUtils;
+import com.example.androidstore.utils.GsonUtils;
 import com.example.androidstore.bean.CartInfo;
 import com.example.androidstore.bean.CartItem;
 import com.example.androidstore.callback.OnClickAddCloseListenter;

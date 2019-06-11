@@ -1,4 +1,4 @@
-package com.example.androidstore.view;
+package com.example.androidstore.View;
 
 import android.animation.Animator;
 import android.content.Context;
