@@ -13,7 +13,7 @@ import com.example.androidstore.fragment.CartFragment;
 import com.example.androidstore.fragment.ClassifyFragment;
 import com.example.androidstore.fragment.HomeFragment;
 import com.example.androidstore.fragment.MeFragment;
-import com.example.androidstore.wight.PxxViewPager;
+import com.example.androidstore.widget.PxxViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
