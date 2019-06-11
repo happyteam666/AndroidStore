@@ -78,15 +78,14 @@ public class AddAddressActivity extends AppCompatActivity {
                     if (isEmpty(name, phone, address, address_detail)) {
                         if (verificationPhone(phone)) {
                             String address1 = address + address_detail;
-                            if (id!=null){
-                                Log.d(TAG, "onClick: "+"88888888888888888888");
+                            if (id==null){
                                 saveAddress(name, address1, phone);
                                 startActivity(new Intent(AddAddressActivity.this, AddressManageActivity.class));
 
                             }else {
-//                                updateAddress();
+                                updateAddress(name, address1, phone);
                                 startActivity(new Intent(AddAddressActivity.this, AddressManageActivity.class));
-                                Log.d(TAG, "onClick: "+"111111111111111111111111");
+
                             }
 
                         }
@@ -105,7 +104,6 @@ public class AddAddressActivity extends AppCompatActivity {
         address_person_name.setText(name);
         addressTv.setText(bigAddress);
         address_person_detail.setText(smallAddress);
-        Log.d(TAG, "updateAddress: ");
     }
     private boolean verificationPhone(String p){
         String regExp = "13\\d{9}|14[579]\\d{8}|15[0123456789]\\d{8}|17[01235678]\\d{8" +
@@ -125,9 +123,14 @@ public class AddAddressActivity extends AppCompatActivity {
         }else
             return true;
     }
-    private void updateAddress(){
-        OkHttpUtils.put().
-                url(HttpContants.ADDRESS_UPDATE)
+    private void updateAddress(String name,String address,String phone){
+        OkHttpUtils.post()
+                .url(HttpContants.ADDRESS_UPDATE)
+                .addParams("id",id)
+                .addParams("customerId",customerId)
+                .addParams("receivingAddress",address)
+                .addParams("addressee",name)
+                .addParams("phone",phone)
                 .build()
                 .execute(new StringCallback() {
                     @Override

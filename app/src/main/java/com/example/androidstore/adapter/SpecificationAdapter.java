@@ -54,14 +54,6 @@ public class SpecificationAdapter extends BaseAdapter {
 			brandNameTv=(Button) convertView.getTag();
 		}
 		brandNameTv.setText(datas.get(position).getName());
-		brandNameTv.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				mPosition=position;
-				notifyDataSetChanged();
-			}
-		});
 		brandNameTv.setSelected(mPosition!=-1&&mPosition==position);
 		return convertView;
 	}
