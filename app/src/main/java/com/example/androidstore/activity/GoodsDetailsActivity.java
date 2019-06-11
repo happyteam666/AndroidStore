@@ -1,18 +1,20 @@
 package com.example.androidstore.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 
 import com.example.androidstore.adapter.SpecificationAdapter;
 import com.example.androidstore.R;
 import com.example.androidstore.utils.GsonUtils;
+import com.example.androidstore.utils.ToastUtils;
 import com.example.androidstore.view.SmartImageView;
 import com.example.androidstore.bean.Goods;
 import com.example.androidstore.bean.Specifications;
@@ -26,15 +28,20 @@ import java.util.ArrayList;
 import okhttp3.Call;
 
 import static com.zhy.http.okhttp.log.LoggerInterceptor.TAG;
-public class GoodsDetailsActivity extends AppCompatActivity implements View.OnClickListener {
+public class GoodsDetailsActivity extends AppCompatActivity {
+    private SharedPreferences preferences;
     private TextView priceTv;
     private TextView nameTv;
     private SmartImageView goodsIv;
     private String goodsId;
     private Goods goods;
     private String goodsPrice;
-    private GridView speciaficationGv;
+    private GridView specificationGv;
     private SpecificationAdapter adapter;
+    private TextView addShopCar;
+    private Specifications specifications;
+    private String customerId;
+    private String specificationId;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,18 +51,58 @@ public class GoodsDetailsActivity extends AppCompatActivity implements View.OnCl
         Intent intent=getIntent();
         goodsId=intent.getStringExtra("goodsId");
         loadGoods();
-        Log.d(TAG, "onCreate: "+goodsId);
+        specificationGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                adapter.mPosition=i;
+                adapter.notifyDataSetChanged();
+                specifications= (Specifications) adapter.getItem(i);
+                goodsPrice=specifications.getPrice()+"";
+                specificationId=specifications.getId()+"";
+                priceTv.setText("¥ "+goodsPrice);
+            }
+        });
+        addShopCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addCartItem(specificationId);
+            }
+        });
     }
-    @SuppressLint("WrongViewCast")
+    private void addCartItem(String specificationId){
+        OkHttpUtils.post().url(HttpContants.CARTITEM_ADD_URL)
+                .addParams("goodsId",goodsId)
+                .addParams("customerId",customerId)
+                .addParams("name",goods.getName())
+                .addParams("image",goods.getImage())
+                .addParams("specificationsId",specificationId)
+                .addParams("quantity","1")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Log.d(LoggerInterceptor.TAG, "onResponse: " + e.getMessage());
+                    }
+                    @Override
+                    public void onResponse(String response, int id) {
+
+                    }
+                });
+        ToastUtils.showToast(this,"成功添加到购物车");
+    }
+
     private void initView(){
         goodsIv=findViewById(R.id.goods_image);
         nameTv=findViewById(R.id.goods_name);
         priceTv=findViewById(R.id.goods_price);
-        speciaficationGv=findViewById(R.id.specification_gv);
+        specificationGv=findViewById(R.id.specification_gv);
+        addShopCar=findViewById(R.id.addshopcar);
 
     }
     private void initData(){
       adapter=new SpecificationAdapter(this);
+        preferences=getSharedPreferences("Id",MODE_PRIVATE);
+        customerId=preferences.getString("_Id","");
 
     }
     private void loadGoods(){
@@ -75,14 +122,10 @@ public class GoodsDetailsActivity extends AppCompatActivity implements View.OnCl
                         nameTv.setText(goods.getName());
                         priceTv.setText("¥ "+goods.getSpecificationsList().get(0).getPrice()+"");
                         adapter.setDatas((ArrayList<Specifications>) goods.getSpecificationsList());
-                        speciaficationGv.setAdapter(adapter);
+                        specificationGv.setAdapter(adapter);
+                        specificationGv.performItemClick(null,0,0);
                     }
                 });
     }
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
 
-        }
-    }
 }

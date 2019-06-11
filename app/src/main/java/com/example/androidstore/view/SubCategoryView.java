@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.androidstore.listener.IViewContainer;
 import com.example.androidstore.R;
-import com.example.androidstore.wight.FlexiScrollView;
+import com.example.androidstore.widget.FlexiScrollView;
 import com.example.androidstore.activity.GoodsListActivity;
 import com.example.androidstore.bean.Category;
 import java.util.ArrayList;

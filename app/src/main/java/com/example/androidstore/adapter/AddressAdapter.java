@@ -2,6 +2,7 @@ package com.example.androidstore.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,15 +11,20 @@ import android.widget.TextView;
 
 import com.example.androidstore.R;
 import com.example.androidstore.activity.AddAddressActivity;
+import com.example.androidstore.activity.AddressManageActivity;
 import com.example.androidstore.bean.Address;
+import com.example.androidstore.contants.HttpContants;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Call;
+
 public class AddressAdapter extends BaseAdapter {
     private Context context;
-    public int mPosition;
     private String bigAddress="";
     private String smallAddress="";
     private List<Address> datas=new ArrayList<>();
@@ -90,8 +96,34 @@ public class AddressAdapter extends BaseAdapter {
                 intent.putExtra("smallAddress",smallAddress);
                 intent.putExtra("id",bean.getId()+"");
                 context.startActivity(intent);
+                smallAddress="";
+                bigAddress="";
+            }
+        });
+        holder.addressDeleteTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteAddress(bean.getId().toString());
+                Intent intent=new Intent(context, AddressManageActivity.class);
+                context.startActivity(intent);
             }
         });
         return convertView;
+    }
+    private void deleteAddress(String id){
+        OkHttpUtils.post()
+                .url(HttpContants.ADDRESS_DELETE)
+                .addParams("id",id)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Log.e("TAG",  e.getMessage());
+                    }
+                    @Override
+                    public void onResponse(String response, int id) {
+
+                    }
+                });
     }
 }
