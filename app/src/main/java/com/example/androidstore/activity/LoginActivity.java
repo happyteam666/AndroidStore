@@ -123,8 +123,9 @@ public class LoginActivity extends AppCompatActivity {
     public static boolean isvalid(String phonevalid,String pwdvalid,String i,String j) {
         if (i.equals(phonevalid) && j.equals(pwdvalid)) {
             return true;
-        } else
+        } else {
             return false;
+        }
     }
 
 }

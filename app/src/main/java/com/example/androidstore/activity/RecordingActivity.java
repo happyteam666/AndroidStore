@@ -1,5 +1,6 @@
 package com.example.androidstore.activity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -7,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.util.Log;
 
 import com.example.androidstore.R;
 import com.example.androidstore.adapter.RecordingAdapter;
@@ -48,8 +50,11 @@ public class RecordingActivity extends AppCompatActivity {
     }
 
     private void initData() {
+        SharedPreferences sp = this.getSharedPreferences("Id", 0);
+
+        Log.d("TAG", "initData: ========================================================="  + sp.getString("_Id",""));
         OkHttpUtils.get().url(HttpContants.RECORE_URL)
-                .addParams("id", "1")
+                .addParams("id", sp.getString("_Id",""))
                 .build()
                 .execute(new StringCallback() {
                     @Override
