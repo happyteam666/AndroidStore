@@ -6,16 +6,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
-import com.example.androidstore.adapter.AddressAdapter;
 import com.example.androidstore.R;
-import com.example.androidstore.utils.GsonUtils;
+import com.example.androidstore.adapter.AddressAdapter;
 import com.example.androidstore.bean.Address;
 import com.example.androidstore.contants.HttpContants;
+import com.example.androidstore.utils.GsonUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zhy.http.okhttp.log.LoggerInterceptor;
@@ -33,9 +32,9 @@ public class AddressManageActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address_list);
-       initView();
-        preferences=getSharedPreferences("Id",MODE_PRIVATE);
-        customerId=preferences.getString("_Id","");
+        initView();
+        preferences = getSharedPreferences("Id", MODE_PRIVATE);
+        customerId = preferences.getString("_Id", "");
         loadAddressList();
         add_fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,15 +43,17 @@ public class AddressManageActivity extends AppCompatActivity {
             }
         });
     }
-    private void initView(){
-        add_fab=findViewById(R.id.fab_recycler_view);
-        addressList=findViewById(R.id.address_list_view);
-        adapter=new AddressAdapter(this);
+
+    private void initView() {
+        add_fab = findViewById(R.id.fab_recycler_view);
+        addressList = findViewById(R.id.address_list_view);
+        adapter = new AddressAdapter(this);
     }
-    private void loadAddressList(){
-        if (customerId!=null)
+
+    private void loadAddressList() {
+        if (customerId != null)
             OkHttpUtils.get().url(HttpContants.ADDRESS_BY_CUSTOMER_URL)
-                    .addParams("customerId",customerId)
+                    .addParams("customerId", customerId)
                     .build()
                     .execute(new StringCallback() {
                         @Override

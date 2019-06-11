@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.example.androidstore.R;
 import com.example.androidstore.activity.GoodsListActivity;
-import com.example.androidstore.activity.SettingActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +29,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 
 
-
-public class HomeFragment extends Fragment{
+public class HomeFragment extends Fragment {
 
     private Unbinder bind;
 
@@ -45,38 +43,38 @@ public class HomeFragment extends Fragment{
 //
 //    View viewHeader;
 
-            @BindView(R.id.vp)
-            View mView;
-         //   @BindView(R.id.bannerViewPager)
-           // ViewPager mViewPaper;
-            private List<ImageView> images;
-            private List<View> dots;
-            private int currentItem;
-            //记录上一次点的位置  
-            private int oldPosition = 0;
-             //存放图片的id  
-             private int[] imageIds = new int[]{
-                     R.drawable.adver1,
-                     R.drawable.adver2,
-                     R.drawable.adver3,
-                     R.drawable.adver4,
-                     R.drawable.adver5,
-                     R.drawable.adver6
-                   };
-            //存放图片的标题  
-            private String[] titles = new String[]{"轮播1","轮播2","轮播3","轮播4"
- };
-            private TextView title;
+    @BindView(R.id.vp)
+    View mView;
+    //   @BindView(R.id.bannerViewPager)
+    // ViewPager mViewPaper;
+    private List<ImageView> images;
+    private List<View> dots;
+    private int currentItem;
+    //记录上一次点的位置  
+    private int oldPosition = 0;
+    //存放图片的id  
+    private int[] imageIds = new int[]{
+            R.drawable.adver1,
+            R.drawable.adver2,
+            R.drawable.adver3,
+            R.drawable.adver4,
+            R.drawable.adver5,
+            R.drawable.adver6
+    };
+    //存放图片的标题  
+    private String[] titles = new String[]{"轮播1", "轮播2", "轮播3", "轮播4"
+    };
+    private TextView title;
     /**
      *
      */
-           private ViewPagerAdapter adapter;
-           private ScheduledExecutorService scheduledExecutorService;
+    private ViewPagerAdapter adapter;
+    private ScheduledExecutorService scheduledExecutorService;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home,container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
         bind = ButterKnife.bind(this, view);
 //        init();
         setView();
@@ -88,15 +86,17 @@ public class HomeFragment extends Fragment{
         super.onDestroyView();
         bind.unbind();
     }
-   public ViewPager mViewPaper;
-    private void setView(){
+
+    public ViewPager mViewPaper;
+
+    private void setView() {
 
 
         mViewPaper = mView.findViewById(R.id.vp);
 
         //显示的图片
         images = new ArrayList<ImageView>();
-        for(int i = 0; i < imageIds.length; i++){
+        for (int i = 0; i < imageIds.length; i++) {
             ImageView imageView = new ImageView(getActivity());
             imageView.setBackgroundResource(imageIds[i]);
             images.add(imageView);
@@ -116,8 +116,6 @@ public class HomeFragment extends Fragment{
         adapter = new ViewPagerAdapter();
         mViewPaper.setAdapter(adapter);
         mViewPaper.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-
 
 
             @Override
@@ -187,10 +185,10 @@ public class HomeFragment extends Fragment{
 
     /**
      * 图片轮播任务
-     * @author liuyazhuang
      *
+     * @author liuyazhuang
      */
-    private class ViewPageTask implements Runnable{
+    private class ViewPageTask implements Runnable {
 
         @Override
         public void run() {
@@ -203,36 +201,41 @@ public class HomeFragment extends Fragment{
      * 接收子线程传递过来的数据
      */
     @SuppressLint("HandlerLeak")
-    private Handler mHandler = new Handler(){
+    private Handler mHandler = new Handler() {
         public void handleMessage(android.os.Message msg) {
             mViewPaper.setCurrentItem(currentItem);
-        };
+        }
+
+        ;
     };
+
     @Override
     public void onStop() {
         // TODO Auto-generated method stub
         super.onStop();
-        if(scheduledExecutorService != null){
+        if (scheduledExecutorService != null) {
             scheduledExecutorService.shutdown();
             scheduledExecutorService = null;
         }
     }
 
 
-
-    @OnClick({R.id.Tshit,R.id.sjkh,R.id.ssfs,R.id.mzhf})
+    @OnClick({R.id.Tshit, R.id.sjkh, R.id.ssfs, R.id.shipin})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.Tshit:
-                Intent intent=new Intent(getContext(), GoodsListActivity.class);
-                intent.putExtra("CATEGORY_ID",125);
+                Intent intent = new Intent(getContext(), GoodsListActivity.class);
+                intent.putExtra("CATEGORY_ID", (long) 125);
                 getContext().startActivity(intent);
                 break;
             case R.id.sjkh:
                 break;
             case R.id.ssfs:
                 break;
-            case R.id.mzhf:
+            case R.id.shipin:
+                intent = new Intent(getContext(), GoodsListActivity.class);
+                intent.putExtra("CATEGORY_ID", (long) 111);
+                getContext().startActivity(intent);
                 break;
             default:
 

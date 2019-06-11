@@ -3,8 +3,8 @@ package com.example.androidstore.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.androidstore.R;
@@ -12,13 +12,10 @@ import com.example.androidstore.R;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.example.androidstore.R.id.login_and_register;
 import static com.example.androidstore.R.id.text_general;
 
 
 public class SettingActivity extends AppCompatActivity {
-
-
 
 
     @Override
@@ -29,10 +26,9 @@ public class SettingActivity extends AppCompatActivity {
     }
 
 
-
     @OnClick({R.id.text_usersafe, R.id.text_paysetting,
             R.id.text_myfiles, R.id.text_design, R.id.text_general,
-            R.id.text_vipp, R.id.text_feedback, R.id.text_about,R.id.exit})
+            R.id.text_vipp, R.id.text_feedback, R.id.text_about, R.id.exit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.text_usersafe:
@@ -53,11 +49,12 @@ public class SettingActivity extends AppCompatActivity {
                 break;
             case R.id.exit: {
                 SharedPreferences sp = getSharedPreferences("Id", 0);
-                if(!sp.getString("_Id","").equals("")) {
+                if (!sp.getString("_Id", "").equals("")) {
                     Exit();
                     startActivity(new Intent(this, LoginActivity.class));
 
-                }else{}
+                } else {
+                }
                 break;
             }
             default:
@@ -69,13 +66,15 @@ public class SettingActivity extends AppCompatActivity {
     public void clearData() {
         SharedPreferences sp = getSharedPreferences("Id", Context.MODE_PRIVATE);
 
-          SharedPreferences.Editor editor = sp.edit(); editor.clear();
+        SharedPreferences.Editor editor = sp.edit();
+        editor.clear();
 
         editor.commit();
     }
-    public void Exit(){
 
-        SharedPreferences sp = getSharedPreferences("Id",0);
+    public void Exit() {
+
+        SharedPreferences sp = getSharedPreferences("Id", 0);
         SharedPreferences.Editor editor = sp.edit();
         editor.clear();
         editor.commit();

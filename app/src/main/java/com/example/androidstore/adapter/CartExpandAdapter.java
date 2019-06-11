@@ -137,18 +137,21 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
 
     // CheckBox2接口的方法
     private OnClickListenterModel onClickListenterModel = null;
+
     public void setOnClickListenterModel(OnClickListenterModel listener) {
         this.onClickListenterModel = listener;
     }
 
     // 删除接口的方法
     private OnClickDeleteListenter onClickDeleteListenter = null;
+
     public void setOnClickDeleteListenter(OnClickDeleteListenter listener) {
         this.onClickDeleteListenter = listener;
     }
 
     // 数量接口的方法
     private OnClickAddCloseListenter onClickAddCloseListenter = null;
+
     public void setOnClickAddCloseListenter(OnClickAddCloseListenter listener) {
         this.onClickAddCloseListenter = listener;
     }

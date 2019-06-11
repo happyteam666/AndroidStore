@@ -323,11 +323,11 @@
 
             //美妆护肤
             <ImageView
-                android:id="@+id/mzhf"
+                android:id="@+id/shipin"
                 android:layout_width="165dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
-                android:src="@drawable/mzhf" />
+                android:src="@drawable/shipin" />
 
         </LinearLayout>
 

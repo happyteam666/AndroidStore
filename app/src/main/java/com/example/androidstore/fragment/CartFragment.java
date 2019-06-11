@@ -12,13 +12,13 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.androidstore.adapter.CartExpandAdapter;
 import com.example.androidstore.R;
-import com.example.androidstore.utils.GsonUtils;
+import com.example.androidstore.adapter.CartExpandAdapter;
 import com.example.androidstore.bean.CartInfo;
 import com.example.androidstore.bean.CartItem;
 import com.example.androidstore.callback.OnClickAddCloseListenter;
 import com.example.androidstore.contants.HttpContants;
+import com.example.androidstore.utils.GsonUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -69,7 +69,7 @@ public class CartFragment extends Fragment {
 
     private void showData() {
         SharedPreferences sp = getActivity().getSharedPreferences("Id", 0);
-        message = sp.getString("_Id","");
+        message = sp.getString("_Id", "");
         OkHttpUtils.get().url(HttpContants.CARTITEM_URL)
                 .addParams("id", message)
                 .build()
@@ -147,7 +147,7 @@ public class CartFragment extends Fragment {
             CartItem cartItem = cartInfo.getData().get(onePosition).getItems().get(position);
 
             OkHttpUtils.post().url(HttpContants.CARTITEM_DELETE_URL)
-                    .addParams("id",cartItem.getId()  + "")
+                    .addParams("id", cartItem.getId() + "")
                     .build()
                     .execute(new StringCallback() {
                         @Override
@@ -158,13 +158,11 @@ public class CartFragment extends Fragment {
                         @Override
                         public void onResponse(String response, int id) {
                             cartInfo.getData().get(onePosition).getItems().remove(position);
-                            Log.d(TAG, "showExpandData: "+view+"  "+onePosition+"  "+position);
+                            Log.d(TAG, "showExpandData: " + view + "  " + onePosition + "  " + position);
                             cartExpandAdapter.notifyDataSetChanged();
-                            // TODO 具体代码没写， 只要删除商品，刷新数据即可
                             Toast.makeText(getActivity(), "删除操作", Toast.LENGTH_LONG).show();
                         }
                     });
-
 
 
         });

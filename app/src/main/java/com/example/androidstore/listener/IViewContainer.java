@@ -1,7 +1,7 @@
-package com.example.androidstore.listener;
+package com.example.androidstore.Listener;
 
 public interface IViewContainer {
-	
-	public void show(Object... values);
-	
+
+    public void show(Object... values);
+
 }

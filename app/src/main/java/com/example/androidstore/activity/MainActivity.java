@@ -1,13 +1,11 @@
 package com.example.androidstore.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.view.Window;
 
 import com.example.androidstore.R;
@@ -22,9 +20,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-
-import static com.example.androidstore.R.id.login_and_register;
 
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 

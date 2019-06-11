@@ -91,12 +91,12 @@ public class SmartImageView extends ImageView {
 
     public void setImage(final SmartImage image, final Integer fallbackResource, final Integer loadingResource, final SmartImageTask.OnCompleteListener completeListener) {
         // Set a loading resource
-        if(loadingResource != null){
+        if (loadingResource != null) {
             setImageResource(loadingResource);
         }
 
         // Cancel any existing tasks for this image view
-        if(currentTask != null) {
+        if (currentTask != null) {
             currentTask.cancel();
             currentTask = null;
         }
@@ -106,16 +106,16 @@ public class SmartImageView extends ImageView {
         currentTask.setOnCompleteHandler(new SmartImageTask.OnCompleteHandler() {
             @Override
             public void onComplete(Bitmap bitmap) {
-                if(bitmap != null) {
+                if (bitmap != null) {
                     setImageBitmap(bitmap);
                 } else {
                     // Set fallback resource
-                    if(fallbackResource != null) {
+                    if (fallbackResource != null) {
                         setImageResource(fallbackResource);
                     }
                 }
 
-                if(completeListener != null){
+                if (completeListener != null) {
                     completeListener.onComplete(bitmap);
                 }
             }

@@ -1,4 +1,4 @@
-package com.example.androidstore.Adapter;
+package com.example.androidstore.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -16,54 +16,54 @@ import java.util.List;
 
 public class SpecificationAdapter extends BaseAdapter {
 
-	private List<Specifications> datas=new ArrayList<Specifications>();
-	private Context context;
-	public int mPosition=-1;
+    private List<Specifications> datas = new ArrayList<Specifications>();
+    private Context context;
+    public int mPosition = -1;
 
-	public SpecificationAdapter(Context c) {
-		this.context = c;
-	}
-	
-	public void setDatas(ArrayList<Specifications> mDatas) {
-		this.datas = mDatas;
-	}
-	
-	@Override
-	public int getCount() {
-		return datas.size();
-	}
+    public SpecificationAdapter(Context c) {
+        this.context = c;
+    }
 
-	@Override
-	public Object getItem(int position) {
-		return datas.get(position);
-	}
+    public void setDatas(ArrayList<Specifications> mDatas) {
+        this.datas = mDatas;
+    }
 
-	@Override
-	public long getItemId(int position) {
-		return 0;
-	}
+    @Override
+    public int getCount() {
+        return datas.size();
+    }
 
-	@Override
-	public View getView(final int position, View convertView, ViewGroup parent) {
-		Button brandNameTv=null;
-		if (convertView==null) {
-			convertView=LayoutInflater.from(context).inflate(R.layout.goods_specification_item, null);
-			brandNameTv=convertView.findViewById(R.id.specification_tv);
-			convertView.setTag(brandNameTv);
-		}else {
-			brandNameTv=(Button) convertView.getTag();
-		}
-		brandNameTv.setText(datas.get(position).getName());
-		brandNameTv.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				mPosition=position;
-				notifyDataSetChanged();
-			}
-		});
-		brandNameTv.setSelected(mPosition!=-1&&mPosition==position);
-		return convertView;
-	}
+    @Override
+    public Object getItem(int position) {
+        return datas.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return 0;
+    }
+
+    @Override
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        Button brandNameTv = null;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.goods_specification_item, null);
+            brandNameTv = convertView.findViewById(R.id.specification_tv);
+            convertView.setTag(brandNameTv);
+        } else {
+            brandNameTv = (Button) convertView.getTag();
+        }
+        brandNameTv.setText(datas.get(position).getName());
+        brandNameTv.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                mPosition = position;
+                notifyDataSetChanged();
+            }
+        });
+        brandNameTv.setSelected(mPosition != -1 && mPosition == position);
+        return convertView;
+    }
 
 }

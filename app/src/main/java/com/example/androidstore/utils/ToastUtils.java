@@ -1,12 +1,8 @@
 package com.example.androidstore.utils;
 
-import android.app.Activity;
 import android.content.Context;
-import android.os.Looper;
 import android.view.Gravity;
 import android.widget.Toast;
-
-import com.example.androidstore.activity.RegisterActivity;
 
 import static android.widget.Toast.LENGTH_SHORT;
 

@@ -1,7 +1,6 @@
 package com.example.androidstore.bean;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @author mascot
@@ -50,7 +49,6 @@ public class Orders implements Serializable {
     public void setTotalPrice(String totalPrice) {
         this.totalPrice = totalPrice;
     }
-
 
 
 }

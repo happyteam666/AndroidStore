@@ -1,4 +1,4 @@
-package com.example.androidstore.Adapter;
+package com.example.androidstore.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -17,14 +17,14 @@ import java.util.List;
 public class CategoryAdapter extends BaseAdapter {
     private Context context;
     public int mPosition;
-    private List<Category> datas=new ArrayList<>();
+    private List<Category> datas = new ArrayList<>();
 
     public CategoryAdapter(Context c) {
-        context=c;
+        context = c;
     }
 
     public void setBeans(List<Category> rBaseCategorys) {
-        datas=rBaseCategorys;
+        datas = rBaseCategorys;
     }
 
     @Override
@@ -42,33 +42,33 @@ public class CategoryAdapter extends BaseAdapter {
         return position;
     }
 
-    class ViewHolder{
+    class ViewHolder {
         public TextView titleTv;
         public View dividerTv;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder=null;
-        if (convertView==null) {
-            convertView= LayoutInflater.from(context).inflate(R.layout.top_category_item, null);
-            holder=new ViewHolder();
-            holder.titleTv= convertView.findViewById(R.id.tv);
-            holder.dividerTv= convertView.findViewById(R.id.divider);
+        ViewHolder holder = null;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.top_category_item, null);
+            holder = new ViewHolder();
+            holder.titleTv = convertView.findViewById(R.id.tv);
+            holder.dividerTv = convertView.findViewById(R.id.divider);
             convertView.setTag(holder);
-        }else {
-            holder=(ViewHolder) convertView.getTag();
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
-        if (mPosition==position) {
+        if (mPosition == position) {
             holder.titleTv.setBackgroundResource(R.drawable.tongcheng_all_bg01);
             holder.dividerTv.setVisibility(View.INVISIBLE);
-        }else {
+        } else {
             holder.titleTv.setBackgroundColor(0xf4f4f4);
             holder.dividerTv.setVisibility(View.VISIBLE);
         }
         holder.titleTv.setText(datas.get(position).getName());
 
-        holder.titleTv.setSelected(mPosition==position);
+        holder.titleTv.setSelected(mPosition == position);
         return convertView;
     }
 

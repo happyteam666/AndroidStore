@@ -11,15 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.example.androidstore.adapter.CategoryAdapter;
 import com.example.androidstore.R;
-import com.example.androidstore.utils.GsonUtils;
-import com.example.androidstore.view.SubCategoryView;
+import com.example.androidstore.adapter.CategoryAdapter;
 import com.example.androidstore.bean.Category;
 import com.example.androidstore.contants.HttpContants;
+import com.example.androidstore.utils.GsonUtils;
+import com.example.androidstore.view.SubCategoryView;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
-
 
 import okhttp3.Call;
 
@@ -30,8 +29,6 @@ public class ClassifyFragment extends Fragment implements View.OnClickListener {
     private SubCategoryView subCategoryView;
     private ListView topCategoryLv;
     private CategoryAdapter adapter;
-
-
 
 
     @Override
@@ -74,7 +71,7 @@ public class ClassifyFragment extends Fragment implements View.OnClickListener {
 
     private void loadCategory() {
         OkHttpUtils.get().url(HttpContants.CATEGORY_URL)
-                .addParams("pid","0")
+                .addParams("pid", "0")
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -84,10 +81,10 @@ public class ClassifyFragment extends Fragment implements View.OnClickListener {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.d(TAG, "22222222 "+response);
-                        adapter.setBeans( GsonUtils.GsonToList(response,Category[].class));
+                        Log.d(TAG, "22222222 " + response);
+                        adapter.setBeans(GsonUtils.GsonToList(response, Category[].class));
                         topCategoryLv.setAdapter(adapter);
-                        topCategoryLv.performItemClick(null,0,0);
+                        topCategoryLv.performItemClick(null, 0, 0);
                     }
                 });
     }

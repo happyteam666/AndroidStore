@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-
-
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -14,16 +12,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
-
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.example.androidstore.R;
-import com.example.androidstore.utils.GetJsonDataUtil;
-
 import com.example.androidstore.bean.JsonBean;
 import com.example.androidstore.contants.HttpContants;
+import com.example.androidstore.utils.GetJsonDataUtil;
 import com.example.androidstore.utils.ToastUtils;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -34,9 +29,11 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import static android.support.constraint.Constraints.TAG;
+
 import butterknife.ButterKnife;
 import okhttp3.Call;
+
+import static android.support.constraint.Constraints.TAG;
 
 public class AddAddressActivity extends AppCompatActivity {
     private String id=null;

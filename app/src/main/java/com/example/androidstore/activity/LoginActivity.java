@@ -11,9 +11,9 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.androidstore.R;
-import com.example.androidstore.utils.GsonUtils;
 import com.example.androidstore.bean.Customer;
 import com.example.androidstore.contants.HttpContants;
+import com.example.androidstore.utils.GsonUtils;
 import com.example.androidstore.utils.ToastUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -46,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
     String Name1;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void attemptLogin() {
-        if(!phone.getText().toString().equals("") && !password.getText().toString().equals("") ) {
+        if (!phone.getText().toString().equals("") && !password.getText().toString().equals("")) {
             OkHttpUtils.post().
                     url(HttpContants.LOGIN_URL)
                     .addParams("phone", Objects.requireNonNull(phone.getText()).toString())
@@ -78,12 +77,13 @@ public class LoginActivity extends AppCompatActivity {
                         public void onError(Call call, Exception e, int id) {
                             Log.e("TAG", "首页请求失败==" + e.getMessage());
                         }
+
                         @Override
                         public void onResponse(String response, int id) {
                             Log.d("TAG", "首页请求成功==" + response);
-                            if(!response.equals("")) {
-                                Name1 = GsonUtils.GsonToBean(response,Customer.class).getUsername();
-                                id1 = GsonUtils.GsonToBean(response,Customer.class).getId();
+                            if (!response.equals("")) {
+                                Name1 = GsonUtils.GsonToBean(response, Customer.class).getUsername();
+                                id1 = GsonUtils.GsonToBean(response, Customer.class).getId();
                                 phoneuser = GsonUtils.GsonToBean(response, Customer.class).getPhone();
                                 pwd = GsonUtils.GsonToBean(response, Customer.class).getPassword();
                                 if (!isvalid(phoneuser, pwd, phone.getText().toString(), password.getText().toString())) {
@@ -97,18 +97,18 @@ public class LoginActivity extends AppCompatActivity {
                                         Looper.prepare();
                                     }
                                     ToastUtils.showToast(LoginActivity.this, "登录成功");
-                                    SharedPreferences sharedPreferences = getSharedPreferences("Id",0); //私有数据
+                                    SharedPreferences sharedPreferences = getSharedPreferences("Id", 0); //私有数据
 
                                     SharedPreferences.Editor editor = sharedPreferences.edit();//获取编辑器
-                                    editor.putString("_Id",String.valueOf(id1));
-                                    editor.putString("_Name","@"+Name1);
+                                    editor.putString("_Id", String.valueOf(id1));
+                                    editor.putString("_Name", "@" + Name1);
                                     editor.commit();//提交修改
 //                                    finish();
                                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
 
                                     Looper.loop();
                                 }
-                            }else{
+                            } else {
                                 if (Looper.myLooper() == null) {
                                     Looper.prepare();
                                 }
@@ -117,12 +117,12 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         }
                     });
-        }else{
-            ToastUtils.showToast(this,"请输入用户名与密码");
+        } else {
+            ToastUtils.showToast(this, "请输入用户名与密码");
         }
     }
 
-    public static boolean isvalid(String phonevalid,String pwdvalid,String i,String j) {
+    public static boolean isvalid(String phonevalid, String pwdvalid, String i, String j) {
         if (i.equals(phonevalid) && j.equals(pwdvalid)) {
             return true;
         } else

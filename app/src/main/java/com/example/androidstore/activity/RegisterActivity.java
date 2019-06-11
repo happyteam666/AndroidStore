@@ -7,7 +7,6 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.androidstore.R;
 import com.example.androidstore.contants.HttpContants;
@@ -67,59 +66,58 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void attemptRegister() {
-        if(isEmpty(phone.getText().toString(),password.getText().toString(),identify.getText().toString()))
-         {
-             if(isMobileNum(phone.getText().toString())) {
-                 if(isPwdStrong(password.getText().toString())) {
-                     if(identify.getText().toString().equals(string)) {
-                         OkHttpUtils.post().
-                                 url(HttpContants.REGISTER_URL)
-                                 .addParams("phone", Objects.requireNonNull(phone.getText()).toString())
-                                 .addParams("password", Objects.requireNonNull(password.getText()).toString())
-                                 .build()
-                                 .execute(new StringCallback() {
-                                     @Override
-                                     public void onError(Call call, Exception e, int id) {
-                                         Log.e("TAG", "首页请求失败==" + e.getMessage());
-                                         if (Looper.myLooper() == null) {
-                                             Looper.prepare();
-                                         }
-                                         ToastUtils.showToast(RegisterActivity.this, "用户已存在");
-                                         Looper.loop();
-                                     }
+        if (isEmpty(phone.getText().toString(), password.getText().toString(), identify.getText().toString())) {
+            if (isMobileNum(phone.getText().toString())) {
+                if (isPwdStrong(password.getText().toString())) {
+                    if (identify.getText().toString().equals(string)) {
+                        OkHttpUtils.post().
+                                url(HttpContants.REGISTER_URL)
+                                .addParams("phone", Objects.requireNonNull(phone.getText()).toString())
+                                .addParams("password", Objects.requireNonNull(password.getText()).toString())
+                                .build()
+                                .execute(new StringCallback() {
+                                    @Override
+                                    public void onError(Call call, Exception e, int id) {
+                                        Log.e("TAG", "首页请求失败==" + e.getMessage());
+                                        if (Looper.myLooper() == null) {
+                                            Looper.prepare();
+                                        }
+                                        ToastUtils.showToast(RegisterActivity.this, "用户已存在");
+                                        Looper.loop();
+                                    }
 
-                                     @Override
-                                     public void onResponse(String response, int id) {
-                                         Log.d("TAG", "首页请求成功==" + response);
-                                         if (Looper.myLooper() == null) {
-                                             Looper.prepare();
-                                         }
-                                         ToastUtils.showToast(RegisterActivity.this, "注册成功");
-                                         finish();
-                                         Looper.loop();
-                                     }
-                                 });
-                     }else{
-                            ToastUtils.showToast(this,"验证码输入，请重新验证");
-                     }
-                 }else{
-                     ToastUtils.showToast(this,"密码太短，请重新设置");
-                 }
-             }else{
-                 ToastUtils.showToast(this,"请核对手机号码");
-             }
-        }else{
-            ToastUtils.showToast(this,"请输入用户名/密码/验证码");
+                                    @Override
+                                    public void onResponse(String response, int id) {
+                                        Log.d("TAG", "首页请求成功==" + response);
+                                        if (Looper.myLooper() == null) {
+                                            Looper.prepare();
+                                        }
+                                        ToastUtils.showToast(RegisterActivity.this, "注册成功");
+                                        finish();
+                                        Looper.loop();
+                                    }
+                                });
+                    } else {
+                        ToastUtils.showToast(this, "验证码输入，请重新验证");
+                    }
+                } else {
+                    ToastUtils.showToast(this, "密码太短，请重新设置");
+                }
+            } else {
+                ToastUtils.showToast(this, "请核对手机号码");
+            }
+        } else {
+            ToastUtils.showToast(this, "请输入用户名/密码/验证码");
         }
     }
 
 
     private void attemptSendIdentify() {
 
-        int radom = (int)((Math.random()*9+1)*1000);
+        int radom = (int) ((Math.random() * 9 + 1) * 1000);
         string = Integer.toString(radom);
-        Log.d("TAG", "attemptSendIdentify: "+string);
-        ToastUtils.showToast(this,"验证码为："+string);
+        Log.d("TAG", "attemptSendIdentify: " + string);
+        ToastUtils.showToast(this, "验证码为：" + string);
 
     }
 
@@ -139,8 +137,8 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    public static boolean isEmpty(String phone,String passwd,String identify){
-        if(!phone.equals("")&&!passwd.equals("")&&!identify.equals(""))
+    public static boolean isEmpty(String phone, String passwd, String identify) {
+        if (!phone.equals("") && !passwd.equals("") && !identify.equals(""))
             return true;
         else
             return false;

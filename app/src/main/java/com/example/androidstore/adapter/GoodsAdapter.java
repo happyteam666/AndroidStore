@@ -8,22 +8,22 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.androidstore.R;
-import com.example.androidstore.view.SmartImageView;
 import com.example.androidstore.bean.Goods;
+import com.example.androidstore.view.SmartImageView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GoodsAdapter extends BaseAdapter {
     private Context context;
-    private List<Goods> datas=new ArrayList<>();
+    private List<Goods> datas = new ArrayList<>();
 
     public GoodsAdapter(Context c) {
-        context=c;
+        context = c;
     }
 
     public void setBeans(List<Goods> goods) {
-        datas=goods;
+        datas = goods;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class GoodsAdapter extends BaseAdapter {
         return position;
     }
 
-    class ViewHolder{
+    class ViewHolder {
         SmartImageView smIv;
         TextView nameTv;
         TextView priceTv;
@@ -50,23 +50,23 @@ public class GoodsAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holer=null;
-        if (convertView==null) {
-            convertView=LayoutInflater.from(context).inflate(R.layout.product_lv_item, null);
-            holer=new ViewHolder();
-            holer.smIv=convertView.findViewById(R.id.product_iv);
-            holer.nameTv=convertView.findViewById(R.id.name_tv);
-            holer.priceTv= convertView.findViewById(R.id.price_tv);
-            holer.commentrateTv=convertView.findViewById(R.id.commrate_tv);
+        ViewHolder holer = null;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.product_lv_item, null);
+            holer = new ViewHolder();
+            holer.smIv = convertView.findViewById(R.id.product_iv);
+            holer.nameTv = convertView.findViewById(R.id.name_tv);
+            holer.priceTv = convertView.findViewById(R.id.price_tv);
+            holer.commentrateTv = convertView.findViewById(R.id.commrate_tv);
             convertView.setTag(holer);
-        }else {
-            holer=(ViewHolder) convertView.getTag();
+        } else {
+            holer = (ViewHolder) convertView.getTag();
         }
         Goods bean = datas.get(position);
 
         holer.smIv.setImageUrl(bean.getImage());
         holer.nameTv.setText(bean.getName());
-        holer.priceTv.setText("¥ "+bean.getSpecificationsList().get(0).getPrice());
+        holer.priceTv.setText("¥ " + bean.getSpecificationsList().get(0).getPrice());
         return convertView;
     }
-    }
+}
