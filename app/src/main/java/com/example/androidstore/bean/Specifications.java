@@ -1,7 +1,6 @@
 package com.example.androidstore.bean;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @author mascot
@@ -52,7 +51,7 @@ public class Specifications implements Serializable {
     }
 
     public double getPrice() {
-        return price/100.0;
+        return price / 100.0;
     }
 
     public void setPrice(double price) {
