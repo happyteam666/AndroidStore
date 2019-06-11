@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
         viewPager.addOnPageChangeListener(this);
         viewPager.setNoScroll(true);
+        //viewPager.setOffscreenPageLimit(0);
 
         bottomNavigation.setOnNavigationItemSelectedListener(item -> {
             viewPager.setCurrentItem(item.getOrder());
@@ -76,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     @Override
     public void onPageSelected(int i) {
         bottomNavigation.getMenu().getItem(i).setChecked(true);
+
     }
 
     @Override

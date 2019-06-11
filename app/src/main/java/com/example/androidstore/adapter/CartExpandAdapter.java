@@ -22,6 +22,7 @@ import com.example.androidstore.callback.OnViewItemClickListener;
 import com.example.androidstore.widget.FrontViewToMove;
 import com.example.androidstore.widget.PxxRoundOvalImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -29,13 +30,26 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
 
     private Context context;
     private ListView listView;
-    private List<CartInfo.DataBean> list;
+    private static volatile List<CartInfo.DataBean> list = new ArrayList<>();
 
-    public CartExpandAdapter(Context context, ListView listView, List<CartInfo.DataBean> list) {
+    public CartExpandAdapter(Context context, ListView listView) {
         super();
         this.context = context;
         this.listView = listView;
-        this.list = list;
+    }
+
+    public List<CartInfo.DataBean> getList() {
+        return list;
+    }
+
+    public void setList(List<CartInfo.DataBean> dataBeans) {
+        list.addAll(dataBeans);
+        notifyDataSetChanged();
+    }
+
+    public void setList(CartInfo.DataBean dataBean) {
+        list.add(dataBean);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -59,28 +73,36 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
 
         //关键语句，使用自己写的类来对frontView的ontouch事件复写，实现视图滑动效果
         new FrontViewToMove(viewHolder1.frontView, listView, 200);
-        CartItem cartItem = list.get(groupPosition).getItems().get(position);
-        viewHolder1.textView.setText(cartItem.getName());
-        viewHolder1.checkBox.setChecked(cartItem.ischeck());
-        viewHolder1.tvMoney.setText("¥ " + cartItem.getSpecifications().getPrice() * cartItem.getQuantity());
-        viewHolder1.btnNum.setText(cartItem.getQuantity() + "");
-        viewHolder1.chlidContent.setText(cartItem.getSpecifications().getName());
-        viewHolder1.pxxRoundOvalImageView.setType(PxxRoundOvalImageView.TYPE_ROUND);
-        viewHolder1.pxxRoundOvalImageView.setRoundRadius(8);
 
-        Glide.with(context).load(list.get(groupPosition)
-                .getItems().get(position).getImage())
-                .into(viewHolder1.pxxRoundOvalImageView);
-//                .placeholder(R.mipmap.image_error)
-//                .error(R.mipmap.image_error).into(viewHolder1.zqRoundOvalImageView);
+        setPagedata(groupPosition, position, viewHolder1);
 
         viewHolder1.checkBox.setOnClickListener(v -> onClickListenterModel.onItemClick(viewHolder1.checkBox.isChecked(), v, groupPosition, position));
         // 为button绑定事件，可以用此按钮来实现删除事件
+
         viewHolder1.button.setOnClickListener(v -> {
             onClickDeleteListenter.onItemClick(v, groupPosition, position);
             new FrontViewToMove(viewHolder1.frontView, listView, 200).generateRevealAnimate(viewHolder1.frontView, 0);
         });
+
         return convertView;
+    }
+
+    private void setPagedata(int groupPosition, int position, ViewHolder1 viewHolder1) {
+
+        if ( list != null && list.size() != 0) {
+            CartItem cartItem = list.get(groupPosition).getItems().get(position);
+            viewHolder1.textView.setText(cartItem.getName());
+            viewHolder1.checkBox.setChecked(cartItem.ischeck());
+            viewHolder1.tvMoney.setText("¥ " + cartItem.getSpecifications().getPrice() * cartItem.getQuantity());
+            viewHolder1.btnNum.setText(cartItem.getQuantity() + "");
+            viewHolder1.chlidContent.setText(cartItem.getSpecifications().getName());
+            viewHolder1.pxxRoundOvalImageView.setType(PxxRoundOvalImageView.TYPE_ROUND);
+            viewHolder1.pxxRoundOvalImageView.setRoundRadius(8);
+
+            Glide.with(context).load(list.get(groupPosition)
+                    .getItems().get(position).getImage())
+                    .into(viewHolder1.pxxRoundOvalImageView);
+        }
     }
 
     class ViewHolder1 implements View.OnClickListener {

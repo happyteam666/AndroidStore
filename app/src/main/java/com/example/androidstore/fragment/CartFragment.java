@@ -48,7 +48,7 @@ public class CartFragment extends Fragment {
     CartExpandAdapter cartExpandAdapter;
     double price;
     int num;
-    String message;
+    volatile String message;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,7 +58,6 @@ public class CartFragment extends Fragment {
         bind = ButterKnife.bind(this, view);
 
         initView();
-
         return view;
     }
 
@@ -68,40 +67,45 @@ public class CartFragment extends Fragment {
     }
 
     private void showData() {
+        cartExpandAdapter = new CartExpandAdapter(getActivity(), cartExpandablelistview);
+        cartExpandablelistview.setAdapter(cartExpandAdapter);
+
         SharedPreferences sp = getActivity().getSharedPreferences("Id", 0);
-        message = sp.getString("_Id","");
+        message = sp.getString("_Id", "");
         OkHttpUtils.get().url(HttpContants.CARTITEM_URL)
                 .addParams("id", message)
                 .build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        if (message != null) {
+                            Toast.makeText(getActivity(), "似乎没有连网，加载失败", Toast.LENGTH_LONG).show();
+                        }
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         cartInfo = GsonUtils.GsonToBean(response, CartInfo.class);
-                        if (cartInfo != null && cartInfo.getData().size() > 0) {
-                            cartExpandAdapter = null;
-                            showExpandData();
-                        } else {
-                            try {
-                                cartExpandAdapter.notifyDataSetChanged();
-                            } catch (Exception e) {
-                                return;
-                            }
-                        }
-
+                        cartExpandAdapter.setList(cartInfo.getData());
+                        showExpandData();
                     }
                 });
 
-
+//        if (cartInfo != null && cartInfo.getData().size() > 0) {
+//            cartExpandAdapter = null;
+//            showExpandData();
+//        } else {
+//            try {
+//                cartExpandAdapter.notifyDataSetChanged();
+//            } catch (Exception e) {
+//                return;
+//            }
+//        }
     }
 
     private void showExpandData() {
-        cartExpandAdapter = new CartExpandAdapter(getActivity(), cartExpandablelistview, cartInfo.getData());
-        cartExpandablelistview.setAdapter(cartExpandAdapter);
+//        cartExpandAdapter = new CartExpandAdapter(getActivity(), cartExpandablelistview);
+//        cartExpandablelistview.setAdapter(cartExpandAdapter);
         int intgroupCount = cartExpandablelistview.getCount();
         for (int i = 0; i < intgroupCount; i++) {
             cartExpandablelistview.expandGroup(i);
@@ -146,7 +150,7 @@ public class CartFragment extends Fragment {
             CartItem cartItem = cartInfo.getData().get(onePosition).getItems().get(position);
 
             OkHttpUtils.post().url(HttpContants.CARTITEM_DELETE_URL)
-                    .addParams("id",cartItem.getId()  + "")
+                    .addParams("id", cartItem.getId() + "")
                     .build()
                     .execute(new StringCallback() {
                         @Override
@@ -157,13 +161,12 @@ public class CartFragment extends Fragment {
                         @Override
                         public void onResponse(String response, int id) {
                             cartInfo.getData().get(onePosition).getItems().remove(position);
-                            Log.d(TAG, "showExpandData: "+view+"  "+onePosition+"  "+position);
+                            Log.d(TAG, "showExpandData: " + view + "  " + onePosition + "  " + position);
                             cartExpandAdapter.notifyDataSetChanged();
                             // TODO 具体代码没写， 只要删除商品，刷新数据即可
                             Toast.makeText(getActivity(), "删除操作", Toast.LENGTH_LONG).show();
                         }
                     });
-
 
 
         });
@@ -186,6 +189,7 @@ public class CartFragment extends Fragment {
                 showCommodityCalculation();
             }
         });
+
         showCommodityCalculation();
     }
 
