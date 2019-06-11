@@ -29,10 +29,9 @@ public class MeFragment extends Fragment {
     private Unbinder bind;
 
     @BindView(R.id.login_and_register)
-    TextView username;
+            TextView username;
 
     String message;
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -83,29 +82,21 @@ public class MeFragment extends Fragment {
         }
     }
 
-    public void Visable() {
-        if (isValid()) {
+    public void Visable(){
+        if(isValid()){
             username.setText(message);
         }
     }
 
-    public boolean isValid() {
+    public boolean isValid(){
 
         SharedPreferences sp = getActivity().getSharedPreferences("Id", 0);
         message = sp.getString("_Name", "");
-        if (message.equals("")) {
+        if(message.equals("")){
             return false;
-        } else {
+        }else{
             return true;
         }
     }
 
-    public void Exit() {
-
-        SharedPreferences sp = getActivity().getSharedPreferences("Id", 0);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.clear();
-        editor.commit();
-
-    }
 }

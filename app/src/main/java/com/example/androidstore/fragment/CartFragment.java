@@ -142,6 +142,7 @@ public class CartFragment extends Fragment {
             }
             showCommodityCalculation();
         });
+
         cartExpandAdapter.setOnClickDeleteListenter((view, onePosition, position) -> {
             CartItem cartItem = cartInfo.getData().get(onePosition).getItems().get(position);
 

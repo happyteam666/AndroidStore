@@ -43,6 +43,8 @@ public class LoginActivity extends AppCompatActivity {
     String phoneuser;
     //密码
     String pwd;
+    //用户名
+    String Name1;
 
 
 
@@ -81,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
                         public void onResponse(String response, int id) {
                             Log.d("TAG", "首页请求成功==" + response);
                             if(!response.equals("")) {
+                                Name1 = GsonUtils.GsonToBean(response,Customer.class).getUsername();
                                 id1 = GsonUtils.GsonToBean(response,Customer.class).getId();
                                 phoneuser = GsonUtils.GsonToBean(response, Customer.class).getPhone();
                                 pwd = GsonUtils.GsonToBean(response, Customer.class).getPassword();
@@ -98,9 +101,8 @@ public class LoginActivity extends AppCompatActivity {
                                     SharedPreferences sharedPreferences = getSharedPreferences("Id",0); //私有数据
 
                                     SharedPreferences.Editor editor = sharedPreferences.edit();//获取编辑器
-                                    String name =String.valueOf((int)((Math.random()*9+1)*1000));
                                     editor.putString("_Id",String.valueOf(id1));
-                                    editor.putString("_Name","@"+name);
+                                    editor.putString("_Name","@"+Name1);
                                     editor.commit();//提交修改
 //                                    finish();
                                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
