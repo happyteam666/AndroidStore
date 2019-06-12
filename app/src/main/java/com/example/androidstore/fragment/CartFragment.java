@@ -72,25 +72,10 @@ public class CartFragment extends Fragment {
 
         SharedPreferences sp = getActivity().getSharedPreferences("Id", 0);
         message = sp.getString("_Id", "");
-        Log.d(TAG, "showData: ===================================================" + message);
-        OkHttpUtils.get().url(HttpContants.CARTITEM_URL)
-                .addParams("id", message)
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        if (message != null && ! "".equals(message)) {
-                            Toast.makeText(getActivity(), "似乎没有连网，加载失败", Toast.LENGTH_LONG).show();
-                        }
-                    }
+        if (!"".equals(message)) {
+            loadData();
+        }
 
-                    @Override
-                    public void onResponse(String response, int id) {
-                        cartInfo = GsonUtils.GsonToBean(response, CartInfo.class);
-                        cartExpandAdapter.setList(cartInfo.getData());
-                        showExpandData();
-                    }
-                });
 
 //        if (cartInfo != null && cartInfo.getData().size() > 0) {
 //            cartExpandAdapter = null;
@@ -104,9 +89,28 @@ public class CartFragment extends Fragment {
 //        }
     }
 
+    private void loadData() {
+
+        OkHttpUtils.get().url(HttpContants.CARTITEM_URL)
+                .addParams("id", message)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Toast.makeText(getActivity(), "似乎没有连网，加载失败", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        cartInfo = GsonUtils.GsonToBean(response, CartInfo.class);
+                        cartExpandAdapter.setList(cartInfo.getData());
+                        showExpandData();
+                    }
+                });
+    }
+
     private void showExpandData() {
-//        cartExpandAdapter = new CartExpandAdapter(getActivity(), cartExpandablelistview);
-//        cartExpandablelistview.setAdapter(cartExpandAdapter);
+
         int intgroupCount = cartExpandablelistview.getCount();
         for (int i = 0; i < intgroupCount; i++) {
             cartExpandablelistview.expandGroup(i);

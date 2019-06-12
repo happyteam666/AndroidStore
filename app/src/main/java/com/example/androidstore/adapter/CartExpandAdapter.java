@@ -30,7 +30,7 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
 
     private Context context;
     private ListView listView;
-    private static volatile List<CartInfo.DataBean> list = new ArrayList<>();
+    private volatile List<CartInfo.DataBean> list = new ArrayList<>();
 
     public CartExpandAdapter(Context context, ListView listView) {
         super();

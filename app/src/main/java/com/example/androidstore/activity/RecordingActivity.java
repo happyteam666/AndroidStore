@@ -8,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
-import android.util.Log;
 
 import com.example.androidstore.R;
 import com.example.androidstore.adapter.RecordingAdapter;
@@ -36,7 +35,7 @@ public class RecordingActivity extends AppCompatActivity {
     RecordingAdapter adapter;
     List<Recording> data;
 
-
+    String customerId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +50,15 @@ public class RecordingActivity extends AppCompatActivity {
 
     private void initData() {
         SharedPreferences sp = this.getSharedPreferences("Id", 0);
+        customerId =  sp.getString("_Id","");
+        if (!"".equals(customerId)) {
+            loadData();
+        }
+    }
 
-        Log.d("TAG", "initData: ========================================================="  + sp.getString("_Id",""));
+    private void loadData() {
         OkHttpUtils.get().url(HttpContants.RECORE_URL)
-                .addParams("id", sp.getString("_Id",""))
+                .addParams("id", customerId)
                 .build()
                 .execute(new StringCallback() {
                     @Override
