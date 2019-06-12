@@ -16,6 +16,7 @@ import com.example.androidstore.activity.LoginActivity;
 import com.example.androidstore.activity.MainActivity;
 import com.example.androidstore.activity.RecordingActivity;
 import com.example.androidstore.activity.SettingActivity;
+import com.example.androidstore.utils.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,6 +29,8 @@ import static com.example.androidstore.R.id.login_and_register;
 public class MeFragment extends Fragment {
 
     private Unbinder bind;
+    //验证是否登录
+    String validID;
 
     @BindView(R.id.login_and_register)
     TextView username;
@@ -60,7 +63,12 @@ public class MeFragment extends Fragment {
             case R.id.image_profile:
                 break;
             case login_and_register:
+                SharedPreferences sp = getActivity().getSharedPreferences("Id",0);
+                validID = sp.getString("_Id","");
+                if(validID.equals(""))
                 startActivity(new Intent(getActivity(), LoginActivity.class));
+                else
+                    ToastUtils.showToast(getActivity(),"用户已登录！");
                 break;
             case R.id.text_order_unconfirmed:
                 startActivity(new Intent(getActivity(), MainActivity.class));
