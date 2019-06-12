@@ -43,8 +43,8 @@ public class CategoryAdapter extends BaseAdapter {
     }
 
     class ViewHolder {
-        public TextView titleTv;
-        public View dividerTv;
+        TextView titleTv;
+        View dividerTv;
     }
 
     @Override

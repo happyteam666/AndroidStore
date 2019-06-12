@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * @author mascot
+ */
 public class RecordingAdapter extends RecyclerView.Adapter<RecordingAdapter.ViewHolder> {
 
     private Context context;

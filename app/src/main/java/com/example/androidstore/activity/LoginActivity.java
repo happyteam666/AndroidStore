@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     //密码
     String pwd;
     //用户名
-    String Name1;
+    String name1;
 
 
     @Override
@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void attemptLogin() {
-        if (!phone.getText().toString().equals("") && !password.getText().toString().equals("")) {
+        if (!"".equals(phone.getText().toString()) && !"".equals(password.getText().toString())) {
             OkHttpUtils.post().
                     url(HttpContants.LOGIN_URL)
                     .addParams("phone", Objects.requireNonNull(phone.getText()).toString())
@@ -81,11 +81,11 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(String response, int id) {
                             Log.d("TAG", "首页请求成功==" + response);
-                            if (!response.equals("")) {
-                                Name1 = GsonUtils.GsonToBean(response, Customer.class).getUsername();
-                                id1 = GsonUtils.GsonToBean(response, Customer.class).getId();
-                                phoneuser = GsonUtils.GsonToBean(response, Customer.class).getPhone();
-                                pwd = GsonUtils.GsonToBean(response, Customer.class).getPassword();
+                            if (!"".equals(response)) {
+                                name1 = GsonUtils.gsonToBean(response, Customer.class).getUsername();
+                                id1 = GsonUtils.gsonToBean(response, Customer.class).getId();
+                                phoneuser = GsonUtils.gsonToBean(response, Customer.class).getPhone();
+                                pwd = GsonUtils.gsonToBean(response, Customer.class).getPassword();
                                 if (!isvalid(phoneuser, pwd, phone.getText().toString(), password.getText().toString())) {
                                     if (Looper.myLooper() == null) {
                                         Looper.prepare();
@@ -101,8 +101,8 @@ public class LoginActivity extends AppCompatActivity {
 
                                     SharedPreferences.Editor editor = sharedPreferences.edit();//获取编辑器
                                     editor.putString("_Id", String.valueOf(id1));
-                                    editor.putString("_Name", "@" + Name1);
-                                    editor.commit();//提交修改
+                                    editor.putString("_Name", "@" + name1);
+                                    editor.apply();//提交修改
 //                                    finish();
                                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
 

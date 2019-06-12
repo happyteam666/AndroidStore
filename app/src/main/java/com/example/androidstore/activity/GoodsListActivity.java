@@ -23,7 +23,7 @@ import okhttp3.Call;
 
 public class GoodsListActivity extends AppCompatActivity {
     private Long categoryId;
-    private ListView goodsList_Lv;
+    private ListView goodslistLv;
     private GoodsAdapter adapter;
     private Goods goods;
 
@@ -31,11 +31,11 @@ public class GoodsListActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goods_list);
-        goodsList_Lv = findViewById(R.id.goods_lv);
+        goodslistLv = findViewById(R.id.goods_lv);
         adapter = new GoodsAdapter(this);
         initData();
         loadGoodsList(categoryId.toString());
-        goodsList_Lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        goodslistLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 goods = (Goods) adapter.getItem(i);
@@ -52,7 +52,7 @@ public class GoodsListActivity extends AppCompatActivity {
     }
 
     private void loadGoodsList(String categoryId) {
-        if (categoryId != null)
+        if (categoryId != null) {
             OkHttpUtils.get().url(HttpContants.GOODS_BY_CATEGORY_URL)
                     .addParams("categoryId", categoryId)
                     .build()
@@ -67,9 +67,10 @@ public class GoodsListActivity extends AppCompatActivity {
 
 
                             Log.d("TAG", "陆成钢测试: " + response);
-                            adapter.setBeans(GsonUtils.GsonToList(response, Goods[].class));
-                            goodsList_Lv.setAdapter(adapter);
+                            adapter.setBeans(GsonUtils.gsonToList(response, Goods[].class));
+                            goodslistLv.setAdapter(adapter);
                         }
                     });
+        }
     }
 }

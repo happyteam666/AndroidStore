@@ -68,7 +68,7 @@ public class RecordingActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        data = GsonUtils.GsonToList(response, Recording[].class);
+                        data = GsonUtils.gsonToList(response, Recording[].class);
                         adapter.setRecordingItems(data);
                     }
                 });

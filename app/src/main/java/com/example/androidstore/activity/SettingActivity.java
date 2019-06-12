@@ -49,11 +49,10 @@ public class SettingActivity extends AppCompatActivity {
                 break;
             case R.id.exit: {
                 SharedPreferences sp = getSharedPreferences("Id", 0);
-                if (!sp.getString("_Id", "").equals("")) {
-                    Exit();
+                if (!"".equals(sp.getString("_Id", ""))) {
+                    exit();
                     startActivity(new Intent(this, LoginActivity.class));
 
-                } else {
                 }
                 break;
             }
@@ -69,15 +68,15 @@ public class SettingActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sp.edit();
         editor.clear();
 
-        editor.commit();
+        editor.apply();
     }
 
-    public void Exit() {
+    public void exit() {
 
         SharedPreferences sp = getSharedPreferences("Id", 0);
         SharedPreferences.Editor editor = sp.edit();
         editor.clear();
-        editor.commit();
+        editor.apply();
 
     }
 }

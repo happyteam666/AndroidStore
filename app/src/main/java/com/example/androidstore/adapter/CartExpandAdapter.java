@@ -1,5 +1,6 @@
 package com.example.androidstore.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * @author mascot
+ */
 public class CartExpandAdapter extends BaseExpandableListAdapter {
 
     private Context context;
@@ -64,6 +68,7 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
         return 0;
     }
 
+    @SuppressLint("InflateParams")
     @Override
     public View getChildView(final int groupPosition, final int position,
                              boolean arg2, View convertView, ViewGroup parent) {
@@ -87,6 +92,7 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
         return convertView;
     }
 
+    @SuppressLint("SetTextI18n")
     private void setPagedata(int groupPosition, int position, ViewHolder1 viewHolder1) {
 
         if ( list != null && list.size() != 0) {
@@ -119,7 +125,7 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
         private Button btnClose;
         private TextView chlidContent;
 
-        public ViewHolder1(View view, int groupPosition, int position) {
+        ViewHolder1(View view, int groupPosition, int position) {
             this.groupPosition = groupPosition;
             this.position = position;
             pxxRoundOvalImageView = view.findViewById(R.id.item_chlid_image);
@@ -150,28 +156,34 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
         }
     }
 
-    // CheckBox1接口的方法
+    /**
+     * CheckBox1接口的方法
+     */
     private OnViewItemClickListener mOnItemClickListener = null;
 
     public void setOnItemClickListener(OnViewItemClickListener listener) {
         this.mOnItemClickListener = listener;
     }
 
-    // CheckBox2接口的方法
+    /**
+     * CheckBox2接口的方法
+     */
     private OnClickListenterModel onClickListenterModel = null;
 
     public void setOnClickListenterModel(OnClickListenterModel listener) {
         this.onClickListenterModel = listener;
     }
 
-    // 删除接口的方法
+    /**
+     * 删除接口的方法
+     */
     private OnClickDeleteListenter onClickDeleteListenter = null;
 
     public void setOnClickDeleteListenter(OnClickDeleteListenter listener) {
         this.onClickDeleteListenter = listener;
     }
 
-    // 数量接口的方法
+
     private OnClickAddCloseListenter onClickAddCloseListenter = null;
 
     public void setOnClickAddCloseListenter(OnClickAddCloseListenter listener) {
@@ -203,6 +215,7 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
         return 0;
     }
 
+    @SuppressLint("InflateParams")
     @Override
     public View getGroupView(final int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
@@ -242,7 +255,7 @@ public class CartExpandAdapter extends BaseExpandableListAdapter {
         TextView textView;
         TextView textTopBar;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             textView = view.findViewById(R.id.shopName);
             checkBox = view.findViewById(R.id.check_box);
             textTopBar = view.findViewById(R.id.item_group_topbar);

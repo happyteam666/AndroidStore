@@ -15,18 +15,18 @@ public class GsonUtils {
     }
 
 
-    public static <T> T GsonToBean(String gsonString, Class<T> cls) {
+    public static <T> T gsonToBean(String gsonString, Class<T> cls) {
         return gson.fromJson(gsonString, cls);
     }
 
 
-    public static <T> List<T> GsonToList(String gsonString, Class<T[]> clazz) {
+    public static <T> List<T> gsonToList(String gsonString, Class<T[]> clazz) {
         T[] arr = gson.fromJson(gsonString, clazz);
         return Arrays.asList(arr);
     }
 
 
-    public static <T> List<Map<String, T>> GsonToListMaps(String gsonString) {
+    public static <T> List<Map<String, T>> gsonToListMaps(String gsonString) {
         List<Map<String, T>> list = null;
         if (gson != null) {
             list = gson.fromJson(gsonString, new TypeToken<List<Map<String, T>>>() {
@@ -35,7 +35,7 @@ public class GsonUtils {
         return list;
     }
 
-    public static <T> Map<String, T> GsonToMaps(String gsonString) {
+    public static <T> Map<String, T> gsonToMaps(String gsonString) {
         Map<String, T> map = null;
         if (gson != null) {
             map = gson.fromJson(gsonString, new TypeToken<Map<String, T>>() {

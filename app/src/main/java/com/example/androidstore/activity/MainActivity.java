@@ -21,6 +21,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * @author mascot
+ */
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
     @BindView(R.id.view_pager_bottom_navigation)

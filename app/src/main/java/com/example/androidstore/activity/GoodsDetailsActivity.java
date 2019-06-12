@@ -11,14 +11,14 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 
-import com.example.androidstore.adapter.SpecificationAdapter;
 import com.example.androidstore.R;
-import com.example.androidstore.utils.GsonUtils;
-import com.example.androidstore.utils.ToastUtils;
-import com.example.androidstore.view.SmartImageView;
+import com.example.androidstore.adapter.SpecificationAdapter;
 import com.example.androidstore.bean.Goods;
 import com.example.androidstore.bean.Specifications;
 import com.example.androidstore.contants.HttpContants;
+import com.example.androidstore.utils.GsonUtils;
+import com.example.androidstore.utils.ToastUtils;
+import com.example.androidstore.view.SmartImageView;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zhy.http.okhttp.log.LoggerInterceptor;
@@ -26,10 +26,7 @@ import com.zhy.http.okhttp.log.LoggerInterceptor;
 import java.util.ArrayList;
 
 import okhttp3.Call;
-
-import static com.zhy.http.okhttp.log.LoggerInterceptor.TAG;
 public class GoodsDetailsActivity extends AppCompatActivity {
-    private SharedPreferences preferences;
     private TextView priceTv;
     private TextView nameTv;
     private SmartImageView goodsIv;
@@ -101,8 +98,8 @@ public class GoodsDetailsActivity extends AppCompatActivity {
     }
     private void initData(){
       adapter=new SpecificationAdapter(this);
-        preferences=getSharedPreferences("Id",MODE_PRIVATE);
-        customerId=preferences.getString("_Id","");
+        SharedPreferences preferences = getSharedPreferences("Id", MODE_PRIVATE);
+        customerId= preferences.getString("_Id","");
 
     }
     private void loadGoods(){
@@ -117,7 +114,7 @@ public class GoodsDetailsActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        goods= GsonUtils.GsonToBean(response,Goods.class);
+                        goods= GsonUtils.gsonToBean(response,Goods.class);
                         goodsIv.setImageUrl(goods.getImage());
                         nameTv.setText(goods.getName());
                         priceTv.setText("¥ "+goods.getSpecificationsList().get(0).getPrice()+"");

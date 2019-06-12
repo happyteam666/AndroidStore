@@ -23,6 +23,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
 
+/**
+ * @author mascot
+ */
 public class RegisterActivity extends AppCompatActivity {
 
     @BindView(R.id.phone)
@@ -138,10 +141,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public static boolean isEmpty(String phone, String passwd, String identify) {
-        if (!phone.equals("") && !passwd.equals("") && !identify.equals(""))
-            return true;
-        else
-            return false;
+        return !"".equals(phone) && !"".equals(passwd) && !"".equals(identify);
     }
 
 }

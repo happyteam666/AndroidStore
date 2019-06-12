@@ -39,7 +39,7 @@ public class MeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_me, container, false);
         bind = ButterKnife.bind(this, view);
-        Visable();
+        visable();
         return view;
     }
 
@@ -85,7 +85,7 @@ public class MeFragment extends Fragment {
         }
     }
 
-    public void Visable() {
+    public void visable() {
         if (isValid()) {
             username.setText(message);
         }
@@ -95,7 +95,7 @@ public class MeFragment extends Fragment {
 
         SharedPreferences sp = getActivity().getSharedPreferences("Id", 0);
         message = sp.getString("_Name", "");
-        if (message.equals("")) {
+        if ("".equals(message)) {
             return false;
         } else {
             return true;

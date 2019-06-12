@@ -22,10 +22,9 @@ import com.zhy.http.okhttp.log.LoggerInterceptor;
 import okhttp3.Call;
 
 public class AddressManageActivity extends AppCompatActivity {
-    private FloatingActionButton add_fab;
+    private FloatingActionButton addFab;
     private ListView addressList;
     private AddressAdapter adapter;
-    private SharedPreferences preferences;
     private String customerId;
 
     @Override
@@ -33,10 +32,10 @@ public class AddressManageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address_list);
         initView();
-        preferences = getSharedPreferences("Id", MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences("Id", MODE_PRIVATE);
         customerId = preferences.getString("_Id", "");
         loadAddressList();
-        add_fab.setOnClickListener(new View.OnClickListener() {
+        addFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(AddressManageActivity.this, AddAddressActivity.class));
@@ -45,13 +44,13 @@ public class AddressManageActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        add_fab = findViewById(R.id.fab_recycler_view);
+        addFab = findViewById(R.id.fab_recycler_view);
         addressList = findViewById(R.id.address_list_view);
         adapter = new AddressAdapter(this);
     }
 
     private void loadAddressList() {
-        if (customerId != null)
+        if (customerId != null) {
             OkHttpUtils.get().url(HttpContants.ADDRESS_BY_CUSTOMER_URL)
                     .addParams("customerId", customerId)
                     .build()
@@ -63,10 +62,11 @@ public class AddressManageActivity extends AppCompatActivity {
 
                         @Override
                         public void onResponse(String response, int id) {
-                            adapter.setBeans(GsonUtils.GsonToList(response, Address[].class));
+                            adapter.setBeans(GsonUtils.gsonToList(response, Address[].class));
                             addressList.setAdapter(adapter);
                         }
                     });
+        }
     }
 
 }

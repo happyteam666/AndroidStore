@@ -82,7 +82,7 @@ public class ClassifyFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onResponse(String response, int id) {
                         Log.d(TAG, "22222222 " + response);
-                        adapter.setBeans(GsonUtils.GsonToList(response, Category[].class));
+                        adapter.setBeans(GsonUtils.gsonToList(response, Category[].class));
                         topCategoryLv.setAdapter(adapter);
                         topCategoryLv.performItemClick(null, 0, 0);
                     }

@@ -1,5 +1,6 @@
 package com.example.androidstore.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -102,7 +103,7 @@ public class CartFragment extends Fragment {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        cartInfo = GsonUtils.GsonToBean(response, CartInfo.class);
+                        cartInfo = GsonUtils.gsonToBean(response, CartInfo.class);
                         cartExpandAdapter.setList(cartInfo.getData());
                         showExpandData();
                     }
@@ -115,43 +116,37 @@ public class CartFragment extends Fragment {
         for (int i = 0; i < intgroupCount; i++) {
             cartExpandablelistview.expandGroup(i);
         }
-        /**
-         * 全选
-         */
-        cartExpandAdapter.setOnItemClickListener((isFlang, view, position) -> {
-            cartInfo.getData().get(position).setIscheck(isFlang);
-            int length = cartInfo.getData().get(position).getItems().size();
-            for (int i = 0; i < length; i++) {
-                cartInfo.getData().get(position).getItems().get(i).setIscheck(isFlang);
-            }
-            cartExpandAdapter.notifyDataSetChanged();
-            showCommodityCalculation();
-        });
 
-        /**
-         * 单选
-         */
-        cartExpandAdapter.setOnClickListenterModel((isFlang, view, onePosition, position) -> {
-            cartInfo.getData().get(onePosition).getItems().get(position).setIscheck(isFlang);
-            int length = cartInfo.getData().get(onePosition).getItems().size();
-            for (int i = 0; i < length; i++) {
-                if (!cartInfo.getData().get(onePosition).getItems().get(i).ischeck()) {
-                    if (!isFlang) {
-                        cartInfo.getData().get(onePosition).setIscheck(isFlang);
-                    }
-                    cartExpandAdapter.notifyDataSetChanged();
-                    showCommodityCalculation();
-                    return;
-                } else {
-                    if (i == (length - 1)) {
-                        cartInfo.getData().get(onePosition).setIscheck(isFlang);
+        selectionAll();
+
+        singleSelection();
+
+        deleteItem();
+
+        changeQuantitty();
+
+        showCommodityCalculation();
+    }
+
+    private void changeQuantitty() {
+        cartExpandAdapter.setOnClickAddCloseListenter(new OnClickAddCloseListenter() {
+            @Override
+            public void onItemClick(View view, int index, int onePosition, int position, int num) {
+                if (index == 1) {
+                    if (num > 1) {
+                        cartInfo.getData().get(onePosition).getItems().get(position).setQuantity((num - 1));
                         cartExpandAdapter.notifyDataSetChanged();
                     }
+                } else {
+                    cartInfo.getData().get(onePosition).getItems().get(position).setQuantity((num + 1));
+                    cartExpandAdapter.notifyDataSetChanged();
                 }
+                showCommodityCalculation();
             }
-            showCommodityCalculation();
         });
+    }
 
+    private void deleteItem() {
         cartExpandAdapter.setOnClickDeleteListenter((view, onePosition, position) -> {
             CartItem cartItem = cartInfo.getData().get(onePosition).getItems().get(position);
 
@@ -175,29 +170,44 @@ public class CartFragment extends Fragment {
 
 
         });
-
-        /***
-         * 数量增加和减少
-         */
-        cartExpandAdapter.setOnClickAddCloseListenter(new OnClickAddCloseListenter() {
-            @Override
-            public void onItemClick(View view, int index, int onePosition, int position, int num) {
-                if (index == 1) {
-                    if (num > 1) {
-                        cartInfo.getData().get(onePosition).getItems().get(position).setQuantity((num - 1));
-                        cartExpandAdapter.notifyDataSetChanged();
-                    }
-                } else {
-                    cartInfo.getData().get(onePosition).getItems().get(position).setQuantity((num + 1));
-                    cartExpandAdapter.notifyDataSetChanged();
-                }
-                showCommodityCalculation();
-            }
-        });
-
-        showCommodityCalculation();
     }
 
+    private void singleSelection() {
+        cartExpandAdapter.setOnClickListenterModel((isFlang, view, onePosition, position) -> {
+            cartInfo.getData().get(onePosition).getItems().get(position).setIscheck(isFlang);
+            int length = cartInfo.getData().get(onePosition).getItems().size();
+            for (int i = 0; i < length; i++) {
+                if (!cartInfo.getData().get(onePosition).getItems().get(i).ischeck()) {
+                    if (!isFlang) {
+                        cartInfo.getData().get(onePosition).setIscheck(isFlang);
+                    }
+                    cartExpandAdapter.notifyDataSetChanged();
+                    showCommodityCalculation();
+                    return;
+                } else {
+                    if (i == (length - 1)) {
+                        cartInfo.getData().get(onePosition).setIscheck(isFlang);
+                        cartExpandAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+            showCommodityCalculation();
+        });
+    }
+
+    private void selectionAll() {
+        cartExpandAdapter.setOnItemClickListener((isFlang, view, position) -> {
+            cartInfo.getData().get(position).setIscheck(isFlang);
+            int length = cartInfo.getData().get(position).getItems().size();
+            for (int i = 0; i < length; i++) {
+                cartInfo.getData().get(position).getItems().get(i).setIscheck(isFlang);
+            }
+            cartExpandAdapter.notifyDataSetChanged();
+            showCommodityCalculation();
+        });
+    }
+
+    @SuppressLint("SetTextI18n")
     private void showCommodityCalculation() {
         price = 0;
         num = 0;
