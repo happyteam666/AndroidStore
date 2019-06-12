@@ -164,7 +164,7 @@ public class CartFragment extends Fragment {
                             cartInfo.getData().get(onePosition).getItems().remove(position);
                             Log.d(TAG, "showExpandData: " + view + "  " + onePosition + "  " + position);
                             cartExpandAdapter.notifyDataSetChanged();
-                            Toast.makeText(getActivity(), "删除操作", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), "删除成功", Toast.LENGTH_LONG).show();
                         }
                     });
 
@@ -242,6 +242,8 @@ public class CartFragment extends Fragment {
     public void onClick() {
         Toast.makeText(getActivity(), "提交订单:  " + cartMoney.getText().toString() + "元", Toast.LENGTH_LONG).show();
     }
+
+
 
     @Override
     public void onDestroy() {
