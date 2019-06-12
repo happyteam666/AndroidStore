@@ -23,6 +23,7 @@ public abstract class HttpContants {
     public static final String CARTITEM_ADD_URL=BASE_URL+"cart/add";
 
     public static final String RECORE_URL=BASE_URL+"recording/customer";
+    public static final String RECORE_ADD_URL=BASE_URL+"recording/add";
 
 
     public static final String ADDADDRESS_URL=BASE_URL+"address/add";
@@ -30,6 +31,6 @@ public abstract class HttpContants {
     public static final String ADDRESS_UPDATE=BASE_URL+"address/update";
     public static final String ADDRESS_DELETE=BASE_URL+"address/delete";
 
-    public static final String ADDORDER_URL=BASE_URL+"order/add";
+
 
 }

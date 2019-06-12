@@ -47,7 +47,7 @@
         <activity
             android:name=".activity.GoodsDetailsActivity"
             android:label="商品详情"
-            android:parentActivityName=".activity.GoodsListActivity" />
+            android:parentActivityName=".activity.MainActivity" />
         <activity
             android:name=".activity.RegisterActivity"
             android:label="注册"

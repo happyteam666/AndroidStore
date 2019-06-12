@@ -26,6 +26,7 @@ import com.zhy.http.okhttp.log.LoggerInterceptor;
 import java.util.ArrayList;
 
 import okhttp3.Call;
+
 public class GoodsDetailsActivity extends AppCompatActivity {
     private TextView priceTv;
     private TextView nameTv;
@@ -39,72 +40,81 @@ public class GoodsDetailsActivity extends AppCompatActivity {
     private Specifications specifications;
     private String customerId;
     private String specificationId;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goods_detail);
         initView();
         initData();
-        Intent intent=getIntent();
-        goodsId=intent.getStringExtra("goodsId");
+        Intent intent = getIntent();
+        goodsId = intent.getStringExtra("goodsId");
         loadGoods();
         specificationGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                adapter.mPosition=i;
+                adapter.mPosition = i;
                 adapter.notifyDataSetChanged();
-                specifications= (Specifications) adapter.getItem(i);
-                goodsPrice=specifications.getPrice()+"";
-                specificationId=specifications.getId()+"";
-                priceTv.setText("¥ "+goodsPrice);
+                specifications = (Specifications) adapter.getItem(i);
+                goodsPrice = specifications.getPrice() + "";
+                specificationId = specifications.getId() + "";
+                priceTv.setText("¥ " + goodsPrice);
             }
         });
         addShopCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addCartItem(specificationId);
+                if (!"".equals(customerId)) {
+                    addCartItem(specificationId);
+                } else {
+                    ToastUtils.showToast(GoodsDetailsActivity.this, "你还没登录");
+                }
             }
         });
     }
-    private void addCartItem(String specificationId){
+
+    private void addCartItem(String specificationId) {
         OkHttpUtils.post().url(HttpContants.CARTITEM_ADD_URL)
-                .addParams("goodsId",goodsId)
-                .addParams("customerId",customerId)
-                .addParams("name",goods.getName())
-                .addParams("image",goods.getImage())
-                .addParams("specificationsId",specificationId)
-                .addParams("quantity","1")
+                .addParams("goodsId", goodsId)
+                .addParams("customerId", customerId)
+                .addParams("name", goods.getName())
+                .addParams("image", goods.getImage())
+                .addParams("specificationsId", specificationId)
+                .addParams("quantity", "1")
                 .build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Log.d(LoggerInterceptor.TAG, "onResponse: " + e.getMessage());
                     }
+
                     @Override
                     public void onResponse(String response, int id) {
 
                     }
                 });
-        ToastUtils.showToast(this,"成功添加到购物车");
+        ToastUtils.showToast(this, "成功添加到购物车");
     }
 
-    private void initView(){
-        goodsIv=findViewById(R.id.goods_image);
-        nameTv=findViewById(R.id.goods_name);
-        priceTv=findViewById(R.id.goods_price);
-        specificationGv=findViewById(R.id.specification_gv);
-        addShopCar=findViewById(R.id.addshopcar);
+    private void initView() {
+        goodsIv = findViewById(R.id.goods_image);
+        nameTv = findViewById(R.id.goods_name);
+        priceTv = findViewById(R.id.goods_price);
+        specificationGv = findViewById(R.id.specification_gv);
+        addShopCar = findViewById(R.id.addshopcar);
 
     }
-    private void initData(){
-      adapter=new SpecificationAdapter(this);
+
+    private void initData() {
+        adapter = new SpecificationAdapter(this);
         SharedPreferences preferences = getSharedPreferences("Id", MODE_PRIVATE);
-        customerId= preferences.getString("_Id","");
+        customerId = preferences.getString("_Id", "");
 
     }
-    private void loadGoods(){
+
+    private void loadGoods() {
         OkHttpUtils.get().url(HttpContants.GOODS_BY_ID)
-                .addParams("id",goodsId)
+                .addParams("id", goodsId)
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -114,13 +124,13 @@ public class GoodsDetailsActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        goods= GsonUtils.gsonToBean(response,Goods.class);
+                        goods = GsonUtils.gsonToBean(response, Goods.class);
                         goodsIv.setImageUrl(goods.getImage());
                         nameTv.setText(goods.getName());
-                        priceTv.setText("¥ "+goods.getSpecificationsList().get(0).getPrice()+"");
+                        priceTv.setText("¥ " + goods.getSpecificationsList().get(0).getPrice() + "");
                         adapter.setDatas((ArrayList<Specifications>) goods.getSpecificationsList());
                         specificationGv.setAdapter(adapter);
-                        specificationGv.performItemClick(null,0,0);
+                        specificationGv.performItemClick(null, 0, 0);
                     }
                 });
     }
