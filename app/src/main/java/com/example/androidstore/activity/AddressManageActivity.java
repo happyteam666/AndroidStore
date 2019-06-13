@@ -15,6 +15,7 @@ import com.example.androidstore.adapter.AddressAdapter;
 import com.example.androidstore.bean.Address;
 import com.example.androidstore.contants.HttpContants;
 import com.example.androidstore.utils.GsonUtils;
+import com.example.androidstore.utils.ToastUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zhy.http.okhttp.log.LoggerInterceptor;
@@ -38,7 +39,11 @@ public class AddressManageActivity extends AppCompatActivity {
         addFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AddressManageActivity.this, AddAddressActivity.class));
+                if (!"".equals(customerId)) {
+                    startActivity(new Intent(AddressManageActivity.this, AddAddressActivity.class));
+                }else {
+                    ToastUtils.showToast(AddressManageActivity.this,"你还没登录");
+                }
             }
         });
     }

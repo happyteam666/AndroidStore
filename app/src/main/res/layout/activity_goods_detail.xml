@@ -22,7 +22,8 @@
             <com.example.androidstore.view.SmartImageView
                 android:id="@+id/goods_image"
                 android:layout_width="match_parent"
-                android:layout_height="332dp" />
+                android:layout_height="332dp"
+                android:focusableInTouchMode="true" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -54,27 +55,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="88dp"
                 android:textSize="14sp" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
-                android:background="#F7F7F7"
-                />
+                android:background="#F7F7F7" />
+
             <TextView
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="发货地：广西               快递：免运费"/>
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="发货地：广西               快递：免运费" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="15dp"
-                android:background="#F7F7F7"
-                />
+                android:background="#F7F7F7" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
-                android:background="#F7F7F7"
-                />
+                android:background="#F7F7F7" />
 
             <TextView
                 android:layout_width="219dp"
@@ -82,27 +84,27 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:text=" 服务       七天无理由·运费险" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="15dp"
-                android:background="#F7F7F7"
-                />
+                android:background="#F7F7F7" />
 
             <TextView
-                android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:text="选择规格"
                 android:textSize="17sp" />
 
 
             <GridView
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:columnWidth="90dp"
                 android:id="@+id/specification_gv"
                 android:layout_width="match_parent"
                 android:layout_height="234dp"
+                android:layout_marginTop="10dp"
+                android:columnWidth="90dp"
+                android:gravity="center"
                 android:horizontalSpacing="5dp"
                 android:listSelector="@android:color/transparent"
                 android:numColumns="3"
