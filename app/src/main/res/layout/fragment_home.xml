@@ -315,6 +315,56 @@
 
             //手机配件
             <ImageView
+                android:id="@+id/huaz"
+                android:layout_width="165dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/huaz" />
+
+            //美妆护肤
+            <ImageView
+                android:id="@+id/xiyif"
+                android:layout_width="165dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/xiyif" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="146dp"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
+
+            //手机配件
+            <ImageView
+                android:id="@+id/s11p"
+                android:layout_width="165dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/s11p" />
+
+            //美妆护肤
+            <ImageView
+                android:id="@+id/watch11"
+                android:layout_width="165dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/watch11" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="146dp"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
+
+            //手机配件
+            <ImageView
                 android:id="@+id/Tshit"
                 android:layout_width="165dp"
                 android:layout_height="match_parent"
@@ -351,5 +401,7 @@
                 android:text="零食"
                 android:textAlignment="center" />
         </LinearLayout>
+
+
     </LinearLayout>
 </ScrollView>
