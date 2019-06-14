@@ -41,6 +41,7 @@ public class AddressManageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (!"".equals(customerId)) {
                     startActivity(new Intent(AddressManageActivity.this, AddAddressActivity.class));
+                    finish();
                 }else {
                     ToastUtils.showToast(AddressManageActivity.this,"你还没登录");
                 }

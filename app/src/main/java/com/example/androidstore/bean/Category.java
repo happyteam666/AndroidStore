@@ -13,7 +13,6 @@ public class Category implements Serializable {
 
     private long id;
 
-
     private String name;
     private List<Category> categories;
     private String image;

@@ -19,15 +19,15 @@ import java.util.ArrayList;
 
 public class SubCategoryView extends FlexiScrollView
 							implements IViewContainer {
-	private Category mTopCategory;
-	private LinearLayout mChildContainerLl;
+	private Category topCategory;
+	private LinearLayout childContainerLl;
 	public static String CATEGORY_ID="CATEGORY_ID";
 	public SubCategoryView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 
 	private void handleLoadSubCategory(ArrayList<Category> subCategorys) {
-		mChildContainerLl.removeAllViews();
+		childContainerLl.removeAllViews();
 		if (subCategorys.size()!=0) {
 				int lineNum = subCategorys.size()/3;
 				lineNum=subCategorys.size()%3!=0?lineNum+1:lineNum;
@@ -43,7 +43,7 @@ public class SubCategoryView extends FlexiScrollView
 					if (3*j+2<subCategorys.size()-1) {
 						addColumn(subCategorys, 3*j+2, lineLl);
 					}
-					mChildContainerLl.addView(lineLl);
+					childContainerLl.addView(lineLl);
 				}
 			}
 		}
@@ -87,14 +87,14 @@ public class SubCategoryView extends FlexiScrollView
 	@Override
 	protected void onFinishInflate() {
 		super.onFinishInflate();
-		mChildContainerLl=findViewById(R.id.child_container_ll);
+		childContainerLl=findViewById(R.id.child_container_ll);
 
 	}
 	@Override
 	public void show(Object... values) {
-		mChildContainerLl.removeAllViews();
-		mTopCategory=(Category) values[0];
-		handleLoadSubCategory((ArrayList<Category>) mTopCategory.getCategories());
+		childContainerLl.removeAllViews();
+		topCategory=(Category) values[0];
+		handleLoadSubCategory((ArrayList<Category>) topCategory.getCategories());
 		}
 
 	}

@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import okhttp3.Call;
 
 public class GoodsDetailsActivity extends AppCompatActivity {
+    private TextView quantityTv;
     private TextView priceTv;
     private TextView nameTv;
     private SmartImageView goodsIv;
@@ -59,6 +60,7 @@ public class GoodsDetailsActivity extends AppCompatActivity {
                 goodsPrice = specifications.getPrice() + "";
                 specificationId = specifications.getId() + "";
                 priceTv.setText("¥ " + goodsPrice);
+                quantityTv.setText("库存量："+specifications.getQuantity()+"件");
             }
         });
         addShopCar.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +104,7 @@ public class GoodsDetailsActivity extends AppCompatActivity {
         priceTv = findViewById(R.id.goods_price);
         specificationGv = findViewById(R.id.specification_gv);
         addShopCar = findViewById(R.id.addshopcar);
+        quantityTv=findViewById(R.id.quantity);
 
     }
 
@@ -128,6 +131,7 @@ public class GoodsDetailsActivity extends AppCompatActivity {
                         goodsIv.setImageUrl(goods.getImage());
                         nameTv.setText(goods.getName());
                         priceTv.setText("¥ " + goods.getSpecificationsList().get(0).getPrice() + "");
+                        quantityTv.setText("库存量："+goods.getSpecificationsList().get(0).getQuantity()+"件");
                         adapter.setDatas((ArrayList<Specifications>) goods.getSpecificationsList());
                         specificationGv.setAdapter(adapter);
                         specificationGv.performItemClick(null, 0, 0);

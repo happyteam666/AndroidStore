@@ -23,6 +23,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
+import static android.content.Context.MODE_PRIVATE;
+import static com.example.androidstore.R.id.content;
 import static com.example.androidstore.R.id.login_and_register;
 
 
@@ -83,7 +85,12 @@ public class MeFragment extends Fragment {
                 startActivity(new Intent(getActivity(), RecordingActivity.class));
                 break;
             case R.id.text_manage_address:
-                startActivity(new Intent(getActivity(), AddressManageActivity.class));
+                if(!"".equals(validID)){
+                    startActivity(new Intent(getActivity(), AddressManageActivity.class));
+                }
+                else {
+                    ToastUtils.showToast(getActivity(),"你还没登录");
+                }
                 break;
             case R.id.text_help:
                 break;

@@ -11,6 +11,18 @@ import java.util.List;
 public class Goods implements Serializable {
 
     private long id;
+    private String name;
+
+    private long brandId;
+
+    private long categoryId;
+
+    private long attributeId;
+
+    private long parameterId;
+
+    private String image;
+    private List<Specifications> specificationsList;
 
     public long getId() {
         return id;
@@ -68,18 +80,8 @@ public class Goods implements Serializable {
         this.image = image;
     }
 
-    private String name;
 
-    private long brandId;
 
-    private long categoryId;
-
-    private long attributeId;
-
-    private long parameterId;
-
-    private String image;
-    private List<Specifications> specificationsList;
 
     public List<Specifications> getSpecificationsList() {
         return specificationsList;
