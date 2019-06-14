@@ -3,6 +3,7 @@ package com.example.androidstore.view;
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -15,6 +16,8 @@ import com.example.androidstore.bean.Category;
 import com.example.androidstore.widget.FlexiScrollView;
 
 import java.util.ArrayList;
+
+import static android.support.constraint.Constraints.TAG;
 
 
 public class SubCategoryView extends FlexiScrollView
@@ -29,19 +32,19 @@ public class SubCategoryView extends FlexiScrollView
 	private void handleLoadSubCategory(ArrayList<Category> subCategorys) {
 		childContainerLl.removeAllViews();
 		if (subCategorys.size()!=0) {
-				int lineNum = subCategorys.size()/3;
-				lineNum=subCategorys.size()%3!=0?lineNum+1:lineNum;
+				int lineNum = subCategorys.size()/2;
+				lineNum=subCategorys.size()%2!=0?lineNum+1:lineNum;
 				for (int j = 0; j < lineNum; j++) {
 					LinearLayout lineLl=new LinearLayout(getContext());
 					lineLl.setOrientation(LinearLayout.HORIZONTAL);
 					LinearLayout.LayoutParams lineParams=new LinearLayout.LayoutParams(-1, -2);
 					lineLl.setLayoutParams(lineParams);
-					addColumn(subCategorys, 3*j, lineLl);
-					if (3*j+1<subCategorys.size()-1) {
-						addColumn(subCategorys, 3*j+1, lineLl);
+					addColumn(subCategorys, 2*j, lineLl);
+					if (2*j+1<=subCategorys.size()-1) {
+						addColumn(subCategorys, 2*j+1, lineLl);
 					}
-					if (3*j+2<subCategorys.size()-1) {
-						addColumn(subCategorys, 3*j+2, lineLl);
+					if (2*j+2<=subCategorys.size()-1) {
+						addColumn(subCategorys, 2*j+2, lineLl);
 					}
 					childContainerLl.addView(lineLl);
 				}
